@@ -146,7 +146,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 1.7
   m_Direction: 1
-  m_Center: {x: 0, y: 0.84, z: 0}
+  m_Center: {x: 0, y: 0.85, z: 0}
 --- !u!54 &383911624
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -213,7 +213,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   groundCheck: {fileID: 1723556580}
-  jumpHeight: 100
+  fixedJumpHeight: 10
+  doubleJumpCooldown: 100
+--- !u!4 &383911628 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 80b3f07e167f246478a2d62cdee893c8, type: 3}
+  m_PrefabInstance: {fileID: 1717198118}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &496242793 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -140191608578672617, guid: 80b3f07e167f246478a2d62cdee893c8, type: 3}
@@ -479,7 +485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da49053d2f25e594e8bd09e32ce130aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 383911628}
   smoothing: 5
 --- !u!1001 &1717198118
 PrefabInstance:

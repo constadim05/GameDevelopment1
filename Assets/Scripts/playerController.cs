@@ -20,32 +20,56 @@ public class playerController : MonoBehaviour
     float groundCheckRadius = 0.2f;
     public LayerMask groundLayer;
     public Transform groundCheck;
-    public float jumpHeight;
+    public float fixedJumpHeight;
+
+    bool isJumping = false;
+    bool canDoubleJump = true;
+    public float doubleJumpCooldown = 1f;
+    float doubleJumpTimer;
+    float lastJumpTime;
 
     void Start()
     {
         myRB = GetComponent<Rigidbody>();
         myAnim = GetComponent<Animator>();
         facingRight = true;
+
+        lastJumpTime = -doubleJumpCooldown;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-    }
-    private void FixedUpdate()
-    {
-        if(grounded && Input.GetAxis("Jump") > 0)
+        
+        if (grounded && Input.GetButtonDown("Jump") && !isJumping)
         {
+            isJumping = true;
             grounded = false;
             myAnim.SetBool("grounded", grounded);
-            myRB.AddForce(new Vector3(0, jumpHeight, 0));
+            myRB.velocity = new Vector3(myRB.velocity.x, fixedJumpHeight, 0);
         }
-
+        else if (canDoubleJump && Input.GetButtonDown("Jump"))
+        {
+            isJumping = true;
+            lastJumpTime  = Time.time;
+            grounded = false;
+            myAnim.SetBool("grounded", grounded);
+            myRB.velocity = new Vector3(myRB.velocity.x, fixedJumpHeight, 0);
+           
+        }
+    }
+    void FixedUpdate()
+    {
         groundCollisions = Physics.OverlapSphere(groundCheck.position, groundCheckRadius, groundLayer);
-        if (groundCollisions.Length > 0) grounded = true;
-        else grounded = false;
+        if (groundCollisions.Length > 0)
+        {
+            grounded = true;
+            isJumping = false; //reset the jumping flag when grounded
+        }
+        else
+        {
+            grounded = false;
+        }
 
         myAnim.SetBool("grounded", grounded);
 
@@ -56,7 +80,24 @@ public class playerController : MonoBehaviour
 
         if (move > 0 && !facingRight) Flip();
         else if (move < 0 && facingRight) Flip();
+
+        if (Time.time - lastJumpTime > doubleJumpCooldown)
+        {
+            canDoubleJump = true;
+        }
+        else
+        {
+            canDoubleJump = false;
+        }
     }
+    void Jump(float jumpHeight)
+    {
+        isJumping = true;
+        grounded = false;
+        myAnim.SetBool("grounded", grounded);
+        myRB.velocity = new Vector3(myRB.velocity.x, jumpHeight, 0);
+    }
+
 
     void Flip()
     {
