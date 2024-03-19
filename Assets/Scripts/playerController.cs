@@ -81,6 +81,8 @@ public class playerController : MonoBehaviour
         if (move > 0 && !facingRight) Flip();
         else if (move < 0 && facingRight) Flip();
 
+        float firing = Input.GetAxis("Fire1");
+
         if (Time.time - lastJumpTime > doubleJumpCooldown)
         {
             canDoubleJump = true;
@@ -105,5 +107,12 @@ public class playerController : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.z *= -1;
         transform.localScale = theScale;
+    }
+
+    public float GetFacing()
+    {
+        if (facingRight) return 1;
+        else return -1;
+
     }
 }
