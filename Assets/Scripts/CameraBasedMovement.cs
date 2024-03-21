@@ -10,7 +10,7 @@ public class CameraBaseMovement : MonoBehaviour
     public float turnSpeed;
 
     // identify players
-    public enum Players { player1, player2 }
+    public enum Players {player1, player2 }
     public Players player;
 
     string xInput, zInput;
@@ -19,6 +19,7 @@ public class CameraBaseMovement : MonoBehaviour
     private Rigidbody rb;
     private Vector3 inputDirection;
 
+
     //stretch goal: ball lock
 
     // Start is called before the first frame update
@@ -26,7 +27,7 @@ public class CameraBaseMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        if (player == Players.player1)
+        if(player == Players.player1)
         {
             xInput = "Horizontal";
             zInput = "Vertical";
@@ -53,13 +54,13 @@ public class CameraBaseMovement : MonoBehaviour
         inputDirection = camX * x + camZ * y;
         inputDirection.Normalize();
 
-        if (inputDirection != Vector3.zero)
+        if(inputDirection != Vector3.zero)
         {
             RotatePlayer();
             MovePlayer();
         }
-
-
+       
+        
     }
 
     void MovePlayer()
@@ -76,6 +77,6 @@ public class CameraBaseMovement : MonoBehaviour
         transform.rotation = lerpedDir;
     }
 
-
+   
 
 }

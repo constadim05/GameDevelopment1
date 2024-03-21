@@ -30,6 +30,7 @@ public class CCMovement : MonoBehaviour
     {
         cc = GetComponent<CharacterController>();
         anim = GetComponentInChildren<Animator>();
+        cam = Camera.main;
     }
 
     // Update is called once per frame
@@ -37,9 +38,10 @@ public class CCMovement : MonoBehaviour
     {
         //process gravity: check if grounded and reduce velocity if so
         groundedPlayer = cc.isGrounded;
-        if (groundedPlayer && playerVelocity.y < 0)
+        if(groundedPlayer && playerVelocity.y < 0)
         {
             playerVelocity.y = 0;
+           
         }
 
         //process player inputs
@@ -51,7 +53,7 @@ public class CCMovement : MonoBehaviour
         Vector3 camZ = Vector3.Cross(camX, Vector3.up);
 
         //if moving, combine camera directions and inputs then move
-        if (h != 0 || z != 0)
+        if( h != 0 || z != 0)
         {
             movementDirection = (camX * h) + (camZ * z);
             movementDirection.Normalize();
@@ -66,7 +68,7 @@ public class CCMovement : MonoBehaviour
         }
 
         //if not locked onto target, determine rotation towards walking direction
-        if (!shouldLook || target == null)
+        if(!shouldLook || target == null)
         {
             Quaternion desiredDirection = Quaternion.LookRotation(movementDirection);
             model.rotation = Quaternion.Lerp(model.rotation, desiredDirection, rotationSpeed * Time.deltaTime);
