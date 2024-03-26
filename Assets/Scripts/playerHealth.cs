@@ -6,6 +6,8 @@ public class playerHealth : MonoBehaviour
 {
     public float fullHealth;
     float currentHealth;
+
+    public GameObject playerDeathFX;
     
     // Start is called before the first frame update
     void Start()
@@ -30,6 +32,8 @@ public class playerHealth : MonoBehaviour
 
     public void makeDead()
     {
-        Destroy(gameObject);
+        Instantiate(playerDeathFX, transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
+        //Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

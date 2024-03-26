@@ -29,7 +29,7 @@ public class enemyDamage : MonoBehaviour
         if (playerInRange) Attack();
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if(other.tag == "Player")
         {
@@ -49,6 +49,7 @@ public class enemyDamage : MonoBehaviour
         if (nextDamage <= Time.time)
         {
             thePlayerHealth.addDamage(damage);
+            pushBack(thePlayer.transform);
             nextDamage = Time.time + damageRate;
 
            

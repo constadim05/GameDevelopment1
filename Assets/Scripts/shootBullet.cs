@@ -33,12 +33,8 @@ public class shootBullet : MonoBehaviour
         else
         {
             gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
-    }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
     }
 }
+        
+        
