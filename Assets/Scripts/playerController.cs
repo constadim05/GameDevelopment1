@@ -8,6 +8,8 @@ public class playerController : MonoBehaviour
 
     //movement variables
     public float runSpeed;
+    public float walkSpeed;
+    bool running;
 
     Rigidbody myRB;
     Animator myAnim;
@@ -60,6 +62,9 @@ public class playerController : MonoBehaviour
     }
     void FixedUpdate()
     {
+        running = false;
+
+
         groundCollisions = Physics.OverlapSphere(groundCheck.position, groundCheckRadius, groundLayer);
         if (groundCollisions.Length > 0)
         {
@@ -76,12 +81,29 @@ public class playerController : MonoBehaviour
         float move = Input.GetAxis("Horizontal");
         myAnim.SetFloat("speed", Mathf.Abs(move));
 
+        float sneaking = Input.GetAxis("Fire3");
+        myAnim.SetFloat("sneaking", sneaking);
+
         myRB.velocity = new Vector3(move * runSpeed, myRB.velocity.y, 0);
+
+        
+
+        float firing = Input.GetAxis("Fire1");
+        myAnim.SetFloat("shooting", firing);
+
+        if((sneaking>0 || firing>0) && grounded)
+        {
+            myRB.velocity = new Vector3(move * walkSpeed, myRB.velocity.y, 0);
+
+
+        }
+        else
+        {
+            myRB.velocity = new Vector3(move * runSpeed, myRB.velocity.y, 0);
+        }
 
         if (move > 0 && !facingRight) Flip();
         else if (move < 0 && facingRight) Flip();
-
-        float firing = Input.GetAxis("Fire1");
 
         if (Time.time - lastJumpTime > doubleJumpCooldown)
         {

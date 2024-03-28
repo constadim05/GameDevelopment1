@@ -208,7 +208,7 @@ ModelImporter:
       name: playerMelee
       takeName: Take 001
       internalID: -6788666626592393668
-      firstFrame: 1
+      firstFrame: 140
       lastFrame: 149
       wrapMode: 0
       orientationOffsetY: 0
