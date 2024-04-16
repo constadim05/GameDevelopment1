@@ -93,6 +93,7 @@ public class playerController : MonoBehaviour
 
         if((sneaking>0 || firing>0) && grounded)
         {
+           
             myRB.velocity = new Vector3(move * walkSpeed, myRB.velocity.y, 0);
 
 
@@ -100,11 +101,12 @@ public class playerController : MonoBehaviour
         else
         {
             myRB.velocity = new Vector3(move * runSpeed, myRB.velocity.y, 0);
+            if(Mathf.Abs(move)>0) running = true;
         }
 
         if (move > 0 && !facingRight) Flip();
         else if (move < 0 && facingRight) Flip();
-
+    
         if (Time.time - lastJumpTime > doubleJumpCooldown)
         {
             canDoubleJump = true;
@@ -136,5 +138,10 @@ public class playerController : MonoBehaviour
         if (facingRight) return 1;
         else return -1;
 
+    }
+
+    public bool getRunning()
+    {
+        return (running);
     }
 }
