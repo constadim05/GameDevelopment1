@@ -3,7 +3,12 @@ guid: 11dec503b5f534e229b902c38eb78e2f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pixelAmmoMat
+    second: {fileID: 2100000, guid: f2d0c8ebf681b0345b8bd0379a2434ec, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

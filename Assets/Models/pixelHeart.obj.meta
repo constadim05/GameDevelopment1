@@ -3,7 +3,12 @@ guid: 589e95368f5434b359553c67f7988146
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pixelHeartMat
+    second: {fileID: 2100000, guid: c8abf8b7f4aea0843b682c65952d5909, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

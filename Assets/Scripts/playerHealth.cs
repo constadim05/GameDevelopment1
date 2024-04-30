@@ -50,6 +50,12 @@ public class playerHealth : MonoBehaviour
         }
     }
 
+    public void addHealth (float health){
+        currentHealth += health;
+        if (currentHealth > fullHealth) currentHealth = fullHealth;
+        playerHealthSlider.value = currentHealth;
+    }
+
     public void makeDead()
     {
         Instantiate(playerDeathFX, transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
