@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.8995, y: 2.8797, z: -0.8786}
-  m_LocalScale: {x: 0.017719664, y: 0.09143273, z: 0.09143273}
+  m_LocalScale: {x: 0.017719664, y: 0.1334552, z: 0.10092345}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -91,8 +91,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.008377075
-        value: 0.03144455
+        time: 0
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -136,7 +136,7 @@ LineRenderer:
     numCapVertices: 0
     alignment: 0
     textureMode: 1
-    textureScale: {x: 2.81, y: 0.25}
+    textureScale: {x: 4.97, y: 0.25}
     shadowBias: 0.5
     generateLightingData: 0
   m_MaskInteraction: 0
@@ -397,7 +397,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.05
+      scalar: 0.21
       minScalar: 0.1
       maxCurve:
         serializedVersion: 2
@@ -775,7 +775,7 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 7.36
+    angle: 3.12
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -5075,6 +5075,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 10
   damage: 5
+  shootableMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &7286148153555119236
 MonoBehaviour:
   m_ObjectHideFlags: 0
