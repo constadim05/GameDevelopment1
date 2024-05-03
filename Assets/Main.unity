@@ -13010,6 +13010,7 @@ PrefabInstance:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     - target: {fileID: 2644246215378745547, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
       propertyPath: m_RenderMode
       value: 1
@@ -13066,6 +13067,8 @@ PrefabInstance:
 >>>>>>> parent of 714ff52 (2/5)
 =======
 >>>>>>> parent of 714ff52 (2/5)
+=======
+>>>>>>> parent of 714ff52 (2/5)
     - target: {fileID: 4445875052490506248, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
       propertyPath: scalingMode
       value: 1
@@ -13095,6 +13098,9 @@ PrefabInstance:
       value: 0
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 714ff52 (2/5)
+=======
 >>>>>>> parent of 714ff52 (2/5)
 =======
 >>>>>>> parent of 714ff52 (2/5)
