@@ -13306,6 +13306,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: simplePlatform
       objectReference: {fileID: 0}
+    - target: {fileID: 8758289786275604785, guid: b3596e1b7ebddac4fa6659304756aacf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13451,7 +13455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1755693668231641173, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.887
+      value: 2.8793
       objectReference: {fileID: 0}
     - target: {fileID: 1755693668231641173, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13494,16 +13498,56 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5102058881933330744, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
+      propertyPath: m_Positions.Array.data[0].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5102058881933330744, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
+      propertyPath: m_Positions.Array.data[1].z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5102058881933330744, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5102058881933330744, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5102058881933330744, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5102058881933330744, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5102058881933330744, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5102058881933330744, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5102058881933330744, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
+      propertyPath: m_Parameters.colorGradient.m_ColorSpace
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5102058881933330744, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
-      value: 0.21000358
+      value: 0.5481911
       objectReference: {fileID: 0}
     - target: {fileID: 5102058881933330744, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 0
+      value: 0.18776703
       objectReference: {fileID: 0}
     - target: {fileID: 7101120452318667105, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
       propertyPath: m_Name
       value: bullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 7101120452318667105, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
