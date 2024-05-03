@@ -6,16 +6,25 @@ public class shootBullet : MonoBehaviour
 {
     public float range = 10f;
     public float damage = 5f;
+<<<<<<< HEAD
     private Ray shootRay;
     private RaycastHit shootHit;
     public LayerMask shootableMask;
     private LineRenderer gunLine;
+=======
+
+    Ray shootRay;
+    RaycastHit shootHit;
+    int shootableMask;
+    LineRenderer gunLine;
+>>>>>>> parent of 714ff52 (2/5)
 
     // Start is called before the first frame update
     void Awake()
     {
         shootableMask = LayerMask.GetMask("Shootable");
         gunLine = GetComponent<LineRenderer>();
+<<<<<<< HEAD
         shootRay = new Ray(transform.position, transform.forward);
         gunLine.SetPosition(0, transform.position);
         gunLine.enabled = true; // Enable the gunLine by default
@@ -92,6 +101,18 @@ public class shootBullet : MonoBehaviour
                 theEnemyHealth.damageFX(shootHit.point, -shootRay.direction);
             }
 
+=======
+
+        shootRay.origin = transform.position;
+        shootRay.direction = transform.forward;
+        gunLine.SetPosition(0, transform.position);
+        //gunLine.enabled = false;
+
+        if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
+
+        //hit an enemy goes here
+        {
+>>>>>>> parent of 714ff52 (2/5)
             gunLine.SetPosition(1, shootHit.point);
         }
         else
