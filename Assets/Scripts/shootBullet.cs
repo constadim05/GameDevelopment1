@@ -15,6 +15,8 @@ public class shootBullet : MonoBehaviour
 
     LineRenderer gunLine;
 
+    public static object Raycast { get; private set; }
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -29,11 +31,36 @@ public class shootBullet : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            shootHit()
+            Shoot(); // Call the Shoot method when Fire1 button is pressed
         }
     }
 
-    void Shoot()
+     void Shoot()
+    {
+        if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
+        {
+            Debug.Log(shootHit.collider.gameObject.name);
+            if (shootHit.collider.tag == "Enemy")
+            {
+                enemyHealth theEnemyHealth = shootHit.collider.GetComponent<enemyHealth>();
+    theEnemyHealth.addDamage(damage);
+                theEnemyHealth.damageFX(shootHit.point, -shootRay.direction);
+            }
+
+//hit an enemy goes here
+
+gunLine.SetPosition(1, shootHit.point);
+        }
+        else
+        {
+            gunLine.SetPosition(1, shootRay.origin + shootRay.direction* range);
+        }
+    } 
+}
+      
+    
+    
+    /* void Shoot()
     {
         {
             if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
@@ -50,33 +77,14 @@ public class shootBullet : MonoBehaviour
             }
             else
             {
+                Debug.Log("Raycast didn't hit anything"); // Add this line to check if the ray is not hitting anything
                 gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
             }
         }
     }
 }
+    */
     
     
-    
-    /*if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
-        {
-            Debug.Log(shootHit.collider.gameObject.name);
-            if (shootHit.collider.tag == "Enemy")
-            {
-                enemyHealth theEnemyHealth = shootHit.collider.GetComponent<enemyHealth>();
-                theEnemyHealth.addDamage(damage);
-                theEnemyHealth.damageFX(shootHit.point, -shootRay.direction);
-            }
-        
-          //hit an enemy goes here
-        
-            gunLine.SetPosition(1, shootHit.point);
-        }
-        else
-        {
-            gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
-        }
-    } 
-}
-        
+  
         
