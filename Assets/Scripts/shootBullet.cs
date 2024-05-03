@@ -25,6 +25,7 @@ public class shootBullet : MonoBehaviour
         shootableMask = LayerMask.GetMask("Shootable");
         gunLine = GetComponent<LineRenderer>();
 <<<<<<< HEAD
+<<<<<<< HEAD
         shootRay = new Ray(transform.position, transform.forward);
         gunLine.SetPosition(0, transform.position);
         gunLine.enabled = true; // Enable the gunLine by default
@@ -101,6 +102,18 @@ public class shootBullet : MonoBehaviour
                 theEnemyHealth.damageFX(shootHit.point, -shootRay.direction);
             }
 
+=======
+
+        shootRay.origin = transform.position;
+        shootRay.direction = transform.forward;
+        gunLine.SetPosition(0, transform.position);
+        //gunLine.enabled = false;
+
+        if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
+
+        //hit an enemy goes here
+        {
+>>>>>>> parent of 714ff52 (2/5)
 =======
 
         shootRay.origin = transform.position;

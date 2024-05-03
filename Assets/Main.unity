@@ -13008,6 +13008,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
     - target: {fileID: 2644246215378745547, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
       propertyPath: m_RenderMode
       value: 1
@@ -13060,6 +13061,8 @@ PrefabInstance:
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
       value: 0.18776703
 =======
+=======
+>>>>>>> parent of 714ff52 (2/5)
     - target: {fileID: 4445875052490506248, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
       propertyPath: scalingMode
       value: 1
@@ -13087,6 +13090,9 @@ PrefabInstance:
     - target: {fileID: 5102058881933330744, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
       value: 0
+<<<<<<< HEAD
+>>>>>>> parent of 714ff52 (2/5)
+=======
 >>>>>>> parent of 714ff52 (2/5)
       objectReference: {fileID: 0}
     - target: {fileID: 7101120452318667105, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
