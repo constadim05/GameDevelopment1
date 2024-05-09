@@ -15,8 +15,10 @@ public class playerHealth : MonoBehaviour
     Color flashColor = new Color(255f, 255f, 255f, 1f);
     float flashSpeed = 5f;
     bool damaged = false;
+    public GameObject endgameText; // Changed from Text to GameObject
 
     AudioSource playerAS;
+    Animator endGameAnim; // Animator reference for endgameText
 
     // Start is called before the first frame update
     void Start()
@@ -26,12 +28,18 @@ public class playerHealth : MonoBehaviour
         playerHealthSlider.value = currentHealth;
 
         playerAS = GetComponent<AudioSource>();
+
+        // Ensure endgameText is initially inactive
+        endgameText.SetActive(false);
+
+        // Get the Animator component of endgameText
+        endGameAnim = endgameText.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //are we hurt?
+        // Are we hurt?
         if (damaged)
         {
             damageScreen.color = flashColor;
@@ -57,7 +65,8 @@ public class playerHealth : MonoBehaviour
         }
     }
 
-    public void addHealth (float health){
+    public void addHealth(float health)
+    {
         currentHealth += health;
         if (currentHealth > fullHealth) currentHealth = fullHealth;
         playerHealthSlider.value = currentHealth;
@@ -66,8 +75,17 @@ public class playerHealth : MonoBehaviour
     public void makeDead()
     {
         Instantiate(playerDeathFX, transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
-        //Destroy(gameObject);
+        // Destroy(gameObject);
         damageScreen.color = flashColor;
         gameObject.SetActive(false);
+
+        // Activate endgameText when player dies
+        endgameText.SetActive(true);
+
+        // Trigger the "endGame" animation
+        endGameAnim.SetTrigger("endGame");
+
+        // Set a boolean parameter to control transition to idle state (if using a boolean condition)
+        // endGameAnim.SetBool("animationEnded", true);
     }
 }
