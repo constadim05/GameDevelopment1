@@ -1,48 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class zombieController : MonoBehaviour
 {
     public GameObject flipModel;
-
     public AudioClip[] idleSounds;
     public float idleSoundTime;
     AudioSource enemyMovementAS;
     float nextIdleSound = 0f;
 
     public float runSpeed;
-    public float walkSpeed;
     public bool facingRight = true;
-
-    float moveSpeed;
     bool running;
-
     Rigidbody myRB;
     Animator myAnim;
     Transform detectedPlayer;
-
     bool Detected;
     bool firstDetection;
     float startRun;
     public float detectionTime;
 
-    // Start is called before the first frame update
     void Start()
     {
         myRB = GetComponent<Rigidbody>();
         myAnim = GetComponent<Animator>();
         enemyMovementAS = GetComponent<AudioSource>();
-
         running = false;
         Detected = false;
         firstDetection = false;
-        moveSpeed = walkSpeed;
-
         if (Random.Range(0, 10) > 5) Flip();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (Detected)
@@ -57,30 +44,28 @@ public class zombieController : MonoBehaviour
             }
         }
 
-        if (Detected && !facingRight)
-            myRB.velocity = new Vector3((moveSpeed * -1), myRB.velocity.y, 0);
-        else if (Detected && facingRight)
-            myRB.velocity = new Vector3(moveSpeed, myRB.velocity.y, 0);
-
-        if (!running && Detected)
+        if (!running)
         {
             if (startRun < Time.time)
             {
-                moveSpeed = runSpeed;
-                myAnim.SetTrigger("run");
                 running = true;
+                myAnim.SetTrigger("run");
             }
         }
 
-        if (!running)
+        if (running)
         {
-            if (Random.Range(0, 10) > 5 && nextIdleSound < Time.time)
-            {
-                AudioClip tempClip = idleSounds[Random.Range(0, idleSounds.Length)];
-                enemyMovementAS.clip = tempClip;
-                enemyMovementAS.Play();
-                nextIdleSound = idleSoundTime + Time.time;
-            }
+            // Move the zombie using transform.position
+            Vector3 moveDirection = facingRight ? Vector3.right : Vector3.left;
+            transform.position += moveDirection * runSpeed * Time.fixedDeltaTime;
+        }
+
+        if (!running && Random.Range(0, 10) > 5 && nextIdleSound < Time.time)
+        {
+            AudioClip tempClip = idleSounds[Random.Range(0, idleSounds.Length)];
+            enemyMovementAS.clip = tempClip;
+            enemyMovementAS.Play();
+            nextIdleSound = idleSoundTime + Time.time;
         }
     }
 
@@ -101,12 +86,8 @@ public class zombieController : MonoBehaviour
         if (other.tag == "Player")
         {
             firstDetection = false;
-            if (running)
-            {
-                myAnim.SetTrigger("run");
-                moveSpeed = walkSpeed;
-                running = false;
-            }
+            running = false;
+            myAnim.SetTrigger("run");
         }
     }
 
