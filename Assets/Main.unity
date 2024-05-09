@@ -1567,6 +1567,9 @@ GameObject:
   - component: {fileID: 690931754}
   - component: {fileID: 690931756}
   - component: {fileID: 690931755}
+  - component: {fileID: 690931757}
+  - component: {fileID: 690931758}
+  - component: {fileID: 690931759}
   m_Layer: 7
   m_Name: zombieDetection
   m_TagString: Enemy
@@ -1707,6 +1710,77 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 1, z: 12}
   m_Center: {x: 0, y: 0.9, z: 0}
+--- !u!114 &690931757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690931753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53afd1ada7da07b4a9dc8d274175eff1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flipModel: {fileID: 1428088813}
+  idleSounds:
+  - {fileID: 8300000, guid: 4eefff9220a0cf5458d05a2ac06ab94d, type: 3}
+  - {fileID: 8300000, guid: 55d541d3ffb701841923d98ca1eb4989, type: 3}
+  - {fileID: 8300000, guid: f31f41b81b823444e9a4613cc27ebb36, type: 3}
+  idleSoundTime: 4
+  runSpeed: 8.5
+  walkSpeed: 2
+  facingRight: 1
+  detectionTime: 2
+--- !u!54 &690931758
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690931753}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!95 &690931759
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690931753}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 039186db7a783674a90f876117766e5b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -2462,6 +2536,9 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 845a7720f81e147ca9c114c060a80893, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 2086056208}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 845a7720f81e147ca9c114c060a80893, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 2086056205}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 845a7720f81e147ca9c114c060a80893, type: 3}
       insertIndex: -1
@@ -2623,6 +2700,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 644aab8ea2e052d42972ff55d49a48ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1428088813 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2170852367464934434, guid: 845a7720f81e147ca9c114c060a80893, type: 3}
+  m_PrefabInstance: {fileID: 1314654644}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1451515677
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3819,6 +3901,28 @@ MonoBehaviour:
   burnTime: 4
   burnEffects: {fileID: 1614408645}
   enemyHealthIndicator: {fileID: 2143091604}
+--- !u!95 &2086056208
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086056202}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 80b3f07e167f246478a2d62cdee893c8, type: 3}
+  m_Controller: {fileID: 9100000, guid: 039186db7a783674a90f876117766e5b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &2143091604 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1650543263417823198, guid: 718358c11a0447f4f92a14fba599b7ae, type: 3}
