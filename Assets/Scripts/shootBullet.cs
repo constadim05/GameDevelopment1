@@ -43,7 +43,6 @@ public class shootBullet : MonoBehaviour
                 if (theEnemyHealth != null)
                 {
                     theEnemyHealth.addDamage(damage);
-                    theEnemyHealth.damageFX(shootHit.point, -shootRay.direction);
                 }
                 gunLine.SetPosition(1, shootHit.point);
             }

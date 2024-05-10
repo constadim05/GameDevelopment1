@@ -7,7 +7,6 @@ public class EnemyHealth : MonoBehaviour
 {
     public float enemyMaxHealth;
     public float damageModifier;
-    public GameObject damageParticles;
     public bool drops;
     public GameObject drop1; // First drop variable
     public GameObject drop2; // Second drop variable
@@ -61,11 +60,6 @@ public class EnemyHealth : MonoBehaviour
         enemyHealthIndicator.value = currentHealth;
         enemyAS.Play();
         if (currentHealth <= 0) makeDead();
-    }
-
-    public void damageFX(Vector3 point, Vector3 rotation)
-    {
-        Instantiate(damageParticles, point, Quaternion.Euler(rotation));
     }
 
     public void addFire()
