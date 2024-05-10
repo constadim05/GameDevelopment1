@@ -1732,7 +1732,7 @@ MonoBehaviour:
   idleSoundTime: 1
   runSpeed: 5
   facingRight: 1
-  detectionTime: 2
+  detectionTime: 0
 --- !u!95 &690931758
 Animator:
   serializedVersion: 7
@@ -2586,6 +2586,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37916a1493691704395a3ee1e621399f, type: 3}
+--- !u!1 &1320405123 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 11dec503b5f534e229b902c38eb78e2f, type: 3}
+  m_PrefabInstance: {fileID: 1846524390}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1391435235
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3885,7 +3890,8 @@ MonoBehaviour:
   damageModifier: 1
   damageParticles: {fileID: 475730548}
   drops: 1
-  drop: {fileID: 413705331}
+  drop1: {fileID: 1320405123}
+  drop2: {fileID: 413705331}
   deathSound: {fileID: 8300000, guid: 38e7a0df9416df34c8349166b0fc7f88, type: 3}
   canBurn: 1
   burnDamage: 4

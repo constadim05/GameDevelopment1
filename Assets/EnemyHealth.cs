@@ -9,7 +9,8 @@ public class EnemyHealth : MonoBehaviour
     public float damageModifier;
     public GameObject damageParticles;
     public bool drops;
-    public GameObject drop;
+    public GameObject drop1; // First drop variable
+    public GameObject drop2; // Second drop variable
     public AudioClip deathSound;
     public bool canBurn;
     public float burnDamage;
@@ -80,11 +81,13 @@ public class EnemyHealth : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(deathSound, transform.position, 0.15f);
 
-        Destroy(gameObject.transform.root.gameObject);
         if (drops)
         {
+            GameObject dropToInstantiate = Random.Range(0, 2) == 0 ? drop1 : drop2; // Randomly choose between drop1 and drop2
             Vector3 spawnPosition = transform.position + Vector3.up * 0.5f;
-            Instantiate(drop, transform.position, transform.rotation);
+            Instantiate(dropToInstantiate, spawnPosition, Quaternion.identity);
         }
+
+        Destroy(gameObject.transform.root.gameObject);
     }
 }
