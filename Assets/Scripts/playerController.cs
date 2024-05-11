@@ -1,116 +1,84 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class playerController : MonoBehaviour
+[RequireComponent(typeof(CharacterController))]
+public class PlayerController : MonoBehaviour
 {
-    // Movement variables
     public float runSpeed;
     public float walkSpeed;
-    bool running;
 
-    Rigidbody myRB;
-    Animator myAnim;
+    private CharacterController characterController;
+    private Animator animator;
+    private bool facingRight = true;
 
-    bool facingRight;
-
-    // For jumping
-    bool grounded = false;
-    Collider[] groundCollisions;
-    float groundCheckRadius = 0.2f;
-    public LayerMask groundLayer;
+    private bool grounded;
     public Transform groundCheck;
-    public float fixedJumpHeight;
+    public float groundCheckRadius = 0.2f;
+    public LayerMask groundLayer;
 
-    bool isJumping = false;
-    bool canJump = true;
-    public float jumpCooldown = 1f;
-    float lastJumpTime;
+    private Vector2 movementInput;
+    private bool jumpInput;
 
-    void Start()
+    private void Start()
     {
-        myRB = GetComponent<Rigidbody>();
-        myAnim = GetComponent<Animator>();
-        facingRight = true;
-
-        lastJumpTime = -jumpCooldown;
+        characterController = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
     }
 
-    void Update()
+    public void OnMove(InputAction.CallbackContext context)
     {
-        // Jumping logic
-        if (grounded && canJump && Input.GetButtonDown("Jump"))
-        {
-            Jump(fixedJumpHeight);
-            lastJumpTime = Time.time;
-            canJump = false;
-        }
-
-        // Update grounded state in animator
-        myAnim.SetBool("grounded", grounded);
+        movementInput = context.ReadValue<Vector2>();
     }
 
-    void FixedUpdate()
+    public void OnJump(InputAction.CallbackContext context)
     {
-        // Ground check
-        groundCollisions = Physics.OverlapSphere(groundCheck.position, groundCheckRadius, groundLayer);
-        grounded = groundCollisions.Length > 0;
+        jumpInput = context.action.triggered;
+    }
 
-        // Movement
-        float move = Input.GetAxis("Horizontal");
-        myAnim.SetFloat("speed", Mathf.Abs(move));
+    private void FixedUpdate()
+    {
+        HandleMovement();
+        HandleJump();
+    }
 
-        float sneaking = Input.GetAxis("Fire3");
-        myAnim.SetFloat("sneaking", sneaking);
+    private void HandleMovement()
+    {
+        float move = movementInput.x;
 
-        float firing = Input.GetAxis("Fire1");
-        myAnim.SetFloat("shooting", firing);
+        float speed = Mathf.Abs(move) > 0 ? (Input.GetButton("Fire3") || Input.GetButton("Fire1") ? walkSpeed : runSpeed) : 0f;
+        animator.SetFloat("speed", Mathf.Abs(move));
 
-        if ((sneaking > 0 || firing > 0) && grounded)
-        {
-            myRB.velocity = new Vector3(move * walkSpeed, myRB.velocity.y, 0);
-        }
-        else
-        {
-            myRB.velocity = new Vector3(move * runSpeed, myRB.velocity.y, 0);
-            if (Mathf.Abs(move) > 0) running = true;
-        }
+        Vector3 movement = new Vector3(move * speed, characterController.velocity.y, 0f);
+        characterController.Move(movement * Time.fixedDeltaTime);
 
-        // Flip character
-        if (move > 0 && !facingRight || move < 0 && facingRight)
+        if ((move > 0 && !facingRight) || (move < 0 && facingRight))
         {
             Flip();
         }
+    }
 
-        // Jump cooldown check
-        if (Time.time - lastJumpTime > jumpCooldown)
+    private void HandleJump()
+    {
+        grounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
+
+        if (grounded && jumpInput)
         {
-            canJump = true;
+            Jump();
         }
     }
 
-    void Jump(float jumpHeight)
+    private void Jump()
     {
-        isJumping = true;
-        grounded = false;
-        myRB.velocity = new Vector3(myRB.velocity.x, jumpHeight, 0);
+        float jumpHeight = 5f; // Set your desired jump height here
+        Vector3 jumpVelocity = new Vector3(characterController.velocity.x, jumpHeight, 0f);
+        characterController.Move(jumpVelocity * Time.fixedDeltaTime);
     }
 
-    void Flip()
+    private void Flip()
     {
         facingRight = !facingRight;
-        Vector3 theScale = transform.localScale;
-        theScale.z *= -1;
-        transform.localScale = theScale;
-    }
-
-    public float GetFacing()
-    {
-        return facingRight ? 1 : -1;
-    }
-
-    public bool getRunning()
-    {
-        return running;
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
     }
 }

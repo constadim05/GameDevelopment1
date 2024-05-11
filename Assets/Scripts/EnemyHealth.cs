@@ -73,15 +73,19 @@ public class EnemyHealth : MonoBehaviour
 
     void makeDead()
     {
-        AudioSource.PlayClipAtPoint(deathSound, transform.position, 0.15f);
-
-        if (drops)
+        // Check if the root GameObject has been destroyed
+        if (gameObject.transform.root != null && gameObject.transform.root.gameObject != null)
         {
-            GameObject dropToInstantiate = Random.Range(0, 2) == 0 ? drop1 : drop2; // Randomly choose between drop1 and drop2
-            Vector3 spawnPosition = transform.position + Vector3.up * 0.5f;
-            Instantiate(dropToInstantiate, spawnPosition, Quaternion.identity);
-        }
+            AudioSource.PlayClipAtPoint(deathSound, transform.position, 0.15f);
 
-        Destroy(gameObject.transform.root.gameObject);
+            if (drops)
+            {
+                GameObject dropToInstantiate = Random.Range(0, 2) == 0 ? drop1 : drop2; // Randomly choose between drop1 and drop2
+                Vector3 spawnPosition = transform.position + Vector3.up * 0.5f;
+                Instantiate(dropToInstantiate, spawnPosition, Quaternion.identity);
+            }
+
+            Destroy(gameObject.transform.root.gameObject);
+        }
     }
 }

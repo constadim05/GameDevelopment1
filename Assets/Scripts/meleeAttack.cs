@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class meleeAttcka : MonoBehaviour
 {
-
     public float damage;
     public float knockBack;
     public float knockBackRadius;
-        public float meleeRate;
+    public float meleeRate;
 
     float nextMelee;
 
@@ -30,13 +29,18 @@ public class meleeAttcka : MonoBehaviour
     void FixedUpdate()
     {
         float melee = Input.GetAxis("Fire2");
-        if(melee > 0 && nextMelee < Time.time && !(myPC.getRunning()))
+        if (melee > 0 && nextMelee < Time.time && !(myPC.getRunning()))
         {
             myAnim.SetTrigger("gunMelee");
             nextMelee = Time.time + meleeRate;
 
-            //Do Damage
+            // Do Damage
             Collider[] attacked = Physics.OverlapSphere(transform.position, knockBackRadius, shootableMask);
+            foreach (Collider hit in attacked)
+            {
+                // Apply damage and knockback to the hit object
+                // Add your damage and knockback logic here
+            }
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class WaveSpawner : MonoBehaviour
 {
     [SerializeField] private float countdown;
-    [SerializeField] private GameObject spawnPoint;
+    [SerializeField] private GameObject[] spawnPoints; // Array of spawn points
     public Wave[] waves;
     private int currentWaveIndex = 0;
 
@@ -14,35 +14,35 @@ public class WaveSpawner : MonoBehaviour
     private void Start()
     {
         readyToCountDown = true;
-        
-        for(int i = 0; i < waves.Length; i++)
+
+        for (int i = 0; i < waves.Length; i++)
         {
             waves[i].enemiesLeft = waves[i].enemies.Length;
         }
     }
+
     private void Update()
     {
-        if(currentWaveIndex >= waves.Length)
+        if (currentWaveIndex >= waves.Length)
         {
             Debug.Log("You survived every wave!");
             return;
         }
-        
-        if(readyToCountDown == true)
+
+        if (readyToCountDown == true)
         {
             countdown -= Time.deltaTime;
         }
-        
 
         if (countdown <= 0)
         {
             readyToCountDown = false;
-            
+
             countdown = waves[currentWaveIndex].timeToNextWave;
             StartCoroutine(SpawnWave());
         }
 
-        if(waves[currentWaveIndex].enemiesLeft == 0)
+        if (waves[currentWaveIndex].enemiesLeft == 0)
         {
             readyToCountDown = true;
             currentWaveIndex++;
@@ -55,8 +55,10 @@ public class WaveSpawner : MonoBehaviour
         {
             for (int i = 0; i < waves[currentWaveIndex].enemies.Length; i++)
             {
-                Enemy enemy = Instantiate(waves[currentWaveIndex].enemies[i], spawnPoint.transform);
-                enemy.transform.SetParent(spawnPoint.transform);
+                // Choose a random spawn point
+                GameObject randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+                Enemy enemy = Instantiate(waves[currentWaveIndex].enemies[i], randomSpawnPoint.transform.position, Quaternion.identity);
+                enemy.transform.SetParent(randomSpawnPoint.transform);
                 yield return new WaitForSeconds(waves[currentWaveIndex].timeToNextEnemy);
             }
         }
