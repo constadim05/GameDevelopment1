@@ -112,6 +112,12 @@ public class playerController : MonoBehaviour
         {
             canJump = true;
         }
+
+        // Update canJump when grounded
+        if (grounded)
+        {
+            canJump = true;
+        }
     }
 
     void Jump(float jumpHeight)

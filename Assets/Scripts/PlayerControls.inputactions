@@ -158,15 +158,15 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "right",
-                    "id": "1217bb1a-c3ff-4639-b537-0c6f737f5f6d",
+                    "name": "",
+                    "id": "d837e9b5-1c3f-4c0a-9b94-247918a7fe48",
                     "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "",
                     "action": "Jump",
                     "isComposite": false,
-                    "isPartOfComposite": true
+                    "isPartOfComposite": false
                 },
                 {
                     "name": "",

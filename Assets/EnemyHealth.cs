@@ -77,7 +77,7 @@ public class EnemyHealth : MonoBehaviour
 
         AudioSource.PlayClipAtPoint(deathSound, transform.position, 0.15f);
 
-        // Deactivate the health indicator
+        // Deactivate the health indicator if it exists
         if (enemyHealthIndicator != null)
         {
             enemyHealthIndicator.gameObject.SetActive(false);
@@ -92,5 +92,6 @@ public class EnemyHealth : MonoBehaviour
 
         Destroy(gameObject.transform.root.gameObject);
     }
+
 
 }

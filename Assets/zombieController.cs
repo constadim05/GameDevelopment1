@@ -16,6 +16,9 @@ public class zombieController : MonoBehaviour
     Transform player1;
     Transform player2;
 
+
+
+
     void Start()
     {
         myRB = GetComponent<Rigidbody>();

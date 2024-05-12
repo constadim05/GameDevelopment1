@@ -1439,7 +1439,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 80b3f07e167f246478a2d62cdee893c8, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 80b3f07e167f246478a2d62cdee893c8, type: 3}
       propertyPath: m_TagString
@@ -1736,6 +1736,38 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f77fafcac6e9f04f851553e08cd450f, type: 3}
+--- !u!1 &872653459 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2312267677437839985, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
+  m_PrefabInstance: {fileID: 692278073896327271}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &872653465
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872653459}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &913313819
 GameObject:
   m_ObjectHideFlags: 0
@@ -4227,9 +4259,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1459346214148136553, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
+    - {fileID: 358449275499670141, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2312267677437839985, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 872653465}
   m_SourcePrefab: {fileID: 100100000, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
 --- !u!1001 &2353303209940133348
 PrefabInstance:
@@ -4308,6 +4344,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 588285166727569472, guid: f4d288f4692274f4181e820df6a43c34, type: 3}
+      propertyPath: m_Center.y
+      value: 0.79
+      objectReference: {fileID: 0}
     - target: {fileID: 2146692394593896706, guid: f4d288f4692274f4181e820df6a43c34, type: 3}
       propertyPath: endgameText
       value: 
@@ -4324,6 +4364,10 @@ PrefabInstance:
       propertyPath: groundCheck
       value: 
       objectReference: {fileID: 1723556580}
+    - target: {fileID: 2681163563668165682, guid: f4d288f4692274f4181e820df6a43c34, type: 3}
+      propertyPath: fixedJumpHeight
+      value: 12.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4438397203295404373, guid: f4d288f4692274f4181e820df6a43c34, type: 3}
       propertyPath: m_Camera
       value: 
@@ -4435,6 +4479,10 @@ PrefabInstance:
     - target: {fileID: 7290106497495706791, guid: f4d288f4692274f4181e820df6a43c34, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7542303397155487939, guid: f4d288f4692274f4181e820df6a43c34, type: 3}
+      propertyPath: m_Center.y
+      value: 0.66
       objectReference: {fileID: 0}
     - target: {fileID: 7953490603588711965, guid: f4d288f4692274f4181e820df6a43c34, type: 3}
       propertyPath: m_Name
