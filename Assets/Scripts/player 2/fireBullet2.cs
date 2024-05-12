@@ -31,7 +31,8 @@ public class fireBullet2 : MonoBehaviour
     {
         playerController2 myPlayer = transform.root.GetComponent<playerController2>();
 
-        if (Input.GetAxisRaw("Fire1_2") > 0 && nextBullet < Time.time && remainingRounds > 0)
+        // Remove the condition related to "Fire" input
+        /*if (Input.GetAxisRaw("Fire") > 0 && nextBullet < Time.time && remainingRounds > 0)
         {
             nextBullet = Time.time + timeBetweenBullets;
             Vector3 rot;
@@ -47,7 +48,7 @@ public class fireBullet2 : MonoBehaviour
 
             remainingRounds -= 1;
             playerAmmoSlider.value = remainingRounds;
-        }
+        }*/
     }
 
     public void reload()
@@ -63,4 +64,3 @@ public class fireBullet2 : MonoBehaviour
         gunMuzzleAS.Play();
     }
 }
-

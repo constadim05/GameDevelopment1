@@ -8,7 +8,7 @@ public class meleeAttcka : MonoBehaviour
     public float damage;
     public float knockBack;
     public float knockBackRadius;
-        public float meleeRate;
+    public float meleeRate;
 
     float nextMelee;
 
@@ -29,14 +29,15 @@ public class meleeAttcka : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        float melee = Input.GetAxis("Fire2");
-        if(melee > 0 && nextMelee < Time.time && !(myPC.getRunning()))
-        {
-            myAnim.SetTrigger("gunMelee");
-            nextMelee = Time.time + meleeRate;
+        // Remove the input detection for "Fire1_2"
+        // float melee = Input.GetAxis("Fire1_2");
+        // if(melee > 0 && nextMelee < Time.time && !(myPC.getRunning()))
+        // {
+        //     myAnim.SetTrigger("gunMelee");
+        //     nextMelee = Time.time + meleeRate;
 
-            //Do Damage
-            Collider[] attacked = Physics.OverlapSphere(transform.position, knockBackRadius, shootableMask);
-        }
+        //     //Do Damage
+        //     Collider[] attacked = Physics.OverlapSphere(transform.position, knockBackRadius, shootableMask);
+        // }
     }
 }

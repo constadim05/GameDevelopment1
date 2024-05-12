@@ -1395,7 +1395,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 80b3f07e167f246478a2d62cdee893c8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.78
+      value: 7.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 80b3f07e167f246478a2d62cdee893c8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1439,7 +1439,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 80b3f07e167f246478a2d62cdee893c8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 80b3f07e167f246478a2d62cdee893c8, type: 3}
       propertyPath: m_TagString
@@ -3086,7 +3086,7 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 9d7cb387-d13a-4a84-bb7f-0e9c5e1c2834
     m_ActionName: 'Player2/Fire2_2[/Keyboard/m]'
-  m_NeverAutoSwitchControlSchemes: 1
+  m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: Player2
   m_SplitScreenIndex: -1
@@ -4217,6 +4217,22 @@ PrefabInstance:
       propertyPath: enemyMaxHealth
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 6911399457963572306, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
+      propertyPath: m_Height
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6911399457963572306, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
+      propertyPath: m_Radius
+      value: 0.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 6911399457963572306, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
+      propertyPath: m_Center.y
+      value: 0.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 6990138031673685138, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
+      propertyPath: m_Size.z
+      value: 19.79
+      objectReference: {fileID: 0}
     - target: {fileID: 8159506277401640730, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.79
@@ -4366,7 +4382,7 @@ PrefabInstance:
       objectReference: {fileID: 1723556580}
     - target: {fileID: 2681163563668165682, guid: f4d288f4692274f4181e820df6a43c34, type: 3}
       propertyPath: fixedJumpHeight
-      value: 12.5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4438397203295404373, guid: f4d288f4692274f4181e820df6a43c34, type: 3}
       propertyPath: m_Camera
@@ -4442,11 +4458,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7290106497495706791, guid: f4d288f4692274f4181e820df6a43c34, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.24
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7290106497495706791, guid: f4d288f4692274f4181e820df6a43c34, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.82
+      value: 1.79
       objectReference: {fileID: 0}
     - target: {fileID: 7290106497495706791, guid: f4d288f4692274f4181e820df6a43c34, type: 3}
       propertyPath: m_LocalPosition.z

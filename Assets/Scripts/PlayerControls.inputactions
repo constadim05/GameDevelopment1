@@ -15,19 +15,10 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Jump2",
+                    "name": "Jump",
                     "type": "PassThrough",
                     "id": "14d66cf3-2129-4748-8595-bd3ad678fa56",
                     "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Fire1_2",
-                    "type": "Button",
-                    "id": "94d4d2f3-f418-4dfc-90f4-88ea634bd4e4",
-                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -74,18 +65,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5e520198-464a-43d7-890b-7a1497e56da3",
-                    "path": "<Keyboard>/v",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Fire1_2",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -109,15 +89,6 @@
                     "type": "PassThrough",
                     "id": "d9779cf0-c461-4a08-bf9c-6422f1788e18",
                     "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Fire2_2",
-                    "type": "Button",
-                    "id": "9d7cb387-d13a-4a84-bb7f-0e9c5e1c2834",
-                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -165,17 +136,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5505509e-1343-4ae7-86a4-b96272fbad77",
-                    "path": "<Keyboard>/m",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Fire2_2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

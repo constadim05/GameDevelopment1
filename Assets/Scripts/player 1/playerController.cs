@@ -60,6 +60,7 @@ public class playerController : MonoBehaviour
         // Jumping logic
         if (grounded && canJump && jumped)
         {
+            myAnim.SetTrigger("Jump"); // Trigger the jump animation
             Jump(fixedJumpHeight);
             lastJumpTime = Time.time;
             canJump = false;

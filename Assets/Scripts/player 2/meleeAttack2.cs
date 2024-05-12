@@ -24,14 +24,15 @@ public class meleeAttack2 : MonoBehaviour
 
     void FixedUpdate()
     {
-        float melee = Input.GetAxis("Fire2_2");
-        if (melee > 0 && nextMelee < Time.time && !(myPC.getRunning()))
-        {
-            myAnim.SetTrigger("gunMelee");
-            nextMelee = Time.time + meleeRate;
+        // Remove the input detection for "Fire2_2"
+        // float melee = Input.GetAxis("Fire2_2");
+        // if (melee > 0 && nextMelee < Time.time && !(myPC.getRunning()))
+        // {
+        //     myAnim.SetTrigger("gunMelee");
+        //     nextMelee = Time.time + meleeRate;
 
-            //Do Damage
-            Collider[] attacked = Physics.OverlapSphere(transform.position, knockBackRadius, shootableMask);
-        }
+        //     //Do Damage
+        //     Collider[] attacked = Physics.OverlapSphere(transform.position, knockBackRadius, shootableMask);
+        // }
     }
 }
