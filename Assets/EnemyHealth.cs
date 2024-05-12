@@ -73,11 +73,7 @@ public class EnemyHealth : MonoBehaviour
 
     void makeDead()
     {
-        if (gameObject == null || gameObject.transform.root == null) return; // Check if GameObject or its root is already destroyed
-
-        AudioSource.PlayClipAtPoint(deathSound, transform.position, 0.15f);
-
-        // Deactivate the health indicator
+        // Deactivate the health indicator if it's not null
         if (enemyHealthIndicator != null)
         {
             enemyHealthIndicator.gameObject.SetActive(false);
@@ -90,7 +86,14 @@ public class EnemyHealth : MonoBehaviour
             Instantiate(dropToInstantiate, spawnPosition, Quaternion.identity);
         }
 
-        Destroy(gameObject.transform.root.gameObject);
+        // Play the death sound
+        AudioSource.PlayClipAtPoint(deathSound, transform.position, 0.15f);
+
+        // Destroy the GameObject
+        Destroy(gameObject);
     }
+
+
+
 
 }
