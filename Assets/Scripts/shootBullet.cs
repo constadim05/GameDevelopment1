@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class shootBullet : MonoBehaviour
 {
@@ -12,51 +13,60 @@ public class shootBullet : MonoBehaviour
     int shootableMask;
     LineRenderer gunLine;
 
+    PlayerControls controls;
+
     void Awake()
     {
         shootableMask = LayerMask.GetMask("Shootable");
         gunLine = GetComponent<LineRenderer>();
+
+        // Initialize input controls
+        controls = new PlayerControls();
+        controls.Player.Shoot.performed += _ => Shoot(); // Call Shoot() when the shoot action is performed
     }
 
-    void Update()
+    void OnEnable()
     {
-        if (Time.time >= nextFireTime)
-        {
-            // Check for shooting input (if applicable)
-            // Example: if (Input.GetButtonDown("Fire1"))
-            Shoot();
-        }
+        controls.Enable();
+    }
+
+    void OnDisable()
+    {
+        controls.Disable();
     }
 
     void Shoot()
     {
-        Ray shootRay = new Ray(transform.position, transform.forward);
-        RaycastHit shootHit;
-
-        gunLine.SetPosition(0, transform.position);
-
-        if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
+        if (Time.time >= nextFireTime)
         {
-            if (shootHit.collider.CompareTag("Enemy"))
+            Ray shootRay = new Ray(transform.position, transform.forward);
+            RaycastHit shootHit;
+
+            gunLine.SetPosition(0, transform.position);
+
+            if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
             {
-                EnemyHealth theEnemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
-                if (theEnemyHealth != null)
+                if (shootHit.collider.CompareTag("Enemy"))
                 {
-                    theEnemyHealth.addDamage(damage);
+                    EnemyHealth theEnemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
+                    if (theEnemyHealth != null)
+                    {
+                        theEnemyHealth.addDamage(damage);
+                    }
+                    gunLine.SetPosition(1, shootHit.point);
                 }
-                gunLine.SetPosition(1, shootHit.point);
+                else
+                {
+                    gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
+                }
             }
             else
             {
                 gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
             }
-        }
-        else
-        {
-            gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
-        }
 
-        // Set the next fire time based on fire rate
-        nextFireTime = Time.time + fireRate;
+            // Set the next fire time based on fire rate
+            nextFireTime = Time.time + fireRate;
+        }
     }
 }

@@ -3058,7 +3058,7 @@ MonoBehaviour:
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: Player2
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 963194227}
+  m_Camera: {fileID: 0}
 --- !u!143 &1498590176
 CharacterController:
   m_ObjectHideFlags: 0

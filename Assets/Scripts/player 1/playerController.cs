@@ -29,7 +29,7 @@ public class playerController : MonoBehaviour
 
     bool isJumping = false;
     bool canJump = true;
-    public float jumpCooldown = 1f;
+    public float jumpCooldown = 0.5f; // Adjust jump cooldown as needed
     float lastJumpTime;
 
     void Start()
@@ -47,33 +47,55 @@ public class playerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        jumped = context.action.triggered;
+        if (context.performed)
+        {
+            jumped = true;
+        }
     }
 
     public void OnShoot(InputAction.CallbackContext context)
     {
         shooting = context.action.triggered;
+        if (shooting)
+        {
+            Shoot();
+        }
     }
 
     void Update()
     {
         // Jumping logic
-        if (grounded && canJump && jumped)
+        if (grounded && canJump && jumped && !isJumping)
         {
             Jump(fixedJumpHeight);
             lastJumpTime = Time.time;
             canJump = false;
+            isJumping = true; // Set isJumping flag
         }
 
         // Update grounded state in animator
         myAnim.SetBool("grounded", grounded);
 
-        // Shooting logic
-        if (shooting)
+        // Reset jump flag if not pressed
+        if (!jumped)
         {
-            // Add your shooting logic here
+            canJump = true;
+        }
+        else
+        {
+            // Set jumped to false to avoid jumping multiple times
+            jumped = false;
+        }
+
+        // Check for cooldown to reset isJumping flag
+        if (isJumping && Time.time - lastJumpTime > jumpCooldown)
+        {
+            isJumping = false;
         }
     }
+
+
+
 
     void FixedUpdate()
     {
@@ -106,12 +128,6 @@ public class playerController : MonoBehaviour
         {
             Flip();
         }
-
-        // Jump cooldown check
-        if (Time.time - lastJumpTime > jumpCooldown)
-        {
-            canJump = true;
-        }
     }
 
     void Jump(float jumpHeight)
@@ -119,6 +135,12 @@ public class playerController : MonoBehaviour
         isJumping = true;
         grounded = false;
         myRB.velocity = new Vector3(myRB.velocity.x, jumpHeight, 0);
+    }
+
+    void Shoot()
+    {
+        // Implement your shooting logic here
+        Debug.Log("Shooting!"); // Example: Print "Shooting!" to the console
     }
 
     void Flip()

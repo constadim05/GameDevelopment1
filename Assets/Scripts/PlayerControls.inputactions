@@ -15,7 +15,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Jump2",
+                    "name": "Jump",
                     "type": "PassThrough",
                     "id": "14d66cf3-2129-4748-8595-bd3ad678fa56",
                     "expectedControlType": "Vector2",
@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Fire1_2",
+                    "name": "Fire1",
                     "type": "Button",
                     "id": "94d4d2f3-f418-4dfc-90f4-88ea634bd4e4",
                     "expectedControlType": "Button",
@@ -74,7 +74,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump2",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -84,8 +84,8 @@
                     "path": "<Keyboard>/v",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Fire1_2",
+                    "groups": "",
+                    "action": "Fire1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -105,7 +105,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Jump",
+                    "name": "Jump2",
                     "type": "PassThrough",
                     "id": "d9779cf0-c461-4a08-bf9c-6422f1788e18",
                     "expectedControlType": "Vector2",
@@ -114,7 +114,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Fire2_2",
+                    "name": "Fire2",
                     "type": "Button",
                     "id": "9d7cb387-d13a-4a84-bb7f-0e9c5e1c2834",
                     "expectedControlType": "Button",
@@ -158,15 +158,15 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "right",
-                    "id": "1217bb1a-c3ff-4639-b537-0c6f737f5f6d",
+                    "name": "",
+                    "id": "9edaa0fb-612b-429b-b952-9f05adfa2b52",
                     "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Jump",
+                    "action": "Jump2",
                     "isComposite": false,
-                    "isPartOfComposite": true
+                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
@@ -175,7 +175,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Fire2_2",
+                    "action": "Fire2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
