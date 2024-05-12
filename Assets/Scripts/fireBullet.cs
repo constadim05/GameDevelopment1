@@ -35,9 +35,10 @@ public class fireBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerController myPlayer = transform.root.GetComponent<playerController>();
+        PlayerController myPlayer = GameObject.Find("soldier").GetComponent<PlayerController>();
 
-        if(Input.GetAxisRaw("Fire1")>0 && nextBullet < Time.time && remainingRounds>0)
+
+        if (Input.GetAxisRaw("Fire1") > 0 && nextBullet < Time.time && remainingRounds > 0)
         {
             nextBullet = Time.time + timeBetweenBullets;
             Vector3 rot;
@@ -56,7 +57,7 @@ public class fireBullet : MonoBehaviour
         }
     }
 
-    public void reload()
+        public void reload()
     {
         remainingRounds = maxRounds;
         playerAmmoSlider.value = remainingRounds;
