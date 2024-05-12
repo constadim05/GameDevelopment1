@@ -13,11 +13,8 @@ public class zombieController : MonoBehaviour
     bool running;
     Rigidbody myRB;
     Animator myAnim;
-    Transform detectedPlayer;
-    bool Detected;
-    bool firstDetection;
-    float startRun;
-    public float detectionTime;
+    Transform player1;
+    Transform player2;
 
     void Start()
     {
@@ -25,39 +22,39 @@ public class zombieController : MonoBehaviour
         myAnim = GetComponent<Animator>();
         enemyMovementAS = GetComponent<AudioSource>();
         running = false;
-        Detected = false;
-        firstDetection = false;
+
+        player1 = GameObject.FindGameObjectWithTag("Player1").transform;
+        player2 = GameObject.FindGameObjectWithTag("Player2").transform;
+
         if (Random.Range(0, 10) > 5) Flip();
     }
 
     void FixedUpdate()
     {
-        if (Detected)
-        {
-            if (detectedPlayer.position.x < transform.position.x && facingRight) Flip();
-            else if (detectedPlayer.position.x > transform.position.x && !facingRight) Flip();
+        if (player1 == null || player2 == null)
+            return;
 
-            if (!firstDetection)
-            {
-                startRun = Time.time + detectionTime;
-                firstDetection = true;
-            }
+        Transform targetPlayer = GetCloserPlayer();
+
+        if (targetPlayer != null)
+        {
+            if (targetPlayer.position.x < transform.position.x && facingRight)
+                Flip();
+            else if (targetPlayer.position.x > transform.position.x && !facingRight)
+                Flip();
+
+            running = true;
+            myAnim.SetTrigger("Run");
+
+            // Move the zombie towards the target player
+            Vector3 moveDirection = (targetPlayer.position - transform.position).normalized;
+            myRB.MovePosition(transform.position + moveDirection * runSpeed * Time.fixedDeltaTime);
         }
-
-        if (!running)
+        else
         {
-            if (startRun < Time.time)
-            {
-                running = true;
-                myAnim.SetTrigger("Run");
-            }
-        }
-
-        if (running)
-        {
-            // Move the zombie using transform.position
-            Vector3 moveDirection = facingRight ? Vector3.right : Vector3.left;
-            transform.position += moveDirection * runSpeed * Time.fixedDeltaTime;
+            running = false;
+            myAnim.SetTrigger("Idle");
+            myRB.velocity = Vector3.zero; // Stop the zombie if no player is detected
         }
 
         if (!running && Random.Range(0, 10) > 5 && nextIdleSound < Time.time)
@@ -69,26 +66,15 @@ public class zombieController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    Transform GetCloserPlayer()
     {
-        if (other.tag == "Player" && !Detected)
-        {
-            Detected = true;
-            detectedPlayer = other.transform;
-            myAnim.SetBool("Detected", Detected);
-            if (detectedPlayer.position.x < transform.position.x && facingRight) Flip();
-            else if (detectedPlayer.position.x > transform.position.x && !facingRight) Flip();
-        }
-    }
+        float distanceToPlayer1 = Vector3.Distance(transform.position, player1.position);
+        float distanceToPlayer2 = Vector3.Distance(transform.position, player2.position);
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            firstDetection = false;
-            running = false;
-            myAnim.SetTrigger("Idle");
-        }
+        if (distanceToPlayer1 < distanceToPlayer2)
+            return player1;
+        else
+            return player2;
     }
 
     void Flip()

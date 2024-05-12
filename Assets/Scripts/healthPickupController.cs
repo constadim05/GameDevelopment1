@@ -19,8 +19,10 @@ public class healthPickupController : MonoBehaviour
 
     }
 
-    void OnTriggerEnter(Collider other){
-        if (other.tag == "Player"){
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player1") || other.CompareTag("Player2"))
+        {
             other.GetComponent<playerHealth>().addHealth(healthAmount);
             Destroy(transform.root.gameObject);
             AudioSource.PlayClipAtPoint(healthPickupSound, transform.position, 0.15f);

@@ -1,13 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class playerController : MonoBehaviour
+[RequireComponent(typeof(CharacterController))]
+public class playerController2 : MonoBehaviour
 {
+    [SerializeField]
     // Movement variables
     public float runSpeed;
     public float walkSpeed;
     bool running;
+
+    private Vector2 movementInput; // Added movementInput variable
+    private bool jumped; // Added jumped variable
+    private bool shooting; // Added shooting variable
 
     Rigidbody myRB;
     Animator myAnim;
@@ -32,14 +37,28 @@ public class playerController : MonoBehaviour
         myRB = GetComponent<Rigidbody>();
         myAnim = GetComponent<Animator>();
         facingRight = true;
-
         lastJumpTime = -jumpCooldown;
+    }
+
+    public void Move(InputAction.CallbackContext context)
+    {
+        movementInput = context.ReadValue<Vector2>();
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        jumped = context.action.triggered;
+    }
+
+    public void OnShoot(InputAction.CallbackContext context)
+    {
+        shooting = context.action.triggered;
     }
 
     void Update()
     {
         // Jumping logic
-        if (grounded && canJump && Input.GetButtonDown("Jump"))
+        if (grounded && canJump && jumped)
         {
             Jump(fixedJumpHeight);
             lastJumpTime = Time.time;
@@ -48,6 +67,12 @@ public class playerController : MonoBehaviour
 
         // Update grounded state in animator
         myAnim.SetBool("grounded", grounded);
+
+        // Shooting logic
+        if (shooting)
+        {
+            // Add your shooting logic here
+        }
     }
 
     void FixedUpdate()
@@ -57,7 +82,7 @@ public class playerController : MonoBehaviour
         grounded = groundCollisions.Length > 0;
 
         // Movement
-        float move = Input.GetAxis("Horizontal");
+        float move = movementInput.x; // Changed to use movementInput
         myAnim.SetFloat("speed", Mathf.Abs(move));
 
         float sneaking = Input.GetAxis("Fire3");
