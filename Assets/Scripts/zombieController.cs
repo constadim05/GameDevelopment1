@@ -93,9 +93,13 @@ public class zombieController : MonoBehaviour
 
     void Flip()
     {
-        facingRight = !facingRight;
-        Vector3 theScale = flipModel.transform.localScale;
-        theScale.z *= -1;
-        flipModel.transform.localScale = theScale;
+        if(flipModel != null)
+        {
+            facingRight = !facingRight;
+            Vector3 theScale = flipModel.transform.localScale;
+            theScale.z *= -1;
+            flipModel.transform.localScale = theScale;
+        }
+        
     }
 }
