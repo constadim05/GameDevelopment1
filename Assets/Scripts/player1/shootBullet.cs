@@ -22,9 +22,16 @@ public class shootBullet : MonoBehaviour
     {
         if (Time.time >= nextFireTime)
         {
-            // Check for shooting input (if applicable)
-            // Example: if (Input.GetButtonDown("Fire1"))
-            Shoot();
+            // Check for shooting input for Soldier 1 (Spacebar)
+            if (gameObject.name == "soldier_1" && Input.GetKeyDown(KeyCode.Space))
+            {
+                Shoot();
+            }
+            // Check for shooting input for Soldier 2 (M key)
+            else if (gameObject.name == "soldier_2" && Input.GetKeyDown(KeyCode.M))
+            {
+                Shoot();
+            }
         }
     }
 

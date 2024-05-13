@@ -18,11 +18,15 @@ public class ammoPickupController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if (other.tag == "Player")
         {
-            other.GetComponentInChildren<fireBullet>().reload();
-            Destroy(transform.root.gameObject);
+            if (other.gameObject.name == "soldier_1" || other.gameObject.name == "soldier_2")
+            {
+                other.GetComponentInChildren<fireBullet>().Reload();
+                Destroy(transform.root.gameObject);
+            }
         }
     }
+
 }
 

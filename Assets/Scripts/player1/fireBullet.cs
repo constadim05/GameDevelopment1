@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class fireBullet : MonoBehaviour
 {
-
     public float timeBetweenBullets = 0.15f;
     public GameObject projectile;
 
@@ -35,35 +34,43 @@ public class fireBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerController myPlayer = transform.root.GetComponent<playerController>();
-
-        if(Input.GetAxisRaw("Fire1")>0 && nextBullet < Time.time && remainingRounds>0)
+        if (gameObject.name == "soldier_1" && Input.GetKeyDown(KeyCode.Space) && nextBullet < Time.time && remainingRounds > 0)
         {
-            nextBullet = Time.time + timeBetweenBullets;
-            Vector3 rot;
-            if (myPlayer.GetFacing() == -1f)
-            {
-                rot = new Vector3(0, -90, 0);
-            }
-            else rot = new Vector3(0, 90, 0);
+            Fire();
+        }
 
-            Instantiate(projectile, transform.position, Quaternion.Euler(rot));
-
-            playASound(reloadSound);
-
-            remainingRounds -= 1;
-            playerAmmoSlider.value = remainingRounds;
+        if (gameObject.name == "soldier_2" && Input.GetKeyDown(KeyCode.M) && nextBullet < Time.time && remainingRounds > 0)
+        {
+            Fire();
         }
     }
 
-    public void reload()
+    void Fire()
+    {
+        nextBullet = Time.time + timeBetweenBullets;
+        Vector3 rot;
+        if (GetComponent<playerController>().GetFacing() == -1f)
+        {
+            rot = new Vector3(0, -90, 0);
+        }
+        else rot = new Vector3(0, 90, 0);
+
+        Instantiate(projectile, transform.position, Quaternion.Euler(rot));
+
+        PlayASound(reloadSound);
+
+        remainingRounds -= 1;
+        playerAmmoSlider.value = remainingRounds;
+    }
+
+    public void Reload()
     {
         remainingRounds = maxRounds;
         playerAmmoSlider.value = remainingRounds;
-        playASound(reloadSound);
+        PlayASound(reloadSound);
     }
 
-    void playASound(AudioClip playTheSound)
+    void PlayASound(AudioClip playTheSound)
     {
         gunMuzzleAS.clip = shootSound;
         gunMuzzleAS.Play();
