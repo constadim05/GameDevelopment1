@@ -38,8 +38,20 @@ public class playerController : MonoBehaviour
 
     void Update()
     {
-        // Jumping logic
-        if (grounded && canJump && Input.GetButtonDown("Jump"))
+        // Movement logic for PlayerController1
+        float move = 0f;
+        if (Input.GetKey(KeyCode.A))
+        {
+            move = -1f;
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            move = 1f;
+        }
+        Move(move);
+
+        // Jumping logic for PlayerController1
+        if (Input.GetKeyDown(KeyCode.W) && canJump)
         {
             Jump(fixedJumpHeight);
             lastJumpTime = Time.time;
@@ -86,6 +98,16 @@ public class playerController : MonoBehaviour
         if (Time.time - lastJumpTime > jumpCooldown)
         {
             canJump = true;
+        }
+    }
+
+    void Move(float move)
+    {
+        // Movement logic for PlayerController1
+        if (grounded)
+        {
+            myRB.velocity = new Vector3(move * runSpeed, myRB.velocity.y, 0);
+            if (Mathf.Abs(move) > 0) running = true;
         }
     }
 
