@@ -60,6 +60,9 @@ public class playerController : MonoBehaviour
 
         // Update grounded state in animator
         myAnim.SetBool("grounded", grounded);
+
+        // Update running state in animator
+        myAnim.SetBool("isRunning", running);
     }
 
     void FixedUpdate()
@@ -88,7 +91,11 @@ public class playerController : MonoBehaviour
         if (grounded)
         {
             myRB.velocity = new Vector3(move * runSpeed, myRB.velocity.y, 0);
-            if (Mathf.Abs(move) > 0) running = true;
+            running = Mathf.Abs(move) > 0;
+        }
+        else
+        {
+            running = false;
         }
     }
 
