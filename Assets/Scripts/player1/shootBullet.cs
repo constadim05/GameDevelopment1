@@ -22,20 +22,40 @@ public class shootBullet : MonoBehaviour
     {
         if (Time.time >= nextFireTime)
         {
-            // Check for shooting input for Soldier 1 (Spacebar)
-            if (gameObject.name == "soldier_1" && Input.GetKeyDown(KeyCode.Space))
-            {
-                Shoot();
-            }
-            // Check for shooting input for Soldier 2 (M key)
-            else if (gameObject.name == "soldier_2" && Input.GetKeyDown(KeyCode.M))
-            {
-                Shoot();
-            }
+            // Check for shooting input (if applicable)
+            // Example: if (Input.GetButtonDown("Fire1"))
+            Shoot(1);
         }
     }
 
-    void Shoot()
+    //void Update()
+    //{
+    //    if (Time.time >= nextFireTime)
+    //    {
+    //        // Check for shooting input for Soldier 1 (Spacebar)
+    //        //if (gameObject.name == "soldier_1" && Input.GetKeyDown(KeyCode.Space))
+    //        //{
+    //        //    Shoot();
+    //        //}
+    //        //// Check for shooting input for Soldier 2 (M key)
+    //        //else if (gameObject.name == "soldier_2" && Input.GetKeyDown(KeyCode.M))
+    //        //{
+    //        //    Shoot();
+    //        //}
+
+    //        if ( Input.GetKeyDown(KeyCode.Space))
+    //        {
+    //            Shoot(1);
+    //        }
+    //        // Check for shooting input for Soldier 2 (M key)
+    //        else if  (Input.GetKeyDown(KeyCode.M))
+    //        {
+    //            Shoot(2);
+    //        }
+    //    }
+    //}
+
+    void Shoot(int playerInt)
     {
         Ray shootRay = new Ray(transform.position, transform.forward);
         RaycastHit shootHit;
