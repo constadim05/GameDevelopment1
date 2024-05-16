@@ -27,6 +27,8 @@ public class playerController : MonoBehaviour
     public float jumpCooldown = 1f;
     float lastJumpTime;
 
+    public int _playerID = 0;
+
     void Start()
     {
         myRB = GetComponent<Rigidbody>();
@@ -39,21 +41,36 @@ public class playerController : MonoBehaviour
     void Update()
     {
         // Movement logic for PlayerController1
-        float move = 0f;
         if (Input.GetKey(KeyCode.A))
         {
-            move = -1f;
+            Move(-1f, 1);
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            move = 1f;
+            Move(1f, 1);
         }
-        Move(move);
+
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            Move(-1f, 2);
+        }
+        else if (Input.GetKey(KeyCode.RightArrow))
+        {
+            Move(1f, 2);
+        }
+
 
         // Jumping logic for PlayerController1
-        if (Input.GetKeyDown(KeyCode.W) && canJump)
+        if (canJump && Input.GetKeyDown(KeyCode.W))
         {
-            Jump(fixedJumpHeight);
+            Jump(fixedJumpHeight, 1);
+            lastJumpTime = Time.time;
+            canJump = false;
+        }
+
+        if (canJump && Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            Jump(fixedJumpHeight, 2);
             lastJumpTime = Time.time;
             canJump = false;
         }
@@ -72,7 +89,7 @@ public class playerController : MonoBehaviour
         float move = Input.GetAxis("Horizontal");
         if (move > 0 && !facingRight || move < 0 && facingRight)
         {
-            Flip();
+            Flip(_playerID);
         }
 
         // Jump cooldown check
@@ -82,29 +99,35 @@ public class playerController : MonoBehaviour
         }
     }
 
-    void Move(float move)
+    void Move(float move, int playerID)
     {
         // Movement logic for PlayerController1
-        if (grounded)
+        if (grounded && _playerID == playerID)
         {
             myRB.velocity = new Vector3(move * runSpeed, myRB.velocity.y, 0);
             if (Mathf.Abs(move) > 0) running = true;
         }
     }
 
-    void Jump(float jumpHeight)
+    void Jump(float jumpHeight, int playerID)
     {
-        isJumping = true;
-        grounded = false;
-        myRB.velocity = new Vector3(myRB.velocity.x, jumpHeight, 0);
+        if (grounded && _playerID == playerID)
+        {
+            isJumping = true;
+            grounded = false;
+            myRB.velocity = new Vector3(myRB.velocity.x, jumpHeight, 0);
+        }
     }
 
-    void Flip()
+    void Flip(int playerID)
     {
-        facingRight = !facingRight;
-        Vector3 theScale = transform.localScale;
-        theScale.z *= -1;
-        transform.localScale = theScale;
+        if (grounded && _playerID == playerID)
+        {
+            facingRight = !facingRight;
+            Vector3 theScale = transform.localScale;
+            theScale.z *= -1;
+            transform.localScale = theScale;
+        }
     }
 
     public float GetFacing()
