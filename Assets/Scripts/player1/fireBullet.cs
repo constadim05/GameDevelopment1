@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class fireBullet : MonoBehaviour
 {
-
     public float timeBetweenBullets = 0.15f;
     public GameObject projectile;
 
@@ -21,7 +20,6 @@ public class fireBullet : MonoBehaviour
     public AudioClip shootSound;
     public AudioClip reloadSound;
 
-
     // Start is called before the first frame update
     void Awake()
     {
@@ -35,47 +33,37 @@ public class fireBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-        if(Input.GetAxisRaw("Fire1")>0 && nextBullet < Time.time && remainingRounds>0)
+        playerController myPlayer = transform.root.GetComponent<playerController>();
+
+        if (myPlayer._playerID == 1 && Input.GetKeyDown(KeyCode.Space) && nextBullet < Time.time && remainingRounds > 0)
         {
-            playerController myPlayer = transform.root.GetComponent<playerController>();
-
-            nextBullet = Time.time + timeBetweenBullets;
-            Vector3 rot;
-            if (myPlayer.GetFacing() == -1f)
-            {
-                rot = new Vector3(0, -90, 0);
-            }
-            else rot = new Vector3(0, 90, 0);
-
-            Instantiate(projectile, transform.position, Quaternion.Euler(rot));
-
-            playASound(reloadSound);
-
-            remainingRounds -= 1;
-            playerAmmoSlider.value = remainingRounds;
+            Fire(myPlayer);
         }
 
-
-        if (Input.GetAxisRaw("Fire2") > 0 && nextBullet < Time.time && remainingRounds > 0)
+        if (myPlayer._playerID == 2 && Input.GetKeyDown(KeyCode.M) && nextBullet < Time.time && remainingRounds > 0)
         {
-            playerController myPlayer = transform.root.GetComponent<playerController>();
-
-            nextBullet = Time.time + timeBetweenBullets;
-            Vector3 rot;
-            if (myPlayer.GetFacing() == -1f)
-            {
-                rot = new Vector3(0, -90, 0);
-            }
-            else rot = new Vector3(0, 90, 0);
-
-            Instantiate(projectile, transform.position, Quaternion.Euler(rot));
-
-            playASound(reloadSound);
-
-            remainingRounds -= 1;
-            playerAmmoSlider.value = remainingRounds;
+            Fire(myPlayer);
         }
+    }
+
+    void Fire(playerController myPlayer)
+    {
+        nextBullet = Time.time + timeBetweenBullets;
+        Vector3 rot;
+        if (myPlayer.GetFacing() == -1f)
+        {
+            rot = new Vector3(0, -90, 0);
+        }
+        else
+        {
+            rot = new Vector3(0, 90, 0);
+        }
+
+        Instantiate(projectile, transform.position, Quaternion.Euler(rot));
+        playASound(shootSound);
+
+        remainingRounds -= 1;
+        playerAmmoSlider.value = remainingRounds;
     }
 
     public void reload()
@@ -87,7 +75,7 @@ public class fireBullet : MonoBehaviour
 
     void playASound(AudioClip playTheSound)
     {
-        gunMuzzleAS.clip = shootSound;
+        gunMuzzleAS.clip = playTheSound;
         gunMuzzleAS.Play();
     }
 }
