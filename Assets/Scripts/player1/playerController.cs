@@ -6,7 +6,7 @@ public class playerController : MonoBehaviour
 {
     // Movement variables
     public float runSpeed;
-    
+
     bool running;
 
     Rigidbody myRB;
@@ -41,38 +41,42 @@ public class playerController : MonoBehaviour
     void Update()
     {
         // Movement logic for PlayerController1
-        if (Input.GetKey(KeyCode.A))
+        if (_playerID == 1)
         {
-            Move(-1f, 1);
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            Move(1f, 1);
-        }
+            if (Input.GetKey(KeyCode.A))
+            {
+                Move(-1f);
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                Move(1f);
+            }
 
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            Move(-1f, 2);
+            if (canJump && Input.GetKeyDown(KeyCode.W))
+            {
+                Jump(fixedJumpHeight);
+                lastJumpTime = Time.time;
+                canJump = false;
+            }
         }
-        else if (Input.GetKey(KeyCode.RightArrow))
+        // Movement logic for PlayerController2
+        else if (_playerID == 2)
         {
-            Move(1f, 2);
-        }
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                Move(-1f);
+            }
+            else if (Input.GetKey(KeyCode.RightArrow))
+            {
+                Move(1f);
+            }
 
-
-        // Jumping logic for PlayerController1
-        if (canJump && Input.GetKeyDown(KeyCode.W))
-        {
-            Jump(fixedJumpHeight, 1);
-            lastJumpTime = Time.time;
-            canJump = false;
-        }
-
-        if (canJump && Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            Jump(fixedJumpHeight, 2);
-            lastJumpTime = Time.time;
-            canJump = false;
+            if (canJump && Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                Jump(fixedJumpHeight);
+                lastJumpTime = Time.time;
+                canJump = false;
+            }
         }
 
         // Update grounded state in animator
@@ -89,7 +93,7 @@ public class playerController : MonoBehaviour
         float move = Input.GetAxis("Horizontal");
         if (move > 0 && !facingRight || move < 0 && facingRight)
         {
-            Flip(_playerID);
+            Flip();
         }
 
         // Jump cooldown check
@@ -98,17 +102,20 @@ public class playerController : MonoBehaviour
             canJump = true;
         }
     }
-    void Move(float move, int playerID)
+
+    void Move(float move)
     {
         // Movement logic for both players
-        if (grounded && _playerID == playerID)
+        if (grounded)
         {
             // Set the velocity based on the movement input
             myRB.velocity = new Vector3(move * runSpeed, myRB.velocity.y, 0);
 
+            // Check if there's movement input
+            bool moving = Mathf.Abs(move) > 0;
+
             // Set the running flag based on whether there's movement input
-            running = Mathf.Abs(move) > 0;
-            Debug.Log($"Player {_playerID}: Running = {running}"); // Debug statement
+            running = moving;
         }
         else
         {
@@ -119,12 +126,12 @@ public class playerController : MonoBehaviour
 
         // Update the running parameter in the Animator
         myAnim.SetBool("running", running);
-        Debug.Log($"Player {_playerID}: Setting running parameter to {running}"); // Debug statement
     }
 
-    void Jump(float jumpHeight, int playerID)
+
+    void Jump(float jumpHeight)
     {
-        if (grounded && _playerID == playerID)
+        if (grounded)
         {
             isJumping = true;
             grounded = false;
@@ -132,15 +139,12 @@ public class playerController : MonoBehaviour
         }
     }
 
-    void Flip(int playerID)
+    void Flip()
     {
-        if (grounded && _playerID == playerID)
-        {
-            facingRight = !facingRight;
-            Vector3 theScale = transform.localScale;
-            theScale.z *= -1;
-            transform.localScale = theScale;
-        }
+        facingRight = !facingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.z *= -1;
+        transform.localScale = theScale;
     }
 
     public float GetFacing()
