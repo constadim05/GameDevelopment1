@@ -65,7 +65,6 @@ public class fireBullet : MonoBehaviour
 
         // Instantiate the bullet
         GameObject newProjectile = Instantiate(projectile, transform.position, Quaternion.Euler(rot));
-        Debug.Log("Projectile instantiated: " + newProjectile.name);
 
         // Check if the player is playerID1 or playerID2
         if (myPlayer._playerID == 1 || myPlayer._playerID == 2)
@@ -75,11 +74,6 @@ public class fireBullet : MonoBehaviour
             {
                 // Instantiate a clone of the bullet for both playerID1 and playerID2
                 GameObject newProjectileClone = Instantiate(newProjectile, transform.position, Quaternion.Euler(rot));
-                Debug.Log("Projectile clone instantiated for PlayerID " + myPlayer._playerID + ": " + newProjectileClone.name);
-            }
-            else
-            {
-                Debug.LogWarning("Original bullet is null, cannot instantiate clone.");
             }
         }
 
@@ -88,16 +82,13 @@ public class fireBullet : MonoBehaviour
         {
             Destroy(newProjectile);
         }
-        else
-        {
-            Debug.LogWarning("Original bullet is null, cannot destroy.");
-        }
 
         playASound(shootSound);
 
         remainingRounds -= 1;
         playerAmmoSlider.value = remainingRounds;
     }
+
 
 
     public void reload()

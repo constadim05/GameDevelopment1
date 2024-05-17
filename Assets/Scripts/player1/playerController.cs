@@ -6,7 +6,7 @@ public class playerController : MonoBehaviour
 {
     // Movement variables
     public float runSpeed;
-    public float walkSpeed;
+    
     bool running;
 
     Rigidbody myRB;
@@ -98,15 +98,28 @@ public class playerController : MonoBehaviour
             canJump = true;
         }
     }
-
     void Move(float move, int playerID)
     {
-        // Movement logic for PlayerController1
+        // Movement logic for both players
         if (grounded && _playerID == playerID)
         {
+            // Set the velocity based on the movement input
             myRB.velocity = new Vector3(move * runSpeed, myRB.velocity.y, 0);
-            if (Mathf.Abs(move) > 0) running = true;
+
+            // Set the running flag based on whether there's movement input
+            running = Mathf.Abs(move) > 0;
+            Debug.Log($"Player {_playerID}: Running = {running}"); // Debug statement
         }
+        else
+        {
+            // If there's no movement input or player stops moving, reset the velocity to zero and set running to false
+            myRB.velocity = new Vector3(0, myRB.velocity.y, 0);
+            running = false;
+        }
+
+        // Update the running parameter in the Animator
+        myAnim.SetBool("running", running);
+        Debug.Log($"Player {_playerID}: Setting running parameter to {running}"); // Debug statement
     }
 
     void Jump(float jumpHeight, int playerID)

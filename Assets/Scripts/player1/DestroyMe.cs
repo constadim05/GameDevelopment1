@@ -13,6 +13,6 @@ public class DestroyMe : MonoBehaviour
 
     void OnDestroy()
     {
-        Debug.Log(gameObject.name + " is destroyed");
+        
     }
 }
