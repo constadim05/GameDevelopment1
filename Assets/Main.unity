@@ -1183,11 +1183,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: cb34cb540332301479f719f8e38448df, type: 3}
   m_PrefabInstance: {fileID: 538148395}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &543885562 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7101120452318667105, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
-  m_PrefabInstance: {fileID: 6209692875034971465}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &552729889
 GameObject:
   m_ObjectHideFlags: 0
@@ -2778,25 +2773,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1122336863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1122336860}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaf875bf41d23fb40b2c4b7edf0be77e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeBetweenBullets: 0.15
-  projectile: {fileID: 0}
-  playerAmmoSlider: {fileID: 266874627}
-  maxRounds: 50
-  startingRounds: 50
-  shootSound: {fileID: 8300000, guid: 2464e98dd43ebda479761a8ca15729cb, type: 3}
-  reloadSound: {fileID: 8300000, guid: cb4b0f688d5e5d348891a9dd272fe3aa, type: 3}
 --- !u!114 &1122336864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2810,7 +2786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBetweenBullets: 0.15
-  projectile: {fileID: 543885562}
+  projectile: {fileID: 7101120452318667105, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
   playerAmmoSlider: {fileID: 858423966}
   maxRounds: 50
   startingRounds: 50
@@ -3110,7 +3086,7 @@ PrefabInstance:
       objectReference: {fileID: 266874627}
     - target: {fileID: 4482179756481025796, guid: b29489b05ad2ce84b86dbbc7fd193db3, type: 3}
       propertyPath: m_Name
-      value: gunMuzzle2
+      value: gunMuzzle
       objectReference: {fileID: 0}
     - target: {fileID: 6637374556061361103, guid: b29489b05ad2ce84b86dbbc7fd193db3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3161,9 +3137,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4482179756481025796, guid: b29489b05ad2ce84b86dbbc7fd193db3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1122336862}
-    - targetCorrespondingSourceObject: {fileID: 4482179756481025796, guid: b29489b05ad2ce84b86dbbc7fd193db3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1122336863}
     - targetCorrespondingSourceObject: {fileID: 4482179756481025796, guid: b29489b05ad2ce84b86dbbc7fd193db3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1122336864}

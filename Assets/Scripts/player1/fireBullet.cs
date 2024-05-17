@@ -20,7 +20,6 @@ public class fireBullet : MonoBehaviour
     public AudioClip shootSound;
     public AudioClip reloadSound;
 
-    // Start is called before the first frame update
     void Awake()
     {
         nextBullet = 0f;
@@ -30,10 +29,15 @@ public class fireBullet : MonoBehaviour
         gunMuzzleAS = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         playerController myPlayer = transform.root.GetComponent<playerController>();
+
+        if (myPlayer == null)
+        {
+            Debug.LogError("playerController not found!");
+            return;
+        }
 
         if (myPlayer._playerID == 1 && Input.GetKeyDown(KeyCode.Space) && nextBullet < Time.time && remainingRounds > 0)
         {
@@ -59,12 +63,42 @@ public class fireBullet : MonoBehaviour
             rot = new Vector3(0, 90, 0);
         }
 
-        Instantiate(projectile, transform.position, Quaternion.Euler(rot));
+        // Instantiate the bullet
+        GameObject newProjectile = Instantiate(projectile, transform.position, Quaternion.Euler(rot));
+        Debug.Log("Projectile instantiated: " + newProjectile.name);
+
+        // Check if the player is playerID1 or playerID2
+        if (myPlayer._playerID == 1 || myPlayer._playerID == 2)
+        {
+            // Check if the original bullet is null before instantiating the clone
+            if (newProjectile != null)
+            {
+                // Instantiate a clone of the bullet for both playerID1 and playerID2
+                GameObject newProjectileClone = Instantiate(newProjectile, transform.position, Quaternion.Euler(rot));
+                Debug.Log("Projectile clone instantiated for PlayerID " + myPlayer._playerID + ": " + newProjectileClone.name);
+            }
+            else
+            {
+                Debug.LogWarning("Original bullet is null, cannot instantiate clone.");
+            }
+        }
+
+        // Destroy the original bullet
+        if (newProjectile != null)
+        {
+            Destroy(newProjectile);
+        }
+        else
+        {
+            Debug.LogWarning("Original bullet is null, cannot destroy.");
+        }
+
         playASound(shootSound);
 
         remainingRounds -= 1;
         playerAmmoSlider.value = remainingRounds;
     }
+
 
     public void reload()
     {
