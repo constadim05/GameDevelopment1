@@ -3199,6 +3199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 644aab8ea2e052d42972ff55d49a48ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ammoAmount: 0
+  ammoPickupSound: {fileID: 0}
 --- !u!1 &1449654703
 GameObject:
   m_ObjectHideFlags: 0
@@ -4364,7 +4366,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2312267677437839985, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6521444711992565530, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
       propertyPath: drop1
