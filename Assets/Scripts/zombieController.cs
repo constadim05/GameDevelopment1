@@ -18,6 +18,8 @@ public class zombieController : MonoBehaviour
     bool firstDetection;
     float startRun;
     public float detectionTime;
+    public float detectionRadius = 10f;
+    public string playerTag = "Player"; // Set this to the tag assigned to player GameObjects
 
     void Start()
     {
@@ -32,30 +34,31 @@ public class zombieController : MonoBehaviour
 
     void FixedUpdate()
     {
+        FindClosestPlayer();
+
         if (Detected)
         {
-            if (detectedPlayer.position.x < transform.position.x && facingRight) Flip();
-            else if (detectedPlayer.position.x > transform.position.x && !facingRight) Flip();
-
-            if (!firstDetection)
+            if (detectedPlayer != null)
             {
-                startRun = Time.time + detectionTime;
-                firstDetection = true;
+                if (detectedPlayer.position.x < transform.position.x && facingRight) Flip();
+                else if (detectedPlayer.position.x > transform.position.x && !facingRight) Flip();
+
+                if (!firstDetection)
+                {
+                    startRun = Time.time + detectionTime;
+                    firstDetection = true;
+                }
             }
         }
 
-        if (!running)
+        if (!running && firstDetection && startRun < Time.time)
         {
-            if (startRun < Time.time)
-            {
-                running = true;
-                myAnim.SetTrigger("Run");
-            }
+            running = true;
+            myAnim.SetTrigger("Run");
         }
 
         if (running)
         {
-            // Move the zombie using transform.position
             Vector3 moveDirection = facingRight ? Vector3.right : Vector3.left;
             transform.position += moveDirection * runSpeed * Time.fixedDeltaTime;
         }
@@ -69,9 +72,41 @@ public class zombieController : MonoBehaviour
         }
     }
 
+
+    private void FindClosestPlayer()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag(playerTag);
+        Debug.Log("Number of players found: " + players.Length);
+
+        Transform closestPlayer = null;
+        float closestDistance = Mathf.Infinity;
+
+        foreach (GameObject player in players)
+        {
+            Transform playerTransform = player.transform;
+            float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+            if (distanceToPlayer < closestDistance)
+            {
+                closestDistance = distanceToPlayer;
+                closestPlayer = playerTransform;
+            }
+        }
+
+        if (closestPlayer != null)
+        {
+            Detected = true;
+            detectedPlayer = closestPlayer;
+            myAnim.SetBool("Detected", Detected);
+            if (detectedPlayer.position.x < transform.position.x && facingRight) Flip();
+            else if (detectedPlayer.position.x > transform.position.x && !facingRight) Flip();
+        }
+    }
+
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player" && !Detected)
+        Debug.Log("OnTriggerEnter: " + other.gameObject.name);
+        if (other.CompareTag(playerTag) && !Detected)
         {
             Detected = true;
             detectedPlayer = other.transform;
@@ -83,23 +118,25 @@ public class zombieController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+        Debug.Log("OnTriggerExit: " + other.gameObject.name);
+        if (other.CompareTag(playerTag))
         {
             firstDetection = false;
             running = false;
+            Detected = false;
+            detectedPlayer = null;
             myAnim.SetTrigger("Idle");
         }
     }
 
     void Flip()
     {
-        if(flipModel != null)
+        if (flipModel != null)
         {
             facingRight = !facingRight;
             Vector3 theScale = flipModel.transform.localScale;
             theScale.z *= -1;
             flipModel.transform.localScale = theScale;
         }
-        
     }
 }

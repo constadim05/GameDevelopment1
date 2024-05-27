@@ -4,50 +4,21 @@ using UnityEngine;
 
 public class ammoPickupController : MonoBehaviour
 {
-//    // Start is called before the first frame update
-//    void Start()
-//    {
-        
-//    }
+    public int ammoAmount;
+    public AudioClip ammoPickupSound;
 
-//    // Update is called once per frame
-//    void Update()
-//    {
-        
-//    }
-
-//    void OnTriggerEnter(Collider other)
-//    {
-//        if(other.tag == "Player")
-//        {
-//            other.GetComponentInChildren<fireBullet>().reload();
-//            Destroy(transform.root.gameObject);
-//        }
-//    }
-//}
-
-public float ammoAmount;
-public AudioClip ammoPickupSound;
-
-// Start is called before the first frame update
-void Start()
-{
-
-}
-
-// Update is called once per frame
-void Update()
-{
-
-}
-
-void OnTriggerEnter(Collider other)
-{
-    if (other.tag == "Player")
+    void OnTriggerEnter(Collider other)
     {
-        other.GetComponent<playerHealth>().addHealth(ammoAmount);
-        Destroy(transform.root.gameObject);
-        AudioSource.PlayClipAtPoint(ammoPickupSound, transform.position, 0.15f);
+        if (other.tag == "Player")
+        {
+            fireBullet fireBulletComponent = other.GetComponentInChildren<fireBullet>();
+
+            if (fireBulletComponent != null)
+            {
+                fireBulletComponent.addAmmo(ammoAmount);
+                AudioSource.PlayClipAtPoint(ammoPickupSound, transform.position, 0.15f);
+                Destroy(transform.root.gameObject);
+            }
+        }
     }
-}
 }

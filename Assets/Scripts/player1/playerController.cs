@@ -51,6 +51,10 @@ public class playerController : MonoBehaviour
             {
                 Move(1f);
             }
+            else
+            {
+                StopMoving();
+            }
 
             if (canJump && Input.GetKeyDown(KeyCode.W))
             {
@@ -69,6 +73,10 @@ public class playerController : MonoBehaviour
             else if (Input.GetKey(KeyCode.RightArrow))
             {
                 Move(1f);
+            }
+            else
+            {
+                StopMoving();
             }
 
             if (canJump && Input.GetKeyDown(KeyCode.UpArrow))
@@ -128,6 +136,16 @@ public class playerController : MonoBehaviour
         myAnim.SetBool("running", running);
     }
 
+    void StopMoving()
+    {
+        if (grounded)
+        {
+            // Set the velocity to zero when there's no movement input
+            myRB.velocity = new Vector3(0, myRB.velocity.y, 0);
+            running = false;
+            myAnim.SetBool("running", false);
+        }
+    }
 
     void Jump(float jumpHeight)
     {

@@ -15,7 +15,7 @@ public class fireBullet : MonoBehaviour
 
     float nextBullet;
 
-    //audio info
+    // Audio info
     AudioSource gunMuzzleAS;
     public AudioClip shootSound;
     public AudioClip reloadSound;
@@ -64,24 +64,7 @@ public class fireBullet : MonoBehaviour
         }
 
         // Instantiate the bullet
-        GameObject newProjectile = Instantiate(projectile, transform.position, Quaternion.Euler(rot));
-
-        // Check if the player is playerID1 or playerID2
-        if (myPlayer._playerID == 1 || myPlayer._playerID == 2)
-        {
-            // Check if the original bullet is null before instantiating the clone
-            if (newProjectile != null)
-            {
-                // Instantiate a clone of the bullet for both playerID1 and playerID2
-                GameObject newProjectileClone = Instantiate(newProjectile, transform.position, Quaternion.Euler(rot));
-            }
-        }
-
-        // Destroy the original bullet
-        if (newProjectile != null)
-        {
-            Destroy(newProjectile);
-        }
+        Instantiate(projectile, transform.position, Quaternion.Euler(rot));
 
         playASound(shootSound);
 
@@ -89,13 +72,17 @@ public class fireBullet : MonoBehaviour
         playerAmmoSlider.value = remainingRounds;
     }
 
-
-
     public void reload()
     {
         remainingRounds = maxRounds;
         playerAmmoSlider.value = remainingRounds;
         playASound(reloadSound);
+    }
+
+    public void addAmmo(int amount)
+    {
+        remainingRounds = Mathf.Min(remainingRounds + amount, maxRounds);
+        playerAmmoSlider.value = remainingRounds;
     }
 
     void playASound(AudioClip playTheSound)
