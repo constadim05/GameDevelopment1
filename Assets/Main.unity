@@ -4677,7 +4677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcca3623dfaf84d24935420ec7fbb06d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endgameText: {fileID: 0}
+  endgameText: {fileID: 1086469348}
 --- !u!1001 &1827127410
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -17,4 +17,8 @@ public class UIFunctions : MonoBehaviour
     {
         Application.Quit();
     }
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }

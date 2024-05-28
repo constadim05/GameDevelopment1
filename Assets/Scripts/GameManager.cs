@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,11 +22,11 @@ public class GameManager : MonoBehaviour
         playersAlive--;
         if (playersAlive <= 0)
         {
-            ShowEndGameText();
+            StartCoroutine(ShowEndGameText());
         }
     }
 
-    private void ShowEndGameText()
+    private IEnumerator ShowEndGameText()
     {
         // Activate the endGameText GameObject
         endgameText.SetActive(true);
@@ -35,5 +37,11 @@ public class GameManager : MonoBehaviour
         {
             endGameAnim.SetTrigger("endGameText");
         }
+
+        // Wait for 3 seconds
+        yield return new WaitForSeconds(3f);
+
+        // Load the "Main Menu" scene
+        SceneManager.LoadScene("MainMenu");
     }
 }
