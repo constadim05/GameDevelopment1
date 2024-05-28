@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
 public class playerHealth : MonoBehaviour
@@ -20,7 +19,10 @@ public class playerHealth : MonoBehaviour
     AudioSource playerAS;
     Animator endGameAnim; // Animator reference for endgameText
 
-    // Start is called before the first frame update
+    int playersAlive; // Counter for players that are still alive
+
+    GameManager gameManager; // Reference to GameManager
+
     void Start()
     {
         currentHealth = fullHealth;
@@ -34,6 +36,12 @@ public class playerHealth : MonoBehaviour
 
         // Get the Animator component of endgameText
         endGameAnim = endgameText.GetComponent<Animator>();
+
+        // Set the initial count of players alive
+        playersAlive = GameObject.FindGameObjectsWithTag("Player").Length;
+
+        // Find and store reference to GameManager
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -75,17 +83,21 @@ public class playerHealth : MonoBehaviour
     public void makeDead()
     {
         Instantiate(playerDeathFX, transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
-        // Destroy(gameObject);
-        damageScreen.color = flashColor;
         gameObject.SetActive(false);
 
-        // Activate endgameText when player dies
-        endgameText.SetActive(true);
+        // Decrease the count of players alive
+        playersAlive--;
 
-        // Trigger the "endGame" animation
-        endGameAnim.SetTrigger("endGame");
+        if (playersAlive <= 0 && gameManager != null)
+        {
+            // Activate endgameText when all players are dead
+            endgameText.SetActive(true);
 
-        // Set a boolean parameter to control transition to idle state (if using a boolean condition)
-        // endGameAnim.SetBool("animationEnded", true);
+            // Trigger the "endGame" animation
+            endGameAnim.SetTrigger("endGame");
+
+            // Notify GameManager when all players are dead
+            gameManager.AllPlayersDied();
+        }
     }
 }

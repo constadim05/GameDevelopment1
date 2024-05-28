@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     //player scores
-    public int player1, player2;
+    public int player1Score, player2Score;
 
     //game state
     public bool gameOver = false;
@@ -40,24 +40,24 @@ public class GameManager : MonoBehaviour
 
         if (playerNum == 1)
         {
-            player1++;
+            player1Score++;
         }
         else
         {
-            player2++;
+            player2Score++;
         }
-        score.text = player1 + " | " + player2;
+        score.text = player1Score + " | " + player2Score;
 
         StartCoroutine(ResetBall());
-
     }
+
     //timer coroutine
     public IEnumerator Timer()
     {
         //set the time
         currentTime = startTime;
 
-        //Our loop will be repeated every second. Cashing a waitforsecnds to use every loop is
+        //Our loop will be repeated every second. Caching a waitforsecnds to use every loop is
         //more performant than creating a new one every time.
         WaitForSeconds pause = new WaitForSeconds(1);
 
@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
         GameOver();
         yield return null;
     }
+
     //ball respawn coroutine
     public IEnumerator ResetBall()
     {
@@ -99,21 +100,28 @@ public class GameManager : MonoBehaviour
     //game over
     void GameOver()
     {
-        if (player1 > player2)
+        if (player1Score > player2Score)
         {
             finishScreen.GetComponent<Image>().color = color1;
-            result.text = "Player 1 Wins" + "\n" + player1.ToString("00") + "|" + player2.ToString("00");
+            result.text = "Player 1 Wins" + "\n" + player1Score.ToString("00") + "|" + player2Score.ToString("00");
         }
-        else if (player2 > player1)
+        else if (player2Score > player1Score)
         {
             finishScreen.GetComponent<Image>().color = color2;
-            result.text = "Player 2 Wins" + "\n" + player1.ToString("00") + "|" + player2.ToString("00");
+            result.text = "Player 2 Wins" + "\n" + player1Score.ToString("00") + "|" + player2Score.ToString("00");
         }
         else
         {
             finishScreen.GetComponent<Image>().color = color3;
-            result.text = "TIE" + "\n" + player1.ToString("00") + "|" + player2.ToString("00");
+            result.text = "TIE" + "\n" + player1Score.ToString("00") + "|" + player2Score.ToString("00");
         }
         finishScreen.SetActive(true);
+    }
+
+    // Handle game over when all players are dead
+    public void AllPlayersDied()
+    {
+        gameOver = true;
+        GameOver();
     }
 }
