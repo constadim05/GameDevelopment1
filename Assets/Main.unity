@@ -1233,6 +1233,7 @@ GameObject:
   - component: {fileID: 568455574}
   - component: {fileID: 568455573}
   - component: {fileID: 568455572}
+  - component: {fileID: 568455576}
   m_Layer: 5
   m_Name: playerCanvas
   m_TagString: Untagged
@@ -1325,6 +1326,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &568455576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568455571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcca3623dfaf84d24935420ec7fbb06d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endgameText: {fileID: 1086469348}
 --- !u!4 &600175298 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5829091194429168614, guid: 37916a1493691704395a3ee1e621399f, type: 3}
@@ -2681,12 +2695,12 @@ GameObject:
   - component: {fileID: 1086469351}
   - component: {fileID: 1086469350}
   m_Layer: 5
-  m_Name: endGameText
+  m_Name: endgameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1086469349
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4332,6 +4346,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1816319960}
   - component: {fileID: 1816319961}
+  - component: {fileID: 1816319962}
   m_Layer: 0
   m_Name: gameController
   m_TagString: Untagged
@@ -4453,6 +4468,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1816319962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816319959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcca3623dfaf84d24935420ec7fbb06d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endgameText: {fileID: 0}
 --- !u!1001 &1827127410
 PrefabInstance:
   m_ObjectHideFlags: 0

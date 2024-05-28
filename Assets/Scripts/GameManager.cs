@@ -1,127 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    //player scores
-    public int player1Score, player2Score;
+    public GameObject endgameText;
+    private int playersAlive;
 
-    //game state
-    public bool gameOver = false;
-
-    //timer
-    public float startTime;
-    float currentTime;
-
-    //ui display
-    public TMP_Text score, timer, result;
-    public Color color1, color2, color3;
-    public GameObject finishScreen;
-
-    //ball
-    public Rigidbody ball;
-
-    //spawn point
-    public Transform spawnPoint;
-
-    // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(Timer());
+        // Set the initial count of players alive
+        playersAlive = GameObject.FindGameObjectsWithTag("Player").Length;
+
+        // Ensure endgameText is initially inactive
+        endgameText.SetActive(false);
     }
 
-    //score goal
-    public void Goal(int playerNum)
+    public void PlayerDied()
     {
-        if (gameOver == true) return;
-
-        if (playerNum == 1)
+        playersAlive--;
+        if (playersAlive <= 0)
         {
-            player1Score++;
+            ShowEndGameText();
         }
-        else
-        {
-            player2Score++;
-        }
-        score.text = player1Score + " | " + player2Score;
-
-        StartCoroutine(ResetBall());
     }
 
-    //timer coroutine
-    public IEnumerator Timer()
+    private void ShowEndGameText()
     {
-        //set the time
-        currentTime = startTime;
+        // Activate the endGameText GameObject
+        endgameText.SetActive(true);
 
-        //Our loop will be repeated every second. Caching a waitforsecnds to use every loop is
-        //more performant than creating a new one every time.
-        WaitForSeconds pause = new WaitForSeconds(1);
-
-        //create a loop that repeats every second until current Time is 0
-        while (currentTime > 0)
+        // If the endGameText GameObject has an Animator component, trigger the animation
+        Animator endGameAnim = endgameText.GetComponent<Animator>();
+        if (endGameAnim != null)
         {
-            currentTime -= 1;
-            var minutes = Mathf.FloorToInt(currentTime / 60);
-            int seconds = Mathf.FloorToInt(currentTime % 60);
-
-            string message = minutes.ToString("00") + ":" + seconds.ToString("00");
-            timer.text = message;
-            yield return pause;
+            endGameAnim.SetTrigger("endGameText");
         }
-        gameOver = true;
-        GameOver();
-        yield return null;
-    }
-
-    //ball respawn coroutine
-    public IEnumerator ResetBall()
-    {
-        ball.constraints = RigidbodyConstraints.FreezeAll;
-        ball.useGravity = false;
-        ball.gameObject.SetActive(false);
-
-        yield return new WaitForSeconds(1);
-
-        ball.transform.position = spawnPoint.position;
-        ball.gameObject.SetActive(true);
-
-        yield return new WaitForSeconds(0.5f);
-
-        ball.constraints = RigidbodyConstraints.None;
-        ball.useGravity = true;
-
-        yield return null;
-    }
-
-    //game over
-    void GameOver()
-    {
-        if (player1Score > player2Score)
-        {
-            finishScreen.GetComponent<Image>().color = color1;
-            result.text = "Player 1 Wins" + "\n" + player1Score.ToString("00") + "|" + player2Score.ToString("00");
-        }
-        else if (player2Score > player1Score)
-        {
-            finishScreen.GetComponent<Image>().color = color2;
-            result.text = "Player 2 Wins" + "\n" + player1Score.ToString("00") + "|" + player2Score.ToString("00");
-        }
-        else
-        {
-            finishScreen.GetComponent<Image>().color = color3;
-            result.text = "TIE" + "\n" + player1Score.ToString("00") + "|" + player2Score.ToString("00");
-        }
-        finishScreen.SetActive(true);
-    }
-
-    // Handle game over when all players are dead
-    public void AllPlayersDied()
-    {
-        gameOver = true;
-        GameOver();
     }
 }

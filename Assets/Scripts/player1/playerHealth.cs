@@ -19,7 +19,7 @@ public class playerHealth : MonoBehaviour
     AudioSource playerAS;
     Animator endGameAnim; // Animator reference for endgameText
 
-    int playersAlive; // Counter for players that are still alive
+    bool isDead = false; // Flag to track player's death status
 
     GameManager gameManager; // Reference to GameManager
 
@@ -36,9 +36,6 @@ public class playerHealth : MonoBehaviour
 
         // Get the Animator component of endgameText
         endGameAnim = endgameText.GetComponent<Animator>();
-
-        // Set the initial count of players alive
-        playersAlive = GameObject.FindGameObjectsWithTag("Player").Length;
 
         // Find and store reference to GameManager
         gameManager = FindObjectOfType<GameManager>();
@@ -67,7 +64,7 @@ public class playerHealth : MonoBehaviour
 
         playerAS.Play();
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !isDead)
         {
             makeDead();
         }
@@ -82,22 +79,20 @@ public class playerHealth : MonoBehaviour
 
     public void makeDead()
     {
+        isDead = true; // Set the death flag
+
         Instantiate(playerDeathFX, transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
         gameObject.SetActive(false);
 
-        // Decrease the count of players alive
-        playersAlive--;
-
-        if (playersAlive <= 0 && gameManager != null)
+        if (gameManager != null)
         {
-            // Activate endgameText when all players are dead
-            endgameText.SetActive(true);
-
-            // Trigger the "endGame" animation
-            endGameAnim.SetTrigger("endGame");
-
-            // Notify GameManager when all players are dead
-            gameManager.AllPlayersDied();
+            Debug.Log("Player Died. Triggering endGameText animation.");
+            gameManager.PlayerDied(); // Notify GameManager that a player died
+            endGameAnim.SetTrigger("endGameText");
+        }
+        else
+        {
+            Debug.LogWarning("GameManager not found.");
         }
     }
 }

@@ -76,7 +76,6 @@ public class zombieController : MonoBehaviour
     private void FindClosestPlayer()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag(playerTag);
-        Debug.Log("Number of players found: " + players.Length);
 
         Transform closestPlayer = null;
         float closestDistance = Mathf.Infinity;
@@ -105,7 +104,6 @@ public class zombieController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("OnTriggerEnter: " + other.gameObject.name);
         if (other.CompareTag(playerTag) && !Detected)
         {
             Detected = true;
@@ -118,7 +116,6 @@ public class zombieController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("OnTriggerExit: " + other.gameObject.name);
         if (other.CompareTag(playerTag))
         {
             firstDetection = false;
