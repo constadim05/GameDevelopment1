@@ -39,16 +39,17 @@ public class fireBullet : MonoBehaviour
             return;
         }
 
-        if (myPlayer._playerID == 1 && Input.GetKeyDown(KeyCode.Space) && nextBullet < Time.time && remainingRounds > 0)
+        if (myPlayer._playerID == 1 && Input.GetKey(KeyCode.Space) && nextBullet < Time.time && remainingRounds > 0)
         {
             Fire(myPlayer);
         }
 
-        if (myPlayer._playerID == 2 && Input.GetKeyDown(KeyCode.M) && nextBullet < Time.time && remainingRounds > 0)
+        if (myPlayer._playerID == 2 && Input.GetKey(KeyCode.M) && nextBullet < Time.time && remainingRounds > 0)
         {
             Fire(myPlayer);
         }
     }
+
 
     void Fire(playerController myPlayer)
     {
