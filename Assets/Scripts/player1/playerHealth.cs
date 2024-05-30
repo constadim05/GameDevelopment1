@@ -6,6 +6,8 @@ public class playerHealth : MonoBehaviour
     public float fullHealth;
     float currentHealth;
 
+
+
     public GameObject playerDeathFX;
 
     //HUD
@@ -14,7 +16,8 @@ public class playerHealth : MonoBehaviour
     Color flashColor = new Color(255f, 255f, 255f, 1f);
     float flashSpeed = 5f;
     bool damaged = false;
-    public GameObject endgameText; // Changed from Text to GameObject
+    public GameObject endgameText;
+    public GameObject blackBackgroundPanel; // Changed from Text to GameObject
 
     AudioSource playerAS;
     Animator endGameAnim; // Animator reference for endgameText
@@ -76,7 +79,6 @@ public class playerHealth : MonoBehaviour
         if (currentHealth > fullHealth) currentHealth = fullHealth;
         playerHealthSlider.value = currentHealth;
     }
-
     public void makeDead()
     {
         isDead = true; // Set the death flag
@@ -86,13 +88,25 @@ public class playerHealth : MonoBehaviour
 
         if (gameManager != null)
         {
-            Debug.Log("Player Died. Triggering endGameText animation.");
             gameManager.PlayerDied(); // Notify GameManager that a player died
             endGameAnim.SetTrigger("endGameText");
-        }
-        else
-        {
-            Debug.LogWarning("GameManager not found.");
+
+            // Activate the black background panel
+            if (blackBackgroundPanel != null)
+            {
+                blackBackgroundPanel.SetActive(true);
+            }
         }
     }
+
+
+
+    public void ReduceHealthToZero()
+    {
+        currentHealth = 0; // Set the player's health to 0
+        playerHealthSlider.value = currentHealth;
+        makeDead(); // Call MakeDead() method to handle death logic
+    }
+
+
 }

@@ -32,8 +32,6 @@ public class GamePlayManager : MonoBehaviour
     [HideInInspector] public GameObject player1;
     [HideInInspector] public GameObject player2;
 
-    
-
     //store player data
     public string player1Name, player2Name;
 
@@ -44,7 +42,7 @@ public class GamePlayManager : MonoBehaviour
     public TMP_Text timerText;
     public TMP_Text messageText;
 
-    
+
     [Header("Other Components")]
     //store a timer
     public Timer gameTimer;
@@ -72,7 +70,7 @@ public class GamePlayManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gameState == State.Gameplay)
+        if (gameState == State.Gameplay)
         {
             DisplayTimer();
         }
@@ -82,7 +80,7 @@ public class GamePlayManager : MonoBehaviour
     public void UpdateScore(int playerNumber, int amount)
     {
         //cancel the function if we are not in gameplay
-        if (gameState != State.Gameplay) return; 
+        if (gameState != State.Gameplay) return;
 
         //if playerNumber is 1, increase player1 score, otherwise increase player 2
         if (playerNumber == 1) player1Score += amount;
@@ -92,7 +90,7 @@ public class GamePlayManager : MonoBehaviour
         //playerNumber = 1 ? player1Score ++ : player2Score ++ 1;
 
         //check if either players score is more than the max score. If so, call End game function
-        if(player1Score >= maxScore || player2Score >= maxScore && gameState != State.Ending)
+        if (player1Score >= maxScore || player2Score >= maxScore && gameState != State.Ending)
         {
             EndGame();
             gameState = State.Ending;
@@ -100,6 +98,28 @@ public class GamePlayManager : MonoBehaviour
         //update the score UI
         player1ScoreText.text = player1Name + " : " + player1Score;
         player2ScoreText.text = player2Name + " : " + player2Score;
+    }
+    public void EndGame()
+    {
+        // Freeze Players
+        player1.GetComponent<CCMovement>().enabled = false;
+        player2.GetComponent<CCMovement>().enabled = false;
+        // Deactivate other scripts when ready
+
+        // Change state
+        gameState = State.Ending;
+
+        // Update UI
+        player1ScoreText.text = "";
+        player2ScoreText.text = "";
+        timerText.text = "";
+
+        // Display winner
+        string winningPlayer;
+        if (player1Score > player2Score) winningPlayer = player1Name;
+        else winningPlayer = player2Name;
+
+        messageText.text = winningPlayer + " Wins!" + "\n" + player1Name + " : " + player1Score + "\n" + player2Name + " : " + player2Score;
     }
 
     //respawns - find player to respawn, deactivate controls, decrease lives*, 
@@ -128,7 +148,7 @@ public class GamePlayManager : MonoBehaviour
         int spawnIndex = Random.Range(0, respawnPositions.Length);
 
         //check if the spawn index matches either previous spawn, if so, reroll
-        while(spawnIndex == lastSpawnP1 || spawnIndex == lastSpawnP2)
+        while (spawnIndex == lastSpawnP1 || spawnIndex == lastSpawnP2)
         {
             spawnIndex = Random.Range(0, respawnPositions.Length);
         }
@@ -194,9 +214,9 @@ public class GamePlayManager : MonoBehaviour
     {
         //show the timer message
         int timer = 4;
-        
+
         //count down from three (displaying time as we go)
-        while(timer > 0)
+        while (timer > 0)
         {
             yield return new WaitForSeconds(1);
             timer -= 1;
@@ -215,30 +235,8 @@ public class GamePlayManager : MonoBehaviour
 
         gameState = State.Gameplay;
     }
+}
 
-    
+
 
     //End game - freeze players, tally scores, display results or move to next scene
-    public void EndGame()
-    {
-        //FreezePlayers
-        player1.GetComponent<CCMovement>().enabled = false;
-        player2.GetComponent<CCMovement>().enabled = false;
-        //deactivate other scripts when ready
-
-        //change state
-        gameState = State.Ending;
-
-        //update UI;
-        player1ScoreText.text = "";
-        player2ScoreText.text = "";
-        timerText.text = "";
-
-        //display winner
-        string winningPlayer;
-        if (player1Score > player2Score) winningPlayer = player1Name;
-        else winningPlayer = player2Name;
-
-        messageText.text = winningPlayer + " Wins!" + "\n" + player1Name + " : " + player1Score + "\n" + player2Name + " : " + player2Score;
-    }
-}

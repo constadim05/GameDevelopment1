@@ -6,15 +6,14 @@ using System.Collections;
 public class GameManager : MonoBehaviour
 {
     public GameObject endgameText;
+    public GameObject blackBackgroundPanel; // Reference to the black background panel
     private int playersAlive;
 
     void Start()
     {
-        // Set the initial count of players alive
         playersAlive = GameObject.FindGameObjectsWithTag("Player").Length;
-
-        // Ensure endgameText is initially inactive
         endgameText.SetActive(false);
+        blackBackgroundPanel.SetActive(false); // Ensure black background panel is initially inactive
     }
 
     public void PlayerDied()
@@ -28,20 +27,29 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator ShowEndGameText()
     {
-        // Activate the endGameText GameObject
+        // Activate both endgame text and black background panel
         endgameText.SetActive(true);
+        blackBackgroundPanel.SetActive(true);
 
-        // If the endGameText GameObject has an Animator component, trigger the animation
         Animator endGameAnim = endgameText.GetComponent<Animator>();
         if (endGameAnim != null)
         {
             endGameAnim.SetTrigger("endGameText");
         }
 
-        // Wait for 3 seconds
+        // Wait for the animation to complete
         yield return new WaitForSeconds(3f);
 
-        // Load the "Main Menu" scene
+        // Deactivate both endgame text and black background panel
+        endgameText.SetActive(false);
+        blackBackgroundPanel.SetActive(false);
+
+        // Load the main menu scene
+        LoadMainMenu();
+    }
+
+    public void LoadMainMenu()
+    {
         SceneManager.LoadScene("MainMenu");
     }
 }

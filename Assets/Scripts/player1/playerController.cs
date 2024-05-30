@@ -114,9 +114,6 @@ public class playerController : MonoBehaviour
         }
     }
 
-
-
-
     void Move(float move)
     {
         // Movement logic for both players
