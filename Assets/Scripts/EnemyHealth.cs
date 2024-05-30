@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UI; // Import the UI namespace for Slider
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -27,6 +25,8 @@ public class EnemyHealth : MonoBehaviour
 
     AudioSource enemyAS;
 
+    GameManager gameManager; // Reference to GameManager
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,8 +34,10 @@ public class EnemyHealth : MonoBehaviour
         enemyHealthIndicator.maxValue = enemyMaxHealth;
         enemyHealthIndicator.value = currentHealth;
         enemyAS = GetComponent<AudioSource>();
-    }
 
+        // Find and store reference to GameManager
+        gameManager = FindObjectOfType<GameManager>();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -86,14 +88,17 @@ public class EnemyHealth : MonoBehaviour
             Instantiate(dropToInstantiate, spawnPosition, Quaternion.identity);
         }
 
+        // Notify GameManager of enemy kill
+        if (gameManager != null)
+        {
+            gameManager.EnemyKilled(); // Call the non-static method on the GameManager instance
+        }
+
         // Play the death sound
         AudioSource.PlayClipAtPoint(deathSound, transform.position, 0.15f);
 
         // Destroy the GameObject
         Destroy(gameObject);
     }
-
-
-
 
 }

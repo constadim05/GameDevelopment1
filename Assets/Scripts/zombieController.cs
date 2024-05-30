@@ -21,6 +21,8 @@ public class zombieController : MonoBehaviour
     public float detectionRadius = 10f;
     public string playerTag = "Player"; // Set this to the tag assigned to player GameObjects
 
+    GameManager gameManager; // Reference to GameManager
+
     void Start()
     {
         myRB = GetComponent<Rigidbody>();
@@ -30,6 +32,9 @@ public class zombieController : MonoBehaviour
         Detected = false;
         firstDetection = false;
         if (Random.Range(0, 10) > 5) Flip();
+
+        // Find and store reference to GameManager
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     void FixedUpdate()
@@ -72,7 +77,6 @@ public class zombieController : MonoBehaviour
         }
     }
 
-
     private void FindClosestPlayer()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag(playerTag);
@@ -101,7 +105,6 @@ public class zombieController : MonoBehaviour
         }
     }
 
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(playerTag) && !Detected)
@@ -123,6 +126,14 @@ public class zombieController : MonoBehaviour
             Detected = false;
             detectedPlayer = null;
             myAnim.SetTrigger("idle");
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (gameManager != null)
+        {
+            gameManager.IncreasePlayerScoreForKilledZombie();
         }
     }
 

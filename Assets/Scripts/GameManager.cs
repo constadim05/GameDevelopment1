@@ -1,25 +1,45 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject endgameText;
-    public GameObject blackBackgroundPanel; // Reference to the black background panel
     private int playersAlive;
+    private int enemyCount;
 
     void Start()
     {
         playersAlive = GameObject.FindGameObjectsWithTag("Player").Length;
+        enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
         endgameText.SetActive(false);
-        blackBackgroundPanel.SetActive(false); // Ensure black background panel is initially inactive
     }
 
     public void PlayerDied()
     {
         playersAlive--;
-        if (playersAlive <= 0)
+        CheckEndGame();
+    }
+
+    public void EnemyKilled()
+    {
+        enemyCount--;
+        IncreasePlayerScoreForKilledZombie(); // Increase player score when enemy is killed
+        CheckEndGame();
+    }
+
+    public void IncreasePlayerScoreForKilledZombie()
+    {
+        PlayerScoreManager playerScoreManager = FindObjectOfType<PlayerScoreManager>();
+        if (playerScoreManager != null)
+        {
+            playerScoreManager.IncreasePlayerScore(1); // Increase player 1 score by 1
+        }
+    }
+
+    private void CheckEndGame()
+    {
+        if (playersAlive <= 0 || enemyCount <= 0)
         {
             StartCoroutine(ShowEndGameText());
         }
@@ -27,24 +47,13 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator ShowEndGameText()
     {
-        // Activate both endgame text and black background panel
         endgameText.SetActive(true);
-        blackBackgroundPanel.SetActive(true);
-
         Animator endGameAnim = endgameText.GetComponent<Animator>();
         if (endGameAnim != null)
         {
             endGameAnim.SetTrigger("endGameText");
         }
-
-        // Wait for the animation to complete
         yield return new WaitForSeconds(3f);
-
-        // Deactivate both endgame text and black background panel
-        endgameText.SetActive(false);
-        blackBackgroundPanel.SetActive(false);
-
-        // Load the main menu scene
         LoadMainMenu();
     }
 
