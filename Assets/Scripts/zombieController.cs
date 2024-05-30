@@ -54,7 +54,7 @@ public class zombieController : MonoBehaviour
         if (!running && firstDetection && startRun < Time.time)
         {
             running = true;
-            myAnim.SetTrigger("Run");
+            myAnim.SetTrigger("run");
         }
 
         if (running)
@@ -95,7 +95,7 @@ public class zombieController : MonoBehaviour
         {
             Detected = true;
             detectedPlayer = closestPlayer;
-            myAnim.SetBool("Detected", Detected);
+            myAnim.SetBool("detected", Detected);
             if (detectedPlayer.position.x < transform.position.x && facingRight) Flip();
             else if (detectedPlayer.position.x > transform.position.x && !facingRight) Flip();
         }
@@ -122,7 +122,7 @@ public class zombieController : MonoBehaviour
             running = false;
             Detected = false;
             detectedPlayer = null;
-            myAnim.SetTrigger("Idle");
+            myAnim.SetTrigger("idle");
         }
     }
 

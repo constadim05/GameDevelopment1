@@ -97,9 +97,12 @@ public class playerController : MonoBehaviour
         groundCollisions = Physics.OverlapSphere(groundCheck.position, groundCheckRadius, groundLayer);
         grounded = groundCollisions.Length > 0;
 
-        // Flip character
-        float move = Input.GetAxis("Horizontal");
-        if (move > 0 && !facingRight || move < 0 && facingRight)
+        // Flip character based on player ID
+        if ((_playerID == 1 && Input.GetAxis("Horizontal") > 0 && !facingRight) || (_playerID == 2 && Input.GetAxis("Horizontal2") > 0 && !facingRight))
+        {
+            Flip();
+        }
+        else if ((_playerID == 1 && Input.GetAxis("Horizontal") < 0 && facingRight) || (_playerID == 2 && Input.GetAxis("Horizontal2") < 0 && facingRight))
         {
             Flip();
         }
@@ -110,6 +113,9 @@ public class playerController : MonoBehaviour
             canJump = true;
         }
     }
+
+
+
 
     void Move(float move)
     {
