@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1410386828090724073, guid: 5f1ddb79039d68b4487115dbee48079d, type: 3}
+      propertyPath: m_text
+      value: 'Player 2:'
+      objectReference: {fileID: 0}
     - target: {fileID: 1660779809098295485, guid: 5f1ddb79039d68b4487115dbee48079d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 386
@@ -167,6 +171,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2219441390092463259, guid: 5f1ddb79039d68b4487115dbee48079d, type: 3}
+      propertyPath: m_Name
+      value: player1ScoreObject
+      objectReference: {fileID: 0}
     - target: {fileID: 5320696832617292220, guid: 5f1ddb79039d68b4487115dbee48079d, type: 3}
       propertyPath: m_FirstSelected
       value: 
@@ -175,9 +183,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6754499041183988060, guid: 5f1ddb79039d68b4487115dbee48079d, type: 3}
+      propertyPath: m_Name
+      value: player2ScoreObject
+      objectReference: {fileID: 0}
     - target: {fileID: 8494992540562764076, guid: 5f1ddb79039d68b4487115dbee48079d, type: 3}
       propertyPath: m_Name
       value: UI Elements
+      objectReference: {fileID: 0}
+    - target: {fileID: 8973125204551313821, guid: 5f1ddb79039d68b4487115dbee48079d, type: 3}
+      propertyPath: m_text
+      value: 'Player 1:'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8973125204551313821, guid: 5f1ddb79039d68b4487115dbee48079d, type: 3}
+      propertyPath: m_isRightToLeft
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4340191650972485313, guid: 5f1ddb79039d68b4487115dbee48079d, type: 3}
