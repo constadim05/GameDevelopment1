@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
     private void CheckEndGame()
     {
         if (playersAlive <= 0 || enemyCount <= 0)
