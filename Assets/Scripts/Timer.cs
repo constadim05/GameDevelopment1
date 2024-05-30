@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 /// <summary>
 /// Used to count time up or down. Can be set and run from inspector, or can be manually set and run from another script
 /// This script also holds an event for when the timer runs out, so that functionality can be easily extended.
@@ -78,6 +79,9 @@ public class Timer : MonoBehaviour
     {
         IsRunning = false;
         onTimerFinished.Invoke();
+
+        // Load the "MainMenu" scene
+        SceneManager.LoadScene("MainMenu");
     }
 
     // Format the time in mm:ss format
