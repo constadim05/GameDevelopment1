@@ -1,44 +1,25 @@
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class PlayerScoreManager : MonoBehaviour
 {
     public int player1Score = 0;
     public int player2Score = 0;
 
-    public GameObject player1ScoreObject;
-    public GameObject player2ScoreObject;
-
-    private Text player1ScoreText;
-    private Text player2ScoreText;
+    public TMP_Text player1ScoreText; // Direct reference to TMP_Text component for player 1
+    public TMP_Text player2ScoreText; // Direct reference to TMP_Text component for player 2
 
     void Start()
     {
-        // Get the Text components from the GameObjects
-        if (player1ScoreObject != null)
+        // Check if the TMP_Text components are assigned in the inspector
+        if (player1ScoreText == null)
         {
-            player1ScoreText = player1ScoreObject.GetComponent<Text>();
-            if (player1ScoreText == null)
-            {
-                Debug.LogError("Player1ScoreText component is missing on " + player1ScoreObject.name);
-            }
-        }
-        else
-        {
-            Debug.LogError("Player1ScoreObject is not assigned in the inspector");
+            Debug.LogError("Player1ScoreText is not assigned in the inspector");
         }
 
-        if (player2ScoreObject != null)
+        if (player2ScoreText == null)
         {
-            player2ScoreText = player2ScoreObject.GetComponent<Text>();
-            if (player2ScoreText == null)
-            {
-                Debug.LogError("Player2ScoreText component is missing on " + player2ScoreObject.name);
-            }
-        }
-        else
-        {
-            Debug.LogError("Player2ScoreObject is not assigned in the inspector");
+            Debug.LogError("Player2ScoreText is not assigned in the inspector");
         }
 
         UpdateScoreUI();

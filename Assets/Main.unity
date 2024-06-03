@@ -507,11 +507,17 @@ MonoBehaviour:
   fixedJumpHeight: 12.5
   jumpCooldown: 1
   _playerID: 2
---- !u!1 &230960309 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2219441390092463259, guid: 5f1ddb79039d68b4487115dbee48079d, type: 3}
+--- !u!114 &230960311 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8973125204551313821, guid: 5f1ddb79039d68b4487115dbee48079d, type: 3}
   m_PrefabInstance: {fileID: 9025765}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &235943099
 GameObject:
   m_ObjectHideFlags: 0
@@ -3102,8 +3108,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1Score: 0
   player2Score: 0
-  player1ScoreObject: {fileID: 230960309}
-  player2ScoreObject: {fileID: 1086843608}
+  player1ScoreText: {fileID: 230960311}
+  player2ScoreText: {fileID: 1086843609}
 --- !u!1 &1083862205
 GameObject:
   m_ObjectHideFlags: 0
@@ -3299,11 +3305,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1086469348}
   m_CullTransparentMesh: 1
---- !u!1 &1086843608 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6754499041183988060, guid: 5f1ddb79039d68b4487115dbee48079d, type: 3}
+--- !u!114 &1086843609 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1410386828090724073, guid: 5f1ddb79039d68b4487115dbee48079d, type: 3}
   m_PrefabInstance: {fileID: 9025765}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1092763874
 GameObject:
   m_ObjectHideFlags: 0
