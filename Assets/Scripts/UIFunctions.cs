@@ -17,4 +17,11 @@ public class UIFunctions : MonoBehaviour
     {
         Application.Quit();
     }
+<<<<<<< Updated upstream
+=======
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+>>>>>>> Stashed changes
 }
