@@ -490,6 +490,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a5e65994117ef44799918dc7e01c154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveData:
+    playerNames:
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    kills: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+    deaths: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+    lastPlayerNames:
+    - 
+    - 
+    maxKills: 10
+    maxRoundTime: 5
+  currentPlayer1:
+    playerName: 
+    kills: 0
+    death: 0
+    kdr: 0
+  currentPlayer2:
+    playerName: 
+    kills: 0
+    death: 0
+    kdr: 0
+  tempPlayers: []
+  debugButtons: 1
+  loadOnStart: 1
 --- !u!4 &1815854118
 Transform:
   m_ObjectHideFlags: 0

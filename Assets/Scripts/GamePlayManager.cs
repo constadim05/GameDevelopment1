@@ -32,6 +32,8 @@ public class GamePlayManager : MonoBehaviour
     [HideInInspector] public GameObject player1;
     [HideInInspector] public GameObject player2;
 
+
+
     //store player data
     public string player1Name, player2Name;
 
@@ -98,28 +100,6 @@ public class GamePlayManager : MonoBehaviour
         //update the score UI
         player1ScoreText.text = player1Name + " : " + player1Score;
         player2ScoreText.text = player2Name + " : " + player2Score;
-    }
-    public void EndGame()
-    {
-        // Freeze Players
-        player1.GetComponent<CCMovement>().enabled = false;
-        player2.GetComponent<CCMovement>().enabled = false;
-        // Deactivate other scripts when ready
-
-        // Change state
-        gameState = State.Ending;
-
-        // Update UI
-        player1ScoreText.text = "";
-        player2ScoreText.text = "";
-        timerText.text = "";
-
-        // Display winner
-        string winningPlayer;
-        if (player1Score > player2Score) winningPlayer = player1Name;
-        else winningPlayer = player2Name;
-
-        messageText.text = winningPlayer + " Wins!" + "\n" + player1Name + " : " + player1Score + "\n" + player2Name + " : " + player2Score;
     }
 
     //respawns - find player to respawn, deactivate controls, decrease lives*, 
@@ -235,8 +215,30 @@ public class GamePlayManager : MonoBehaviour
 
         gameState = State.Gameplay;
     }
-}
 
 
 
     //End game - freeze players, tally scores, display results or move to next scene
+    public void EndGame()
+    {
+        //FreezePlayers
+        player1.GetComponent<CCMovement>().enabled = false;
+        player2.GetComponent<CCMovement>().enabled = false;
+        //deactivate other scripts when ready
+
+        //change state
+        gameState = State.Ending;
+
+        //update UI;
+        player1ScoreText.text = "";
+        player2ScoreText.text = "";
+        timerText.text = "";
+
+        //display winner
+        string winningPlayer;
+        if (player1Score > player2Score) winningPlayer = player1Name;
+        else winningPlayer = player2Name;
+
+        messageText.text = winningPlayer + " Wins!" + "\n" + player1Name + " : " + player1Score + "\n" + player2Name + " : " + player2Score;
+    }
+}

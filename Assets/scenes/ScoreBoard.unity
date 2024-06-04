@@ -831,6 +831,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6724133396273246212, guid: 5c4d260c16a3545ddbf14d566dbb3a9e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724133396273246212, guid: 5c4d260c16a3545ddbf14d566dbb3a9e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724133396273246212, guid: 5c4d260c16a3545ddbf14d566dbb3a9e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1867020321}
+    - target: {fileID: 6724133396273246212, guid: 5c4d260c16a3545ddbf14d566dbb3a9e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6950632376482737086, guid: 5c4d260c16a3545ddbf14d566dbb3a9e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1172,10 +1188,18 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1089551686714960563, guid: 5c4d260c16a3545ddbf14d566dbb3a9e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2043314510}
+    - targetCorrespondingSourceObject: {fileID: 1089551686714960563, guid: 5c4d260c16a3545ddbf14d566dbb3a9e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2043314512}
   m_SourcePrefab: {fileID: 100100000, guid: 5c4d260c16a3545ddbf14d566dbb3a9e, type: 3}
 --- !u!224 &1867020320 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3984332395035082175, guid: 5c4d260c16a3545ddbf14d566dbb3a9e, type: 3}
+  m_PrefabInstance: {fileID: 1867020319}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1867020321 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 240869514772416478, guid: 5c4d260c16a3545ddbf14d566dbb3a9e, type: 3}
   m_PrefabInstance: {fileID: 1867020319}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1888884766
@@ -1299,6 +1323,50 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a5e65994117ef44799918dc7e01c154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveData:
+    playerNames:
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    kills: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+    deaths: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+    lastPlayerNames:
+    - 
+    - 
+    maxKills: 10
+    maxRoundTime: 5
+  currentPlayer1:
+    playerName: 
+    kills: 0
+    death: 0
+    kdr: 0
+  currentPlayer2:
+    playerName: 
+    kills: 0
+    death: 0
+    kdr: 0
+  tempPlayers: []
+  debugButtons: 1
+  loadOnStart: 1
+--- !u!114 &2043314512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2043314509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bf77e58fa3b4483d86a63c7dcf139e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2129051437

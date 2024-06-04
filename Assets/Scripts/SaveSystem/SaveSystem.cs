@@ -14,7 +14,9 @@ public class SaveSystem : MonoBehaviour
 
     private void Awake()
     {
-        filePath = Application.persistentDataPath + "/" + saveFileName + ".saveData";
+        // Construct the file path using Application.persistentDataPath
+        filePath = Path.Combine(Application.persistentDataPath, saveFileName + ".saveData");
+        Debug.Log("File Path: " + filePath); // Add this line to debug log the file path
 
         if (instance == null)
         {
@@ -25,6 +27,7 @@ public class SaveSystem : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     public void SaveGame(GameData saveData)
     {
         // find the file path and create a file
@@ -39,6 +42,7 @@ public class SaveSystem : MonoBehaviour
         dataStream.Close();
 
     }
+
     public GameData LoadGame()
     {
         //check if the file already exists
@@ -61,5 +65,4 @@ public class SaveSystem : MonoBehaviour
 
         //if the file does not exist, return an error message and cancel the function
     }
-
 }

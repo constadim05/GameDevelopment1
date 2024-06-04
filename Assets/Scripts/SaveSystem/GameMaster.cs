@@ -88,6 +88,7 @@ public class GameMaster : MonoBehaviour
         }
     }
 
+
     public void SendHighScoresToSaveData(List<PlayerData> players)
     {
         for (int i = 0; i < 10; i++)
