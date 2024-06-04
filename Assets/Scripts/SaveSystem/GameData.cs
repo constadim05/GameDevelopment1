@@ -1,19 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 [System.Serializable]
 public class GameData
 {
-    //you can only save simple data
-    public int score = 0;
-    public string player1Name;
-    public void AddScore(int points)
-    {
-        score += points;
-    }
+    public string[] playerNames;
+    public int[] kills;
+    public int[] deaths;
+    public string[] lastPlayerNames;
+    public int maxKills;
+    public float maxRoundTime;
 
-    public void ResetData()
+    public GameData()
     {
-        score = 0;
+        playerNames = new string[10];
+        kills = new int[10];
+        deaths = new int[10];
+        lastPlayerNames = new string[2];
+        maxKills = 10;
+        maxRoundTime = 5.0f;
     }
 }
