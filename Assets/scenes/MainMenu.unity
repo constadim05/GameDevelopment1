@@ -459,7 +459,7 @@ GameObject:
   - component: {fileID: 1815854117}
   - component: {fileID: 1815854116}
   m_Layer: 0
-  m_Name: Gamemanager
+  m_Name: GameMaster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -509,6 +509,8 @@ MonoBehaviour:
     - 
     maxKills: 10
     maxRoundTime: 5
+    score: 0
+    player1Name: 
   currentPlayer1:
     playerName: 
     kills: 0

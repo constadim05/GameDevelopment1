@@ -8,13 +8,16 @@ public class GameData
     public int maxKills;
     public float maxRoundTime;
 
-    public GameData()
+    public int score = 0;
+    public string player1Name;
+
+    public void AddScore(int points)
     {
-        playerNames = new string[10];
-        kills = new int[10];
-        deaths = new int[10];
-        lastPlayerNames = new string[2];
-        maxKills = 10;
-        maxRoundTime = 5.0f;
+        score += points;
     }
+    public void ResetData()
+    {
+        score = 0;
+    }
+    
 }

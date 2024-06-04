@@ -21,6 +21,7 @@ public class SaveSystem : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -30,39 +31,34 @@ public class SaveSystem : MonoBehaviour
 
     public void SaveGame(GameData saveData)
     {
-        // find the file path and create a file
-        FileStream dataStream = new FileStream(filePath, FileMode.Create);
+        // Create the directory if it doesn't exist
+        Directory.CreateDirectory(Path.GetDirectoryName(filePath));
 
-        //get the binary formatter ready
-        BinaryFormatter converter = new BinaryFormatter();
-
-        //convert the data and send it the file
-        converter.Serialize(dataStream, saveData);
-
-        dataStream.Close();
-
+        // Create or overwrite the file
+        using (FileStream dataStream = new FileStream(filePath, FileMode.Create))
+        {
+            BinaryFormatter converter = new BinaryFormatter();
+            converter.Serialize(dataStream, saveData);
+        }
     }
 
     public GameData LoadGame()
     {
-        //check if the file already exists
+        // Check if the file exists before attempting to load
         if (File.Exists(filePath))
         {
-            //if so get the existing file and return it
-            FileStream dataStream = new FileStream(filePath, FileMode.Open);
-
-            BinaryFormatter converter = new BinaryFormatter();
-            GameData saveData = converter.Deserialize(dataStream) as GameData;
-
-            dataStream.Close();
-            return saveData;
+            // Open the file and deserialize the data
+            using (FileStream dataStream = new FileStream(filePath, FileMode.Open))
+            {
+                BinaryFormatter converter = new BinaryFormatter();
+                GameData saveData = converter.Deserialize(dataStream) as GameData;
+                return saveData;
+            }
         }
         else
         {
             Debug.LogError("Save file not found in " + filePath);
             return null;
         }
-
-        //if the file does not exist, return an error message and cancel the function
     }
 }
