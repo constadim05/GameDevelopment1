@@ -1,23 +1,21 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
 [System.Serializable]
 public class GameData
 {
-    public string[] playerNames;
-    public int[] kills;
-    public int[] deaths;
-    public string[] lastPlayerNames;
-    public int maxKills;
-    public float maxRoundTime;
+    //you can only save simple data
+    public string[] playerNames = new string[10];
+    //store arrays of our score information MAKE DIFFERENT FOR YOUR INDIVIDUAL GAME
+    public int[] kills = new int[10];
+    public int[] deaths = new int[10];
 
-    public int score = 0;
-    public string player1Name;
+    //Game settings or information
+    public float maxRoundTime = 120f;
+    public int maxKills = 10;
 
-    public void AddScore(int points)
-    {
-        score += points;
-    }
-    public void ResetData()
-    {
-        score = 0;
-    }
-    
+    public string[] lastPlayerNames = new string[2];
+
+
 }

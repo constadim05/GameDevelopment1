@@ -14,51 +14,52 @@ public class SaveSystem : MonoBehaviour
 
     private void Awake()
     {
-        // Construct the file path using Application.persistentDataPath
-        filePath = Path.Combine(Application.persistentDataPath, saveFileName + ".saveData");
-        Debug.Log("File Path: " + filePath); // Add this line to debug log the file path
+        filePath = Application.persistentDataPath + "/" + saveFileName + ".saveData";
 
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
     }
-
     public void SaveGame(GameData saveData)
     {
-        // Create the directory if it doesn't exist
-        Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+        // find the file path and create a file
+        FileStream dataStream = new FileStream(filePath, FileMode.Create);
 
-        // Create or overwrite the file
-        using (FileStream dataStream = new FileStream(filePath, FileMode.Create))
-        {
-            BinaryFormatter converter = new BinaryFormatter();
-            converter.Serialize(dataStream, saveData);
-        }
+        //get the binary formatter ready
+        BinaryFormatter converter = new BinaryFormatter();
+
+        //convert the data and send it the file
+        converter.Serialize(dataStream, saveData);
+
+        dataStream.Close();
+
     }
-
     public GameData LoadGame()
     {
-        // Check if the file exists before attempting to load
+        //check if the file already exists
         if (File.Exists(filePath))
         {
-            // Open the file and deserialize the data
-            using (FileStream dataStream = new FileStream(filePath, FileMode.Open))
-            {
-                BinaryFormatter converter = new BinaryFormatter();
-                GameData saveData = converter.Deserialize(dataStream) as GameData;
-                return saveData;
-            }
+            //if so get the existing file and return it
+            FileStream dataStream = new FileStream(filePath, FileMode.Open);
+
+            BinaryFormatter converter = new BinaryFormatter();
+            GameData saveData = converter.Deserialize(dataStream) as GameData;
+
+            dataStream.Close();
+            return saveData;
         }
         else
         {
             Debug.LogError("Save file not found in " + filePath);
             return null;
         }
+
+        //if the file does not exist, return an error message and cancel the function
     }
+
 }
