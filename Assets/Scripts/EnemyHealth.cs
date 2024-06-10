@@ -25,7 +25,7 @@ public class EnemyHealth : MonoBehaviour
 
     AudioSource enemyAS;
 
-    GameManager gameManager; // Reference to GameManager
+    GamePlayManager gameManager; // Reference to GameManager
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +36,7 @@ public class EnemyHealth : MonoBehaviour
         enemyAS = GetComponent<AudioSource>();
 
         // Find and store reference to GameManager
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = FindObjectOfType<GamePlayManager>();
     }
     // Update is called once per frame
     void Update()

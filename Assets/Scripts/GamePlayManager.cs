@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System.Collections;
 using TMPro;
 
-/// <summary>
-/// Manage game state, scores, and respawns during gameplay. Only one GamePlayManager should be in the scene
-/// reference this script to access gameplay objects like UI
-/// </summary>
 public class GamePlayManager : MonoBehaviour
 {
     #region Variables
@@ -17,6 +13,8 @@ public class GamePlayManager : MonoBehaviour
     public State gameState = State.Intro;
     //store score data
     public int player1Score, player2Score;
+    private int playersAlive;
+    private int enemyCount;
 
     public int maxScore;
     public float gameDuration;
@@ -32,8 +30,6 @@ public class GamePlayManager : MonoBehaviour
     [HideInInspector] public GameObject player1;
     [HideInInspector] public GameObject player2;
 
-
-
     //store player data
     public string player1Name, player2Name;
 
@@ -43,12 +39,11 @@ public class GamePlayManager : MonoBehaviour
     public TMP_Text player2ScoreText;
     public TMP_Text timerText;
     public TMP_Text messageText;
-
+    public GameObject endgameText;
 
     [Header("Other Components")]
     //store a timer
     public Timer gameTimer;
-
 
     #endregion
 
@@ -66,7 +61,11 @@ public class GamePlayManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(GameMaster.instance != null)
+        playersAlive = GameObject.FindGameObjectsWithTag("Player").Length;
+        enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        endgameText.SetActive(false);
+
+        if (GameMaster.instance != null)
         {
             maxScore = GameMaster.instance.saveData.maxKills;
             gameDuration = GameMaster.instance.saveData.maxRoundTime;
@@ -220,6 +219,7 @@ public class GamePlayManager : MonoBehaviour
         }
         //Activate game play
         messageText.text = "Go!";
+
         yield return new WaitForSeconds(1);
         //hide messages
         messageText.text = "";
@@ -232,7 +232,48 @@ public class GamePlayManager : MonoBehaviour
         gameState = State.Gameplay;
     }
 
+    public void PlayerDied()
+    {
+        playersAlive--;
+        CheckEndGame();
+    }
 
+    public void EnemyKilled()
+    {
+        enemyCount--;
+        IncreasePlayerScoreForKilledZombie(); // Increase player score when enemy is killed
+        CheckEndGame();
+    }
+
+    public void IncreasePlayerScoreForKilledZombie()
+    {
+        UpdateScore(1, 1); // Increase player 1 score by 1
+    }
+
+    private void CheckEndGame()
+    {
+        if (playersAlive <= 0 || enemyCount <= 0)
+        {
+            StartCoroutine(ShowEndGameText());
+        }
+    }
+
+    private IEnumerator ShowEndGameText()
+    {
+        endgameText.SetActive(true);
+        Animator endGameAnim = endgameText.GetComponent<Animator>();
+        if (endGameAnim != null)
+        {
+            endGameAnim.SetTrigger("endGameText");
+        }
+        yield return new WaitForSeconds(3f);
+        LoadMainMenu();
+    }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 
     //End game - freeze players, tally scores, display results or move to next scene
     public void EndGame()

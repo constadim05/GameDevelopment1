@@ -1,5 +1,3 @@
-// LobbyManager.cs
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +23,7 @@ public class LobbyManager : MonoBehaviour
     public bool player2IsReady;
 
     PlayerScoreManager playerScoreManager; // Reference to PlayerScoreManager
+    public Timer timer; // Reference to the Timer script
 
     // Start is called before the first frame update
     void Start()
@@ -61,6 +60,9 @@ public class LobbyManager : MonoBehaviour
         }
         maxKills.text = GameMaster.instance.saveData.maxKills.ToString();
         maxTime.text = GameMaster.instance.saveData.maxRoundTime.ToString();
+
+        // Find and set reference to Timer script
+        timer = FindObjectOfType<Timer>();
     }
 
     public void UpdatePlayerName(int playerNum)
@@ -87,7 +89,12 @@ public class LobbyManager : MonoBehaviour
 
     public void UpdateTime()
     {
-        GameMaster.instance.saveData.maxRoundTime = float.Parse(maxTime.text);
+        float newMaxTime = float.Parse(maxTime.text);
+
+        // Update max time in Timer script
+        timer.maxTime = newMaxTime;
+
+        GameMaster.instance.saveData.maxRoundTime = newMaxTime;
     }
 
     public void EnableBools(int playerNum)

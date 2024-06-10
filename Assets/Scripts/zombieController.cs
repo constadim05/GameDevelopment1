@@ -21,7 +21,7 @@ public class zombieController : MonoBehaviour
     public float detectionRadius = 10f;
     public string playerTag = "Player"; // Set this to the tag assigned to player GameObjects
 
-    GameManager gameManager; // Reference to GameManager
+    GamePlayManager gameManager; // Reference to GameManager
 
     void Start()
     {
@@ -34,7 +34,7 @@ public class zombieController : MonoBehaviour
         if (Random.Range(0, 10) > 5) Flip();
 
         // Find and store reference to GameManager
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = FindObjectOfType<GamePlayManager>();
     }
 
     void FixedUpdate()

@@ -24,7 +24,7 @@ public class playerHealth : MonoBehaviour
 
     bool isDead = false; // Flag to track player's death status
 
-    GameManager gameManager; // Reference to GameManager
+    GamePlayManager gameManager; // Reference to GameManager
 
     void Start()
     {
@@ -41,7 +41,7 @@ public class playerHealth : MonoBehaviour
         endGameAnim = endgameText.GetComponent<Animator>();
 
         // Find and store reference to GameManager
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = FindObjectOfType<GamePlayManager>();
     }
 
     // Update is called once per frame
