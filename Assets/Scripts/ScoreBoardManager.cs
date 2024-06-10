@@ -11,9 +11,9 @@ public class ScoreBoardManager : MonoBehaviour
         for (int i = 0; i < scoreCards.Count; i++)
         {
             scoreCards[i].playerName.text = GameMaster.instance.tempPlayers[i].playerName;
-            scoreCards[i].kills.text = GameMaster.instance.tempPlayers[i].kills.ToString();
-            scoreCards[i].deaths.text = GameMaster.instance.tempPlayers[i].death.ToString();
-            scoreCards[i].KDR.text = GameMaster.instance.tempPlayers[i].kdr.ToString();
+            scoreCards[i].kills.text = "Kills: " + GameMaster.instance.tempPlayers[i].kills.ToString();
+            scoreCards[i].deaths.text = "Deaths: " + GameMaster.instance.tempPlayers[i].death.ToString();
+            scoreCards[i].KDR.text = "KDR: " + GameMaster.instance.tempPlayers[i].kdr.ToString();
         }
     }
 }

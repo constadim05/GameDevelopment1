@@ -1,3 +1,5 @@
+// PlayerScoreManager.cs
+
 using UnityEngine;
 using TMPro;
 
@@ -8,6 +10,19 @@ public class PlayerScoreManager : MonoBehaviour
 
     public TMP_Text player1ScoreText; // Direct reference to TMP_Text component for player 1
     public TMP_Text player2ScoreText; // Direct reference to TMP_Text component for player 2
+
+    public void UpdateMaxKillsText(int maxKills)
+    {
+        if (player1ScoreText != null && player2ScoreText != null)
+        {
+            player1ScoreText.text = "Max Kills: " + maxKills;
+            player2ScoreText.text = "Max Kills: " + maxKills;
+        }
+        else
+        {
+            Debug.LogError("One or both player score text references are null");
+        }
+    }
 
     void Start()
     {

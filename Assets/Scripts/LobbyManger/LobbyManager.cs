@@ -1,8 +1,11 @@
+// LobbyManager.cs
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+
 public class LobbyManager : MonoBehaviour
 {
     //UI Elements
@@ -21,10 +24,25 @@ public class LobbyManager : MonoBehaviour
     public bool player1IsReady;
     public bool player2IsReady;
 
+    PlayerScoreManager playerScoreManager; // Reference to PlayerScoreManager
 
     // Start is called before the first frame update
     void Start()
     {
+        // Initialize playerScoreManager reference
+        playerScoreManager = FindObjectOfType<PlayerScoreManager>();
+
+        // Check if playerScoreManager is null
+        if (playerScoreManager == null)
+        {
+            Debug.LogError("PlayerScoreManager is not found in the scene");
+        }
+        else
+        {
+            // Update max kills text on start
+            playerScoreManager.UpdateMaxKillsText(GameMaster.instance.saveData.maxKills);
+        }
+
         if (GameMaster.instance.saveData.lastPlayerNames[0] == "")
         {
             player1Name.text = "Insert Player Name";
@@ -44,6 +62,7 @@ public class LobbyManager : MonoBehaviour
         maxKills.text = GameMaster.instance.saveData.maxKills.ToString();
         maxTime.text = GameMaster.instance.saveData.maxRoundTime.ToString();
     }
+
     public void UpdatePlayerName(int playerNum)
     {
         if (playerNum == 1)
@@ -55,15 +74,22 @@ public class LobbyManager : MonoBehaviour
             GameMaster.instance.currentPlayer2.playerName = player2Name.text;
         }
     }
+
     public void UpdateKills()
     {
         GameMaster.instance.saveData.maxKills = int.Parse(maxKills.text);
-
+        // Update max kills text in PlayerScoreManager
+        if (playerScoreManager != null)
+        {
+            playerScoreManager.UpdateMaxKillsText(GameMaster.instance.saveData.maxKills);
+        }
     }
+
     public void UpdateTime()
     {
         GameMaster.instance.saveData.maxRoundTime = float.Parse(maxTime.text);
     }
+
     public void EnableBools(int playerNum)
     {
         if (playerNum == 1)
@@ -87,6 +113,7 @@ public class LobbyManager : MonoBehaviour
             playButton.interactable = false;
         }
     }
+
     public void DisableBools(int playerNum)
     {
         if (playerNum == 1)
@@ -110,5 +137,4 @@ public class LobbyManager : MonoBehaviour
             playButton.interactable = false;
         }
     }
-
 }
