@@ -66,6 +66,14 @@ public class GamePlayManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(GameMaster.instance != null)
+        {
+            maxScore = GameMaster.instance.saveData.maxKills;
+            gameDuration = GameMaster.instance.saveData.maxRoundTime;
+
+            player1Name = GameMaster.instance.currentPlayer1.playerName;
+            player2Name = GameMaster.instance.currentPlayer2.playerName;
+        }
         SetupGame();
     }
 
@@ -85,8 +93,16 @@ public class GamePlayManager : MonoBehaviour
         if (gameState != State.Gameplay) return;
 
         //if playerNumber is 1, increase player1 score, otherwise increase player 2
-        if (playerNumber == 1) player1Score += amount;
-        else player2Score += amount;
+        if (playerNumber == 1)
+        {
+            GameMaster.instance.currentPlayer1.kills += amount;
+            player1Score += amount;
+        }
+        else
+        {
+            GameMaster.instance.currentPlayer2.kills += amount;
+            player2Score += amount;
+        }
 
         //ternary operator can be used for bool statements to put logic on one clean line
         //playerNumber = 1 ? player1Score ++ : player2Score ++ 1;
@@ -240,5 +256,8 @@ public class GamePlayManager : MonoBehaviour
         else winningPlayer = player2Name;
 
         messageText.text = winningPlayer + " Wins!" + "\n" + player1Name + " : " + player1Score + "\n" + player2Name + " : " + player2Score;
+
+        GameMaster.instance.SortTempList(GameMaster.instance.tempPlayers, true);
+        GameMaster.instance.SaveGame();
     }
 }
