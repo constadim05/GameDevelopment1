@@ -9,11 +9,11 @@ EditorBuildSettings:
     path: Assets/scenes/MainMenu.unity
     guid: 4591293b732828241b9d9c3541e26e91
   - enabled: 1
-    path: Assets/scenes/LocalGameScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
     path: Assets/scenes/LocalLobby.unity
     guid: 7c6f58a8b4bd96e48a7890da87012163
+  - enabled: 1
+    path: Assets/scenes/LocalGameScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/scenes/ScoreBoard.unity
     guid: dbc7a649c57ba06478ea06033880fda9
