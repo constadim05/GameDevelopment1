@@ -1,85 +1,54 @@
-// PlayerScoreManager.cs
-
 using UnityEngine;
 using TMPro;
 
 public class PlayerScoreManager : MonoBehaviour
 {
-    public int player1Score = 0;
-    public int player2Score = 0;
+    public int[] playerScores = new int[2]; // Array to store scores of each player
 
-    public TMP_Text player1ScoreText; // Direct reference to TMP_Text component for player 1
-    public TMP_Text player2ScoreText; // Direct reference to TMP_Text component for player 2
-
-    public void UpdateMaxKillsText(int maxKills)
-    {
-        if (player1ScoreText != null && player2ScoreText != null)
-        {
-            player1ScoreText.text = "Max Kills: " + maxKills;
-            player2ScoreText.text = "Max Kills: " + maxKills;
-        }
-        else
-        {
-            Debug.LogError("One or both player score text references are null");
-        }
-    }
+    public TMP_Text[] playerScoreTexts; // Array to store TMP_Text components for each player
 
     void Start()
     {
-        // Check if the TMP_Text components are assigned in the inspector
-        if (player1ScoreText == null)
+        // Check if all playerScoreTexts are assigned in the inspector
+        for (int i = 0; i < playerScoreTexts.Length; i++)
         {
-            Debug.LogError("Player1ScoreText is not assigned in the inspector");
-        }
-
-        if (player2ScoreText == null)
-        {
-            Debug.LogError("Player2ScoreText is not assigned in the inspector");
+            if (playerScoreTexts[i] == null)
+            {
+                Debug.LogError("Player" + (i + 1) + "ScoreText is not assigned in the inspector");
+            }
         }
 
         UpdateScoreUI();
     }
 
-    public void IncreasePlayerScore(int playerNumber)
+    public void IncreasePlayerScore(int playerNumber, int killCount)
     {
-        if (playerNumber == 1)
-        {
-            player1Score++;
-            Debug.Log("Player 1 Score Increased: " + player1Score);
-        }
-        else if (playerNumber == 2)
-        {
-            player2Score++;
-            Debug.Log("Player 2 Score Increased: " + player2Score);
-        }
-        else
+        if (playerNumber < 1 || playerNumber > playerScores.Length)
         {
             Debug.LogError("Invalid player number: " + playerNumber);
+            return;
         }
+
+        playerScores[playerNumber - 1] += killCount; // Adjusting index for 0-based array
+
+        Debug.Log("Player " + playerNumber + " Score Increased: " + playerScores[playerNumber - 1]);
 
         UpdateScoreUI();
     }
 
     void UpdateScoreUI()
     {
-        if (player1ScoreText != null)
+        for (int i = 0; i < playerScores.Length; i++)
         {
-            player1ScoreText.text = "Player 1: " + player1Score;
-            Debug.Log("Player 1 Score Text Updated: " + player1ScoreText.text);
-        }
-        else
-        {
-            Debug.LogError("Player 1 Score Text is null");
-        }
-
-        if (player2ScoreText != null)
-        {
-            player2ScoreText.text = "Player 2: " + player2Score;
-            Debug.Log("Player 2 Score Text Updated: " + player2ScoreText.text);
-        }
-        else
-        {
-            Debug.LogError("Player 2 Score Text is null");
+            if (playerScoreTexts[i] != null)
+            {
+                playerScoreTexts[i].text = "Player " + (i + 1) + ": " + playerScores[i];
+                Debug.Log("Player " + (i + 1) + " Score Text Updated: " + playerScoreTexts[i].text);
+            }
+            else
+            {
+                Debug.LogError("Player " + (i + 1) + " Score Text is null");
+            }
         }
     }
 }
