@@ -21,22 +21,21 @@ public class GameManager : MonoBehaviour
         CheckEndGame();
     }
 
-    public void EnemyKilled()
+    public void EnemyKilled(int playerNumber)
     {
         enemyCount--;
-        IncreasePlayerScoreForKilledZombie(); // Increase player score when enemy is killed
+        IncreasePlayerScoreForKilledZombie(playerNumber); // Increase player score when enemy is killed
         CheckEndGame();
     }
 
-    public void IncreasePlayerScoreForKilledZombie()
+    public void IncreasePlayerScoreForKilledZombie(int playerNumber)
     {
         PlayerScoreManager playerScoreManager = FindObjectOfType<PlayerScoreManager>();
         if (playerScoreManager != null)
         {
-            playerScoreManager.IncreasePlayerScore(1); // Increase player 1 score by 1
+            playerScoreManager.IncreasePlayerScore(playerNumber, 1); // Increase score for the specified player
         }
     }
-
 
     private void CheckEndGame()
     {
@@ -61,5 +60,12 @@ public class GameManager : MonoBehaviour
     public void LoadMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+
+    // Usage example method to simulate an enemy being killed by a specific player
+    public void SimulateEnemyKilledByPlayer(int playerNumber)
+    {
+        // This method can be called to simulate an enemy kill by a specified player number
+        EnemyKilled(playerNumber);
     }
 }
