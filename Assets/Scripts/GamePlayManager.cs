@@ -21,18 +21,12 @@ public class GamePlayManager : MonoBehaviour
     public int maxScore;
     public float gameDuration;
 
-    //store respawns positions
-    public Transform[] respawnPositions;
-    private int lastSpawnP1, lastSpawnP2;
-
     [Header("Player Settings")]
     public GameObject player1Prefab;
     public GameObject player2Prefab;
     //store player object references
     [HideInInspector] public GameObject player1;
     [HideInInspector] public GameObject player2;
-
-
 
     //store player data
     public string player1Name, player2Name;
@@ -42,13 +36,10 @@ public class GamePlayManager : MonoBehaviour
     public TMP_Text player1ScoreText;
     public TMP_Text player2ScoreText;
     public TMP_Text timerText;
-    public TMP_Text messageText;
-
 
     [Header("Other Components")]
     //store a timer
     public Timer gameTimer;
-
 
     #endregion
 
@@ -66,7 +57,7 @@ public class GamePlayManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(GameMaster.instance != null)
+        if (GameMaster.instance != null)
         {
             maxScore = GameMaster.instance.saveData.maxKills;
             gameDuration = GameMaster.instance.saveData.maxRoundTime;
@@ -74,19 +65,12 @@ public class GamePlayManager : MonoBehaviour
             player1Name = GameMaster.instance.currentPlayer1.playerName;
             player2Name = GameMaster.instance.currentPlayer2.playerName;
         }
-       SetupGame();
+        SetupGame();
     }
 
-    bool doOnce = true;
     // Update is called once per frame
     void Update()
     {
-        //if (doOnce)
-        //{
-        //    doOnce = false;
-        //    SetupGame();
-        //}
-
         if (gameState == State.Gameplay)
         {
             DisplayTimer();
@@ -111,11 +95,8 @@ public class GamePlayManager : MonoBehaviour
             player2Score += amount;
         }
 
-        //ternary operator can be used for bool statements to put logic on one clean line
-        //playerNumber = 1 ? player1Score ++ : player2Score ++ 1;
-
         //check if either players score is more than the max score. If so, call End game function
-        if (player1Score >= maxScore || player2Score >= maxScore && gameState != State.Ending)
+        if ((player1Score >= maxScore || player2Score >= maxScore) && gameState != State.Ending)
         {
             EndGame();
             gameState = State.Ending;
@@ -123,50 +104,6 @@ public class GamePlayManager : MonoBehaviour
         //update the score UI
         player1ScoreText.text = player1Name + " : " + player1Score;
         player2ScoreText.text = player2Name + " : " + player2Score;
-    }
-
-    //respawns - find player to respawn, deactivate controls, decrease lives*, 
-    //disable player, move to spawn point, reset data, reactivate player, check for end of game if relevant
-    public void SpawnPlayer(int playerNumber)
-    {
-        //Pick which player to spawn
-        GameObject currentPlayer;
-        if (playerNumber == 1) currentPlayer = player1;
-        else currentPlayer = player2;
-
-        //disable any scripts
-        currentPlayer.GetComponent<CCMovement>().enabled = false;
-        //add all the scripts you want to disable here.
-
-        //call the reactivation of the player
-        StartCoroutine(FinishSpawn(currentPlayer));
-
-    }
-    private IEnumerator FinishSpawn(GameObject currentPlayer)
-    {
-        //wait incase animations need to play
-        yield return new WaitForSeconds(2f);
-
-        //pick a random number to spawn from
-        int spawnIndex = Random.Range(0, respawnPositions.Length);
-
-        //check if the spawn index matches either previous spawn, if so, reroll
-        while (spawnIndex == lastSpawnP1 || spawnIndex == lastSpawnP2)
-        {
-            spawnIndex = Random.Range(0, respawnPositions.Length);
-        }
-
-        //move player to spawn point
-        currentPlayer.transform.position = respawnPositions[spawnIndex].position;
-        //store new last position
-        if (currentPlayer == player1) lastSpawnP1 = spawnIndex;
-        else lastSpawnP2 = spawnIndex;
-
-        yield return new WaitForSeconds(0.5f);
-        //reactivate all scripts and reset all data
-        currentPlayer.GetComponent<CCMovement>().enabled = true;
-        //add all the other scripts you need to activate or reset e.g.
-        //health reset, animation state changed, weapons reactivated etc
     }
 
     //Display the timer
@@ -179,68 +116,17 @@ public class GamePlayManager : MonoBehaviour
     void SetupGame()
     {
         //set game state
-        gameState = State.Intro;
-
-        //Spawn players for the first time
-        int spawnIndex = Random.Range(0, respawnPositions.Length);
-
-        player1 = Instantiate(player1Prefab, respawnPositions[spawnIndex].position, respawnPositions[spawnIndex].rotation);
-        lastSpawnP1 = spawnIndex;
-
-        //repeat for player 2
-        spawnIndex = Random.Range(0, respawnPositions.Length);
-
-        int attempts = 0;
-        while (spawnIndex == lastSpawnP1 && attempts < 3)
-        {
-            Random.Range(0, respawnPositions.Length);
-            attempts++;
-        }
-
-        player2 = Instantiate(player2Prefab, respawnPositions[spawnIndex].position, respawnPositions[spawnIndex].rotation);
-        lastSpawnP2 = spawnIndex;
-
+        gameState = State.Gameplay;
 
         //player names displayed in UI
         player1ScoreText.text = player1Name + " : " + 0;
         player2ScoreText.text = player2Name + " : " + 0;
 
-        //hide timer
-        timerText.text = "";
-
-        //display start message
-        messageText.text = "Get Ready";
-        //run the intro sequence coroutine
-        StartCoroutine(IntroSequence());
-    }
-    //intro coroutine
-    private IEnumerator IntroSequence()
-    {
-        //show the timer message
-        int timer = 4;
-
-        //count down from three (displaying time as we go)
-        while (timer > 0)
-        {
-            yield return new WaitForSeconds(1);
-            timer -= 1;
-            messageText.text = "Starting in " + timer;
-        }
-        //Activate game play
-        messageText.text = "Go!";
-        yield return new WaitForSeconds(1);
-        //hide messages
-        messageText.text = "";
-
         //run gameplay timer
         gameTimer.countDown = true;
         gameTimer.maxTime = gameDuration;
         gameTimer.StartTimer();
-
-        gameState = State.Gameplay;
     }
-
-
 
     //End game - freeze players, tally scores, display results or move to next scene
     public void EndGame()
@@ -263,7 +149,7 @@ public class GamePlayManager : MonoBehaviour
         if (player1Score > player2Score) winningPlayer = player1Name;
         else winningPlayer = player2Name;
 
-        messageText.text = winningPlayer + " Wins!" + "\n" + player1Name + " : " + player1Score + "\n" + player2Name + " : " + player2Score;
+        //messageText.text = winningPlayer + " Wins!" + "\n" + player1Name + " : " + player1Score + "\n" + player2Name + " : " + player2Score;
 
         GameMaster.instance.SortTempList(GameMaster.instance.tempPlayers, true);
         GameMaster.instance.SaveGame();

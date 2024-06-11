@@ -507,11 +507,6 @@ MonoBehaviour:
   fixedJumpHeight: 12.5
   jumpCooldown: 1
   _playerID: 2
---- !u!4 &119406441 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 80b3f07e167f246478a2d62cdee893c8, type: 3}
-  m_PrefabInstance: {fileID: 643880262}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &230960311 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8973125204551313821, guid: 5f1ddb79039d68b4487115dbee48079d, type: 3}
@@ -1970,6 +1965,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 80b3f07e167f246478a2d62cdee893c8, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 80b3f07e167f246478a2d62cdee893c8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 80b3f07e167f246478a2d62cdee893c8, type: 3}
       propertyPath: m_TagString
@@ -4696,6 +4695,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 80b3f07e167f246478a2d62cdee893c8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 80b3f07e167f246478a2d62cdee893c8, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
@@ -4960,7 +4963,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 998263058}
@@ -5093,9 +5096,6 @@ MonoBehaviour:
   player2Score: 0
   maxScore: 10
   gameDuration: 30
-  respawnPositions:
-  - {fileID: 383911628}
-  - {fileID: 119406441}
   player1Prefab: {fileID: 383911621}
   player2Prefab: {fileID: 119406429}
   player1: {fileID: 0}
@@ -5830,10 +5830,10 @@ SceneRoots:
   - {fileID: 1717198118}
   - {fileID: 643880262}
   - {fileID: 1723556580}
+  - {fileID: 1816319960}
   - {fileID: 6209692875034971465}
   - {fileID: 833130483}
   - {fileID: 1827127410}
-  - {fileID: 1816319960}
   - {fileID: 235943101}
   - {fileID: 621130202056714725}
   - {fileID: 568455575}
