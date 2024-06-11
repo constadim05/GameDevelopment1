@@ -119,6 +119,96 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &268596796
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 268596799}
+  - component: {fileID: 268596798}
+  - component: {fileID: 268596797}
+  m_Layer: 0
+  m_Name: GameMaster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &268596797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268596796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aa7272cf86a20548919b40c40fc3aa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveFileName: save
+--- !u!114 &268596798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268596796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a5e65994117ef44799918dc7e01c154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveData:
+    playerNames:
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    kills: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+    deaths: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+    maxRoundTime: 5
+    maxKills: 10
+    lastPlayerNames:
+    - 
+    - 
+  currentPlayer1:
+    playerName: 
+    kills: 0
+    death: 0
+    kdr: 0
+  currentPlayer2:
+    playerName: 
+    kills: 0
+    death: 0
+    kdr: 0
+  tempPlayers: []
+  debugButtons: 1
+  loadOnStart: 1
+--- !u!4 &268596799
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268596796}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 263.8612, y: 343.4953, z: -429.03528}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &322514775
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,3 +654,4 @@ SceneRoots:
   - {fileID: 322514778}
   - {fileID: 1721602615}
   - {fileID: 499608060}
+  - {fileID: 268596799}

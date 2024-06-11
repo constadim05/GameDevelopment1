@@ -74,12 +74,19 @@ public class GamePlayManager : MonoBehaviour
             player1Name = GameMaster.instance.currentPlayer1.playerName;
             player2Name = GameMaster.instance.currentPlayer2.playerName;
         }
-        SetupGame();
+       SetupGame();
     }
 
+    bool doOnce = true;
     // Update is called once per frame
     void Update()
     {
+        //if (doOnce)
+        //{
+        //    doOnce = false;
+        //    SetupGame();
+        //}
+
         if (gameState == State.Gameplay)
         {
             DisplayTimer();
@@ -176,6 +183,7 @@ public class GamePlayManager : MonoBehaviour
 
         //Spawn players for the first time
         int spawnIndex = Random.Range(0, respawnPositions.Length);
+
         player1 = Instantiate(player1Prefab, respawnPositions[spawnIndex].position, respawnPositions[spawnIndex].rotation);
         lastSpawnP1 = spawnIndex;
 
