@@ -1285,6 +1285,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 444967803}
   m_CullTransparentMesh: 1
+--- !u!1 &465948105 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2312267677437839985, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
+  m_PrefabInstance: {fileID: 692278073896327271}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &475730548
 GameObject:
   m_ObjectHideFlags: 0
@@ -2469,17 +2474,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!114 &749778723 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1265339181462181859, guid: 5f1ddb79039d68b4487115dbee48079d, type: 3}
-  m_PrefabInstance: {fileID: 9025765}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &779433942
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4946,6 +4940,7 @@ GameObject:
   - component: {fileID: 1816319961}
   - component: {fileID: 1816319962}
   - component: {fileID: 1816319963}
+  - component: {fileID: 1816319964}
   m_Layer: 0
   m_Name: gameController
   m_TagString: Untagged
@@ -5105,8 +5100,24 @@ MonoBehaviour:
   player1ScoreText: {fileID: 230960311}
   player2ScoreText: {fileID: 1086843609}
   timerText: {fileID: 1616165440}
-  messageText: {fileID: 749778723}
   gameTimer: {fileID: 1616165443}
+--- !u!114 &1816319964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816319959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceda6c8077b78bd4b9786a43124176bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 465948105}
+  spawnInterval: 2
+  spawnAreaMin: {x: -27.6, y: 1.82}
+  spawnAreaMax: {x: 28.36, y: 1.82}
+  maxEnemies: 10
 --- !u!1001 &1827127410
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5456,7 +5467,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8159506277401640730, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.79
+      value: 28.36
       objectReference: {fileID: 0}
     - target: {fileID: 8159506277401640730, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5464,7 +5475,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8159506277401640730, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.5524101
+      value: -0.55
       objectReference: {fileID: 0}
     - target: {fileID: 8159506277401640730, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
       propertyPath: m_LocalRotation.w
