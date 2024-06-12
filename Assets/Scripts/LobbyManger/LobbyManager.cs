@@ -35,7 +35,7 @@ public class LobbyManager : MonoBehaviour
         // Check if playerScoreManager is null
         if (playerScoreManager == null)
         {
-            Debug.LogError("PlayerScoreManager is not found in the scene");
+           
         }
         else
         {
