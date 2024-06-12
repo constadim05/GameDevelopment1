@@ -5,17 +5,21 @@ using Photon.Pun;
 
 public class SpawnPlayers : MonoBehaviour
 {
-    // Start is called before the first frame update
-   
-        public GameObject playerPrefab;
+    public GameObject playerPrefab;
 
-    public float minX, maxX, minZ, maxZ;
-    
+    public Vector3 player1SpawnPoint = new Vector3(0.239999995f, 1.82000005f, -0.709999979f);
+    public Vector3 player2SpawnPoint = new Vector3(7.75f, 1.82000005f, -0.709999979f);
 
-    // Update is called once per frame
     void Start()
     {
-        Vector3 spawnPoint = new Vector3(Random.RandomRange(minX, maxX), 0, Random.RandomRange(minZ, maxZ));
-        PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint, Quaternion.identity);
+        // Check if this is player 1 or player 2
+        if (PhotonNetwork.LocalPlayer.ActorNumber == 1)
+        {
+            PhotonNetwork.Instantiate(playerPrefab.name, player1SpawnPoint, Quaternion.identity);
+        }
+        else if (PhotonNetwork.LocalPlayer.ActorNumber == 2)
+        {
+            PhotonNetwork.Instantiate(playerPrefab.name, player2SpawnPoint, Quaternion.identity);
+        }
     }
 }

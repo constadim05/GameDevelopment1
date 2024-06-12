@@ -9,6 +9,8 @@ public class playerController : MonoBehaviour
 
     bool running;
 
+    
+
     Rigidbody myRB;
     Animator myAnim;
 
