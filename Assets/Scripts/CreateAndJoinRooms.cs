@@ -21,7 +21,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     }
     public override void OnJoinedRoom()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("LocalGameScene");
     }
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
