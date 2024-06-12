@@ -1634,7 +1634,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcca3623dfaf84d24935420ec7fbb06d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endgameText: {fileID: 1086469348}
+  endgameTextWin: {fileID: 0}
+  endgameTextLose: {fileID: 0}
 --- !u!1 &571888294
 GameObject:
   m_ObjectHideFlags: 0
@@ -3297,8 +3298,8 @@ GameObject:
   - component: {fileID: 1086469351}
   - component: {fileID: 1086469350}
   m_Layer: 5
-  m_Name: endgameTextLose
-  m_TagString: Untagged
+  m_Name: EndgameTextLose
+  m_TagString: EndgameTextLose
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3330,7 +3331,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1086469348}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 9808d23a7e38d154a80096caf2274c20, type: 2}
   m_CullingMode: 0
@@ -3833,8 +3834,8 @@ GameObject:
   - component: {fileID: 1284200720}
   - component: {fileID: 1284200719}
   m_Layer: 5
-  m_Name: endgameTextWin
-  m_TagString: Untagged
+  m_Name: EndgameTextWin
+  m_TagString: EndgameTextWin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3866,7 +3867,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1284200717}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 9808d23a7e38d154a80096caf2274c20, type: 2}
   m_CullingMode: 0
@@ -5268,7 +5269,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcca3623dfaf84d24935420ec7fbb06d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endgameText: {fileID: 1086469348}
+  endgameTextWin: {fileID: 1284200717}
+  endgameTextLose: {fileID: 1086469348}
 --- !u!114 &1816319963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5312,9 +5314,9 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 2104548482}
   - {fileID: 1409220979}
-  spawnInterval: 5
+  spawnInterval: 2
   maxZombies: 10
-  detectionRadius: 30
+  detectionRadius: 100
   idleSounds:
   - {fileID: 8300000, guid: 4eefff9220a0cf5458d05a2ac06ab94d, type: 3}
   - {fileID: 8300000, guid: 55d541d3ffb701841923d98ca1eb4989, type: 3}
