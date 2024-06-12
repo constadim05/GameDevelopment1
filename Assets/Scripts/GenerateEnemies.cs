@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class GenerateEnemies : MonoBehaviour
 {
     public GameObject zombiePrefab;  // Reference to the zombie prefab
     public Transform[] spawnPoints;  // Array of spawn points
@@ -43,15 +43,16 @@ public class EnemySpawner : MonoBehaviour
         GameObject zombieGO = Instantiate(zombiePrefab, spawnPoint.position, spawnPoint.rotation);
 
         // Initialize zombie properties
-        zombieGO.GetComponent<zombieController>().flipModel = zombieGO.transform; // Adjust as needed
-        zombieGO.GetComponent<zombieController>().runSpeed = Random.Range(2f, 5f);  // Set random speed
-        zombieGO.GetComponent<zombieController>().idleSounds = idleSounds;
-        zombieGO.GetComponent<zombieController>().idleSoundTime = idleSoundTime;
+        zombieController zombieScript = zombieGO.GetComponent<zombieController>();
+        zombieScript.flipModel = zombieGO;  // Assign the GameObject
+        zombieScript.runSpeed = Random.Range(2f, 5f);  // Set random speed
+        zombieScript.idleSounds = idleSounds;
+        zombieScript.idleSoundTime = idleSoundTime;
 
         // Increment zombie count
         currentZombieCount++;
 
-        // Optionally, disable the collider after some time to let zombies pass through each other
+        // Optionally, destroy the zombie after some time
         Destroy(zombieGO, 20f);  // Example: Destroy zombie after 20 seconds
     }
 

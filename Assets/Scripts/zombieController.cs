@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class zombieController : MonoBehaviour
 {
-    public GameObject flipModel;
+    public GameObject flipModel;  // This should be a GameObject, not Transform
     public AudioClip[] idleSounds;
     public float idleSoundTime;
     AudioSource enemyMovementAS;
