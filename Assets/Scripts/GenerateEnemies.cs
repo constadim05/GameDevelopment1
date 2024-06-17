@@ -43,7 +43,7 @@ public class GenerateEnemies : MonoBehaviour
         GameObject zombieGO = Instantiate(zombiePrefab, spawnPoint.position, spawnPoint.rotation);
 
         // Initialize zombie properties
-        var zombieController = zombieGO.GetComponent<ZombieController>(); // Ensure the component name matches your actual script
+        var zombieController = zombieGO.GetComponent<zombieController>(); // Ensure the component name matches your actual script
         if (zombieController != null)
         {
             zombieController.flipModel = zombieGO.transform.gameObject; // Adjust as needed
@@ -57,7 +57,7 @@ public class GenerateEnemies : MonoBehaviour
 
         // Optionally, destroy the zombie after some time
         Destroy(zombieGO, 20f);  // Example: Destroy zombie after 20 seconds
-        var healthComponent = zombieGO.GetComponent<Health>(); // Assuming there's a Health component with an OnDeath event
+        var healthComponent = zombieGO.GetComponent<EnemyHealth>(); // Assuming there's a Health component with an OnDeath event
         if (healthComponent != null)
         {
             healthComponent.OnDeath += OnZombieDestroyed;
