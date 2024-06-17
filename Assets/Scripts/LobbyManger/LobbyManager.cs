@@ -1,5 +1,3 @@
-// LobbyManager.cs
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,19 +6,20 @@ using UnityEngine.UI;
 
 public class LobbyManager : MonoBehaviour
 {
-    //UI Elements
+    // UI Elements
     public TMP_InputField player1Name;
     public TMP_InputField player2Name;
     public TMP_InputField maxKills;
     public TMP_InputField maxTime;
 
-    //UI buttons
+    // UI buttons
     public Button playButton;
     public Button player1ReadyUp;
     public Button player2ReadyUp;
     public Button player1NotReady;
     public Button player2NotReady;
-    //bools
+
+    // bools
     public bool player1IsReady;
     public bool player2IsReady;
 
@@ -43,13 +42,14 @@ public class LobbyManager : MonoBehaviour
             playerScoreManager.UpdateMaxKillsText(GameMaster.instance.saveData.maxKills);
         }
 
+        // Load player names from saveData
         if (GameMaster.instance.saveData.lastPlayerNames[0] == "")
         {
             player1Name.text = "Insert Player Name";
         }
         else
         {
-            player1Name.text = GameMaster.instance.saveData.playerNames[0];
+            player1Name.text = GameMaster.instance.saveData.lastPlayerNames[0];
         }
         if (GameMaster.instance.saveData.lastPlayerNames[1] == "")
         {
@@ -57,10 +57,25 @@ public class LobbyManager : MonoBehaviour
         }
         else
         {
-            player2Name.text = GameMaster.instance.saveData.playerNames[1];
+            player2Name.text = GameMaster.instance.saveData.lastPlayerNames[1];
         }
         maxKills.text = GameMaster.instance.saveData.maxKills.ToString();
         maxTime.text = GameMaster.instance.saveData.maxRoundTime.ToString();
+
+        // Subscribe to kill updates
+        GameMaster.instance.OnKillUpdate += UpdatePlayerNamesWithKills;
+    }
+
+    private void OnDestroy()
+    {
+        // Unsubscribe from kill updates
+        GameMaster.instance.OnKillUpdate -= UpdatePlayerNamesWithKills;
+    }
+
+    private void UpdatePlayerNamesWithKills()
+    {
+        player1Name.text = GameMaster.instance.currentPlayer1.playerName;
+        player2Name.text = GameMaster.instance.currentPlayer2.playerName;
     }
 
     public void UpdatePlayerName(int playerNum)
@@ -68,11 +83,14 @@ public class LobbyManager : MonoBehaviour
         if (playerNum == 1)
         {
             GameMaster.instance.currentPlayer1.playerName = player1Name.text;
+            GameMaster.instance.saveData.lastPlayerNames[0] = player1Name.text; // Save the name
         }
         if (playerNum == 2)
         {
             GameMaster.instance.currentPlayer2.playerName = player2Name.text;
+            GameMaster.instance.saveData.lastPlayerNames[1] = player2Name.text; // Save the name
         }
+        GameMaster.instance.SaveGame(); // Save the game data
     }
 
     public void UpdateKills()
@@ -83,11 +101,13 @@ public class LobbyManager : MonoBehaviour
         {
             playerScoreManager.UpdateMaxKillsText(GameMaster.instance.saveData.maxKills);
         }
+        GameMaster.instance.SaveGame(); // Save the game data
     }
 
     public void UpdateTime()
     {
         GameMaster.instance.saveData.maxRoundTime = float.Parse(maxTime.text);
+        GameMaster.instance.SaveGame(); // Save the game data
     }
 
     public void EnableBools(int playerNum)

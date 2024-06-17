@@ -14,35 +14,35 @@ public class WaveSpawner : MonoBehaviour
     private void Start()
     {
         readyToCountDown = true;
-        
-        for(int i = 0; i < waves.Length; i++)
+
+        for (int i = 0; i < waves.Length; i++)
         {
             waves[i].enemiesLeft = waves[i].enemies.Length;
         }
     }
+
     private void Update()
     {
-        if(currentWaveIndex >= waves.Length)
+        if (currentWaveIndex >= waves.Length)
         {
             Debug.Log("You survived every wave!");
             return;
         }
-        
-        if(readyToCountDown == true)
+
+        if (readyToCountDown == true)
         {
             countdown -= Time.deltaTime;
         }
-        
 
         if (countdown <= 0)
         {
             readyToCountDown = false;
-            
+
             countdown = waves[currentWaveIndex].timeToNextWave;
             StartCoroutine(SpawnWave());
         }
 
-        if(waves[currentWaveIndex].enemiesLeft == 0)
+        if (waves[currentWaveIndex].enemiesLeft == 0)
         {
             readyToCountDown = true;
             currentWaveIndex++;
@@ -55,7 +55,7 @@ public class WaveSpawner : MonoBehaviour
         {
             for (int i = 0; i < waves[currentWaveIndex].enemies.Length; i++)
             {
-                Enemy enemy = Instantiate(waves[currentWaveIndex].enemies[i], spawnPoint.transform);
+                GameObject enemy = Instantiate(waves[currentWaveIndex].enemies[i], spawnPoint.transform.position, spawnPoint.transform.rotation);
                 enemy.transform.SetParent(spawnPoint.transform);
                 yield return new WaitForSeconds(waves[currentWaveIndex].timeToNextEnemy);
             }
@@ -65,7 +65,7 @@ public class WaveSpawner : MonoBehaviour
     [System.Serializable]
     public class Wave
     {
-        public Enemy[] enemies;
+        public GameObject[] enemies; // Changed from Enemy to GameObject
         public float timeToNextEnemy;
         public float timeToNextWave;
 

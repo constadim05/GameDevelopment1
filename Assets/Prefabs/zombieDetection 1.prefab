@@ -659,9 +659,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa67f571a2312e245b0cc4db7f7d477c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyMaxHealth: 100
+  enemyMaxHealth: 25
   damageModifier: 1
-  damageParticles: {fileID: 0}
   drops: 1
   drop1: {fileID: 0}
   drop2: {fileID: 0}
@@ -766,7 +765,6 @@ GameObject:
   - component: {fileID: 3956449658200271656}
   - component: {fileID: 7997666451328285994}
   - component: {fileID: 6986479296883877306}
-  - component: {fileID: 1459346214148136553}
   m_Layer: 7
   m_Name: zombieDetection 1
   m_TagString: Enemy
@@ -782,14 +780,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2312267677437839985}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -4.79, y: 1.82, z: -0.5524101}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1009342273534988236}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &6990138031673685138
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -928,7 +926,9 @@ MonoBehaviour:
   idleSoundTime: 1
   runSpeed: 5
   facingRight: 1
-  detectionTime: 0
+  detectionTime: 0.1
+  detectionRadius: 10
+  playerTag: Player
 --- !u!95 &6986479296883877306
 Animator:
   serializedVersion: 7
@@ -951,18 +951,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1459346214148136553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2312267677437839985}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e972864755772d46a155fd52b1fecf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2869920278227259456
 GameObject:
   m_ObjectHideFlags: 0
@@ -1730,9 +1718,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31a7ad9d0a763774fbac9e7a0d443085, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
-  damageRate: 1
-  pushBackForce: 10
+  damage1: 5
+  damage2: 5
+  damageRate1: 1
+  damageRate2: 1
+  pushBackForce1: 1
+  pushBackForce2: 1
 --- !u!1 &7339869245350553436
 GameObject:
   m_ObjectHideFlags: 0

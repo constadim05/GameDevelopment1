@@ -829,7 +829,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa7272cf86a20548919b40c40fc3aa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveFileName: save
 --- !u!114 &336633728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -856,11 +855,11 @@ MonoBehaviour:
     - 
     kills: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
     deaths: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
-    maxRoundTime: 5
-    maxKills: 10
     lastPlayerNames:
     - 
     - 
+    maxKills: 10
+    maxRoundTime: 5
   currentPlayer1:
     playerName: 
     kills: 0
@@ -1805,7 +1804,7 @@ Transform:
   m_GameObject: {fileID: 629177860}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -50, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3243,6 +3242,9 @@ MonoBehaviour:
   player2Score: 0
   player1ScoreText: {fileID: 230960311}
   player2ScoreText: {fileID: 1086843609}
+  maxKillsText: {fileID: 1086469351}
+  player1Name: Player 1
+  player2Name: Player 2
 --- !u!1 &1083862205
 GameObject:
   m_ObjectHideFlags: 0
@@ -4230,22 +4232,9 @@ MonoBehaviour:
   spawnPoint: {fileID: 629177860}
   waves:
   - enemies:
-    - {fileID: 0}
+    - {fileID: 465948105}
     timeToNextEnemy: 1
     timeToNextWave: 10
-    enemiesLeft: 0
-  - enemies:
-    - {fileID: 0}
-    timeToNextEnemy: 1
-    timeToNextWave: 10
-    enemiesLeft: 0
-  - enemies: []
-    timeToNextEnemy: 0
-    timeToNextWave: 0
-    enemiesLeft: 0
-  - enemies: []
-    timeToNextEnemy: 0
-    timeToNextWave: 0
     enemiesLeft: 0
 --- !u!4 &1581837409
 Transform:
@@ -5113,11 +5102,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceda6c8077b78bd4b9786a43124176bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 465948105}
+  zombiePrefab: {fileID: 465948105}
+  spawnPoints:
+  - {fileID: 629177861}
   spawnInterval: 2
-  spawnAreaMin: {x: -27.6, y: 1.82}
-  spawnAreaMax: {x: 28.36, y: 1.82}
-  maxEnemies: 10
+  maxZombies: 10
+  detectionRadius: 100
+  idleSounds:
+  - {fileID: 8300000, guid: 4eefff9220a0cf5458d05a2ac06ab94d, type: 3}
+  - {fileID: 8300000, guid: 55d541d3ffb701841923d98ca1eb4989, type: 3}
+  - {fileID: 8300000, guid: f31f41b81b823444e9a4613cc27ebb36, type: 3}
+  idleSoundTime: 5
 --- !u!1001 &1827127410
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5413,37 +5408,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1644412732076429270, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
-      propertyPath: damage1
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1644412732076429270, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
-      propertyPath: damage2
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1644412732076429270, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
-      propertyPath: damageRate1
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1644412732076429270, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
-      propertyPath: damageRate2
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1644412732076429270, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
-      propertyPath: pushBackForce1
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1644412732076429270, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
-      propertyPath: pushBackForce2
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2312267677437839985, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
       propertyPath: m_Name
       value: zombieDetection
-      objectReference: {fileID: 0}
-    - target: {fileID: 2312267677437839985, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6521444711992565530, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
       propertyPath: drop1
@@ -5453,18 +5420,6 @@ PrefabInstance:
       propertyPath: drop2
       value: 
       objectReference: {fileID: 413705331}
-    - target: {fileID: 6521444711992565530, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
-      propertyPath: enemyMaxHealth
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 7997666451328285994, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
-      propertyPath: detectionTime
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7997666451328285994, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
-      propertyPath: playerLayer.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8159506277401640730, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 28.36
@@ -5505,8 +5460,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1459346214148136553, guid: 0c8aa102917a0df4b8043ffd8774e7c2, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

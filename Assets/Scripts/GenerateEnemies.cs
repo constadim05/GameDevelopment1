@@ -38,11 +38,18 @@ public class GenerateEnemies : MonoBehaviour
 
     void SpawnZombie()
     {
+        // Check if spawnPoints array is empty
+        if (spawnPoints.Length == 0)
+        {
+            Debug.LogError("No spawn points assigned.");
+            return;
+        }
+
         // Choose a random spawn point
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
         GameObject zombieGO = Instantiate(zombiePrefab, spawnPoint.position, spawnPoint.rotation);
 
-        // Initialize zombie properties
+        // Initialize zombie properties (assuming zombieController is the correct component)
         var zombieController = zombieGO.GetComponent<zombieController>(); // Ensure the component name matches your actual script
         if (zombieController != null)
         {
@@ -63,6 +70,7 @@ public class GenerateEnemies : MonoBehaviour
             healthComponent.OnDeath += OnZombieDestroyed;
         }
     }
+
 
     // Method to decrement zombie count when a zombie is destroyed
     public void OnZombieDestroyed()

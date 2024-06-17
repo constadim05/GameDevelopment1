@@ -34,6 +34,10 @@ public class GameMaster : MonoBehaviour
     public bool debugButtons;
     public bool loadOnStart = true;
 
+    // Event for kill updates
+    public delegate void KillUpdate();
+    public event KillUpdate OnKillUpdate;
+
     //edit current players data like score and name
     public void Start()
     {
@@ -47,6 +51,7 @@ public class GameMaster : MonoBehaviour
             CreateTempList();
         }
     }
+
     //create a temp list of all players, filled in with data from saveData
     public void CreateTempList()
     {
@@ -56,7 +61,7 @@ public class GameMaster : MonoBehaviour
         //get the players form saveData and put them in the list
         for (int i = 0; i < saveData.playerNames.Length; i++)
         {
-            //creat a player profile
+            //create a player profile
             PlayerData newPlayer = new PlayerData();
 
             //input the information from the savedata to the new player
@@ -73,20 +78,37 @@ public class GameMaster : MonoBehaviour
             tempPlayers.Add(newPlayer);
         }
     }
+
+    // Call this method when a player gets a kill
+    public void PlayerGotKill(PlayerData player)
+    {
+        player.kills++;
+        player.UpdatePlayerNameWithKills();
+
+        // Trigger the event
+        if (OnKillUpdate != null)
+        {
+            OnKillUpdate.Invoke();
+        }
+
+        // Save game after updating kills
+        SaveGame();
+    }
+
     //add our current players to the list
-    //sort the list from hightest to lowest scores
+    //sort the list from highest to lowest scores
     public List<PlayerData> SortTempList(List<PlayerData> unSortedPlayers, bool addCurrentPlayers = false)
     {
         if (addCurrentPlayers)
         {
             //check if list already contains player 1
-            if (tempPlayers.Find(p => p.playerName == currentPlayer1.playerName) == null)
+            if (tempPlayers.Find(p => p.playerName.Split(':')[0] == currentPlayer1.playerName.Split(':')[0]) == null)
             {
                 tempPlayers.Add(currentPlayer1);
             }
             else //if the player already exists, then replace its score with your current score
             {
-                PlayerData existingPlayer = tempPlayers.Find(p => p.playerName == currentPlayer1.playerName);
+                PlayerData existingPlayer = tempPlayers.Find(p => p.playerName.Split(':')[0] == currentPlayer1.playerName.Split(':')[0]);
                 existingPlayer.kills = currentPlayer1.kills;
                 existingPlayer.death = currentPlayer1.death;
 
@@ -95,14 +117,15 @@ public class GameMaster : MonoBehaviour
                 else if (existingPlayer.kills == 0) existingPlayer.kdr = -existingPlayer.death;
                 else existingPlayer.kdr = (float)existingPlayer.kills / (float)existingPlayer.death;
             }
+
             //check if list already contains player 2
-            if (tempPlayers.Find(p => p.playerName == currentPlayer2.playerName) == null)
+            if (tempPlayers.Find(p => p.playerName.Split(':')[0] == currentPlayer2.playerName.Split(':')[0]) == null)
             {
                 tempPlayers.Add(currentPlayer2);
             }
             else //if the player already exists, then replace its score with your current score
             {
-                PlayerData existingPlayer = tempPlayers.Find(p => p.playerName == currentPlayer2.playerName);
+                PlayerData existingPlayer = tempPlayers.Find(p => p.playerName.Split(':')[0] == currentPlayer2.playerName.Split(':')[0]);
                 existingPlayer.kills = currentPlayer2.kills;
                 existingPlayer.death = currentPlayer2.death;
 
@@ -111,155 +134,50 @@ public class GameMaster : MonoBehaviour
                 else if (existingPlayer.kills == 0) existingPlayer.kdr = -existingPlayer.death;
                 else existingPlayer.kdr = (float)existingPlayer.kills / (float)existingPlayer.death;
             }
-
         }
-        List<PlayerData> sortedPlayers = unSortedPlayers.OrderByDescending(p => p.kdr).ToList();
-        return sortedPlayers;
-    }
 
+        //sort the list by score
+        List<PlayerData> sortedList = unSortedPlayers.OrderByDescending(o => o.kills).ToList();
 
-    //convert the list to simple data arrays
-    //save the arrays to saveDatas
-    public void SendHighScoresToSaveData(List<PlayerData> players)
-    {
-        for (int i = 0; i < 10; i++)
+        //remove any extras
+        if (sortedList.Count > 10)
         {
-            saveData.playerNames[i] = players[i].playerName;
-            saveData.kills[i] = players[i].kills;
-            saveData.deaths[i] = players[i].death;
+            sortedList.RemoveRange(10, sortedList.Count - 10);
         }
+
+        //save the list to the savedata
+        for (int i = 0; i < sortedList.Count; i++)
+        {
+            //put the playername in saveData
+            saveData.playerNames[i] = sortedList[i].playerName;
+            saveData.kills[i] = sortedList[i].kills;
+            saveData.deaths[i] = sortedList[i].death;
+        }
+
+        // Save the game after sorting
+        SaveGame();
+
+        return sortedList;
     }
 
-    //save the game
     public void SaveGame()
     {
-        SortTempList(tempPlayers, false);
-        SendHighScoresToSaveData(tempPlayers);
-
-        saveData.lastPlayerNames[0] = currentPlayer1.playerName;
-        saveData.lastPlayerNames[1] = currentPlayer2.playerName;
-
-        SaveSystem.instance.SaveGame(saveData);
+        // Save the game data using SaveSystem
+        SaveSystem.SaveGame(saveData);
     }
 
     public void LoadGame()
     {
-        //attempt to get a saveData file from the computer
-        saveData = SaveSystem.instance.LoadGame();
-        if (saveData == null) //create a new file if none where found
+        // Load the game data using SaveSystem
+        saveData = SaveSystem.LoadGame();
+
+        // Make sure the loaded data isn't null
+        if (saveData == null)
         {
             saveData = new GameData();
-            Debug.Log("No data was found, a new file was created instead");
         }
 
-        currentPlayer1.playerName = saveData.lastPlayerNames[0];
-        currentPlayer2.playerName = saveData.lastPlayerNames[1];
+        // Populate the player list
         CreateTempList();
     }
-
-    #region debugging
-    private void Update()
-    {
-        if (!debugButtons) return;
-
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            if (tempPlayers != null)
-            {
-                tempPlayers = SortTempList(tempPlayers, false);
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            SaveGame();
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            LoadGame();
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            RandomFillData();
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            ClearData();
-        }
-
-    }
-
-    #region debugging functions
-    void ClearData()
-    {
-        foreach (PlayerData player in tempPlayers)
-        {
-            player.playerName = "";
-            player.kills = 0;
-            player.death = 0;
-            player.kdr = 0;
-        }
-    }
-    void RandomFillData()
-    {
-        //create possible letters to randomise from
-        string glyphs = "abcdefghijklmnopqrstuvwxyz";
-
-        foreach (PlayerData player in tempPlayers)
-        {
-            //generate a random name for the temp player
-            int charAmount = Random.Range(3, 10);
-            player.playerName = "";
-            for (int i = 0; i < charAmount; i++)
-            {
-                player.playerName += glyphs[Random.Range(0, glyphs.Length)];
-            }
-            //generate random Kills score
-            player.kills = Random.Range(0, 20);
-            //generate random deaths
-            player.death = Random.Range(0, 20);
-
-            //calculate the kdr and input it
-            if (player.death == 0) player.kdr = player.kills;
-            else if (player.kills == 0) player.kdr = -player.death;
-            else player.kdr = (float)player.kills / (float)player.death;
-        }
-
-    }
-    #endregion
-    #endregion
-    #region OldCode
-    /*
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            saveData.AddScore(1);
-            PrintScore();
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            saveData.AddScore(-1);
-            PrintScore();
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            SaveSystem.instance.SaveGame(saveData);
-            Debug.Log("Saved Game");
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            saveData = SaveSystem.instance.LoadGame();
-            Debug.Log("Loaded data");
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            saveData.ResetData();
-            PrintScore();
-        }
-    }
-    public void PrintScore()
-    {
-        Debug.Log("The current score is " + saveData.score);
-    }*/
-    #endregion
 }

@@ -1,5 +1,3 @@
-// PlayerScoreManager.cs
-
 using UnityEngine;
 using TMPro;
 
@@ -11,18 +9,10 @@ public class PlayerScoreManager : MonoBehaviour
     public TMP_Text player1ScoreText; // Direct reference to TMP_Text component for player 1
     public TMP_Text player2ScoreText; // Direct reference to TMP_Text component for player 2
 
-    public void UpdateMaxKillsText(int maxKills)
-    {
-        if (player1ScoreText != null && player2ScoreText != null)
-        {
-            player1ScoreText.text = "Max Kills: " + maxKills;
-            player2ScoreText.text = "Max Kills: " + maxKills;
-        }
-        else
-        {
-            Debug.LogError("One or both player score text references are null");
-        }
-    }
+    public TMP_Text maxKillsText; // Reference to TMP_Text for displaying max kills
+
+    public string player1Name = "Player 1";
+    public string player2Name = "Player 2";
 
     void Start()
     {
@@ -36,6 +26,19 @@ public class PlayerScoreManager : MonoBehaviour
         {
             Debug.LogError("Player2ScoreText is not assigned in the inspector");
         }
+
+        if (maxKillsText == null)
+        {
+            Debug.LogError("MaxKillsText is not assigned in the inspector");
+        }
+
+        UpdateScoreUI();
+    }
+
+    public void UpdatePlayerNames(string newName1, string newName2)
+    {
+        player1Name = newName1;
+        player2Name = newName2;
 
         UpdateScoreUI();
     }
@@ -60,11 +63,23 @@ public class PlayerScoreManager : MonoBehaviour
         UpdateScoreUI();
     }
 
+    public void UpdateMaxKillsText(int maxKills)
+    {
+        if (maxKillsText != null)
+        {
+            maxKillsText.text = "Max Kills: " + maxKills;
+        }
+        else
+        {
+            Debug.LogError("MaxKillsText is not assigned in the inspector");
+        }
+    }
+
     void UpdateScoreUI()
     {
         if (player1ScoreText != null)
         {
-            player1ScoreText.text = "Player 1: " + player1Score;
+            player1ScoreText.text = $"{player1Name}: {player1Score}";
             Debug.Log("Player 1 Score Text Updated: " + player1ScoreText.text);
         }
         else
@@ -74,7 +89,7 @@ public class PlayerScoreManager : MonoBehaviour
 
         if (player2ScoreText != null)
         {
-            player2ScoreText.text = "Player 2: " + player2Score;
+            player2ScoreText.text = $"{player2Name}: {player2Score}";
             Debug.Log("Player 2 Score Text Updated: " + player2ScoreText.text);
         }
         else
