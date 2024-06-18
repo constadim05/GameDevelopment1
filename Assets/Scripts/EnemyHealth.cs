@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI; // Import the UI namespace for Slider
+using System;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -26,6 +27,9 @@ public class EnemyHealth : MonoBehaviour
     AudioSource enemyAS;
 
     GameManager gameManager; // Reference to GameManager
+
+    // Event for when the enemy dies
+    public event Action OnDeath;
 
     // Start is called before the first frame update
     void Start()
@@ -83,7 +87,7 @@ public class EnemyHealth : MonoBehaviour
 
         if (drops)
         {
-            GameObject dropToInstantiate = Random.Range(0, 2) == 0 ? drop1 : drop2; // Randomly choose between drop1 and drop2
+            GameObject dropToInstantiate = UnityEngine.Random.Range(0, 2) == 0 ? drop1 : drop2; // Randomly choose between drop1 and drop2
             Vector3 spawnPosition = transform.position + Vector3.up * 0.5f;
             Instantiate(dropToInstantiate, spawnPosition, Quaternion.identity);
         }
@@ -94,11 +98,13 @@ public class EnemyHealth : MonoBehaviour
             gameManager.EnemyKilled(); // Call the non-static method on the GameManager instance
         }
 
+        // Trigger the OnDeath event
+        OnDeath?.Invoke();
+
         // Play the death sound
         AudioSource.PlayClipAtPoint(deathSound, transform.position, 0.15f);
 
         // Destroy the GameObject
         Destroy(gameObject);
     }
-
 }
