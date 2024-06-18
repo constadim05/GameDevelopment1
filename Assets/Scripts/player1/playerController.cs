@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class playerController : MonoBehaviour
+public class playerController : MonoBehaviour, IPunObservable
 {
     // Movement variables
     public float runSpeed;
-
     bool running;
-
     PhotonView view;
     Rigidbody myRB;
     Animator myAnim;
-
     bool facingRight;
 
     // For jumping
@@ -28,8 +25,11 @@ public class playerController : MonoBehaviour
     bool canJump = true;
     public float jumpCooldown = 1f;
     float lastJumpTime;
-
     public int _playerID = 0;
+
+    // Networked position and rotation
+    private Vector3 networkPosition;
+    private Quaternion networkRotation;
 
     void Start()
     {
@@ -99,7 +99,13 @@ public class playerController : MonoBehaviour
     void FixedUpdate()
     {
         // Ensure the script only runs for the local player
-        if (!view.IsMine) return;
+        if (!view.IsMine)
+        {
+            // Smooth movement for remote players
+            myRB.position = Vector3.MoveTowards(myRB.position, networkPosition, Time.fixedDeltaTime * runSpeed);
+            myRB.rotation = Quaternion.RotateTowards(myRB.rotation, networkRotation, Time.fixedDeltaTime * runSpeed);
+            return;
+        }
 
         // Ground check
         groundCollisions = Physics.OverlapSphere(groundCheck.position, groundCheckRadius, groundLayer);
@@ -184,5 +190,21 @@ public class playerController : MonoBehaviour
     public bool getRunning()
     {
         return running;
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // Send position and rotation data to other players
+            stream.SendNext(myRB.position);
+            stream.SendNext(myRB.rotation);
+        }
+        else
+        {
+            // Receive position and rotation data from other players
+            networkPosition = (Vector3)stream.ReceiveNext();
+            networkRotation = (Quaternion)stream.ReceiveNext();
+        }
     }
 }

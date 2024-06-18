@@ -4315,6 +4315,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5539192211780274829, guid: cb9e6d51c8469c84e979aa9379d04c74, type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 483682058700091990, guid: cb9e6d51c8469c84e979aa9379d04c74, type: 3}
       propertyPath: endgameText
       value: 
@@ -4489,6 +4493,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -28152583833376489, guid: 04a31bc7d9e391749b3635d50424a03c, type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 331555772432770929, guid: 04a31bc7d9e391749b3635d50424a03c, type: 3}
       propertyPath: playerAmmoSlider
       value: 

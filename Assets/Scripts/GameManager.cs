@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using Photon.Pun;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPunCallbacks
 {
     public GameObject endgameText;
     private int playersAlive;
@@ -15,12 +16,14 @@ public class GameManager : MonoBehaviour
         endgameText.SetActive(false);
     }
 
+    [PunRPC]
     public void PlayerDied()
     {
         playersAlive--;
         CheckEndGame();
     }
 
+    [PunRPC]
     public void EnemyKilled()
     {
         enemyCount--;
@@ -36,7 +39,6 @@ public class GameManager : MonoBehaviour
             playerScoreManager.IncreasePlayerScore(1); // Increase player 1 score by 1
         }
     }
-
 
     private void CheckEndGame()
     {
@@ -61,5 +63,17 @@ public class GameManager : MonoBehaviour
     public void LoadMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+
+    // Helper method to call RPC for PlayerDied
+    public void OnPlayerDied()
+    {
+        photonView.RPC("PlayerDied", RpcTarget.All);
+    }
+
+    // Helper method to call RPC for EnemyKilled
+    public void OnEnemyKilled()
+    {
+        photonView.RPC("EnemyKilled", RpcTarget.All);
     }
 }
