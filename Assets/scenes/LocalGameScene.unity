@@ -708,17 +708,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d3635ef4a51c4a448229fe3ca108f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &383911630 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -6373646180596454077, guid: cb9e6d51c8469c84e979aa9379d04c74, type: 3}
-  m_PrefabInstance: {fileID: 2625599672050308686}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 383911621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &398350211
 GameObject:
   m_ObjectHideFlags: 0
@@ -4330,14 +4319,6 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: -5539192211780274829, guid: cb9e6d51c8469c84e979aa9379d04c74, type: 3}
-      propertyPath: ObservedComponents.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -5539192211780274829, guid: cb9e6d51c8469c84e979aa9379d04c74, type: 3}
-      propertyPath: 'ObservedComponents.Array.data[1]'
-      value: 
-      objectReference: {fileID: 383911630}
     - target: {fileID: 483682058700091990, guid: cb9e6d51c8469c84e979aa9379d04c74, type: 3}
       propertyPath: endgameText
       value: 
@@ -4401,10 +4382,6 @@ PrefabInstance:
     - target: {fileID: 6805524304748063791, guid: cb9e6d51c8469c84e979aa9379d04c74, type: 3}
       propertyPath: m_Name
       value: soldier_1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6805524304748063791, guid: cb9e6d51c8469c84e979aa9379d04c74, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4520,10 +4497,6 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: -28152583833376489, guid: 04a31bc7d9e391749b3635d50424a03c, type: 3}
-      propertyPath: ObservedComponents.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 331555772432770929, guid: 04a31bc7d9e391749b3635d50424a03c, type: 3}
       propertyPath: playerAmmoSlider
       value: 
@@ -4587,10 +4560,6 @@ PrefabInstance:
     - target: {fileID: 8893962817192579278, guid: 04a31bc7d9e391749b3635d50424a03c, type: 3}
       propertyPath: m_Name
       value: soldier_2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8893962817192579278, guid: 04a31bc7d9e391749b3635d50424a03c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
