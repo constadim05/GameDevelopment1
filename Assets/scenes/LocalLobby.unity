@@ -468,6 +468,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7513911311303269664, guid: c32a6b7f54d974242a8cbae7b39a2523, type: 3}
+      propertyPath: m_Name
+      value: Kill Limit
+      objectReference: {fileID: 0}
     - target: {fileID: 7973763748854223632, guid: c32a6b7f54d974242a8cbae7b39a2523, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -499,6 +503,10 @@ PrefabInstance:
     - target: {fileID: 8633062701925425556, guid: c32a6b7f54d974242a8cbae7b39a2523, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8727476217085125596, guid: c32a6b7f54d974242a8cbae7b39a2523, type: 3}
+      propertyPath: m_text
+      value: 'Kill Limit:'
       objectReference: {fileID: 0}
     - target: {fileID: 8728701766264759523, guid: c32a6b7f54d974242a8cbae7b39a2523, type: 3}
       propertyPath: m_AnchorMax.y
