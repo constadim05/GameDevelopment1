@@ -690,24 +690,13 @@ Transform:
 --- !u!1 &383911621 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6805524304748063791, guid: cb9e6d51c8469c84e979aa9379d04c74, type: 3}
-  m_PrefabInstance: {fileID: 2625599672050308686}
+  m_PrefabInstance: {fileID: 5317351927422583470}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &383911628 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6141156036947211925, guid: cb9e6d51c8469c84e979aa9379d04c74, type: 3}
-  m_PrefabInstance: {fileID: 2625599672050308686}
+  m_PrefabInstance: {fileID: 5317351927422583470}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &383911629 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 483682058700091990, guid: cb9e6d51c8469c84e979aa9379d04c74, type: 3}
-  m_PrefabInstance: {fileID: 2625599672050308686}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 383911621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d3635ef4a51c4a448229fe3ca108f94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &398350211
 GameObject:
   m_ObjectHideFlags: 0
@@ -3233,7 +3222,7 @@ MonoBehaviour:
   IsRunning: 0
   CurrentTime: 0
   playerHealthScripts:
-  - {fileID: 383911629}
+  - {fileID: 2505798787574572056}
   - {fileID: 119406438}
 --- !u!1 &1617344691
 GameObject:
@@ -4307,7 +4296,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3596e1b7ebddac4fa6659304756aacf, type: 3}
---- !u!1001 &2625599672050308686
+--- !u!114 &2505798787574572056 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 483682058700091990, guid: cb9e6d51c8469c84e979aa9379d04c74, type: 3}
+  m_PrefabInstance: {fileID: 5317351927422583470}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383911621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d3635ef4a51c4a448229fe3ca108f94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &5317351927422583470
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -4315,10 +4315,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -5539192211780274829, guid: cb9e6d51c8469c84e979aa9379d04c74, type: 3}
-      propertyPath: sceneViewId
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 483682058700091990, guid: cb9e6d51c8469c84e979aa9379d04c74, type: 3}
       propertyPath: endgameText
       value: 
@@ -4493,10 +4489,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -28152583833376489, guid: 04a31bc7d9e391749b3635d50424a03c, type: 3}
-      propertyPath: sceneViewId
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 331555772432770929, guid: 04a31bc7d9e391749b3635d50424a03c, type: 3}
       propertyPath: playerAmmoSlider
       value: 
@@ -4634,7 +4626,7 @@ SceneRoots:
   - {fileID: 963194228}
   - {fileID: 705507995}
   - {fileID: 2353303209940133348}
-  - {fileID: 2625599672050308686}
+  - {fileID: 5317351927422583470}
   - {fileID: 7008659228359378111}
   - {fileID: 1723556580}
   - {fileID: 1816319960}

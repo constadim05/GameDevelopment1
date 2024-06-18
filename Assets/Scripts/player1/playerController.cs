@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class playerController : MonoBehaviour
 {
@@ -9,8 +10,7 @@ public class playerController : MonoBehaviour
 
     bool running;
 
-    
-
+    PhotonView view;
     Rigidbody myRB;
     Animator myAnim;
 
@@ -36,12 +36,15 @@ public class playerController : MonoBehaviour
         myRB = GetComponent<Rigidbody>();
         myAnim = GetComponent<Animator>();
         facingRight = true;
-
+        view = GetComponent<PhotonView>();
         lastJumpTime = -jumpCooldown;
     }
 
     void Update()
     {
+        // Ensure the script only runs for the local player
+        if (!view.IsMine) return;
+
         // Movement logic for PlayerController1
         if (_playerID == 1)
         {
@@ -95,6 +98,9 @@ public class playerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Ensure the script only runs for the local player
+        if (!view.IsMine) return;
+
         // Ground check
         groundCollisions = Physics.OverlapSphere(groundCheck.position, groundCheckRadius, groundLayer);
         grounded = groundCollisions.Length > 0;
