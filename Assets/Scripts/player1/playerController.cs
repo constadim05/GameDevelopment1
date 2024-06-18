@@ -208,3 +208,4 @@ public class playerController : MonoBehaviour, IPunObservable
         }
     }
 }
+//need to add photon view to the bullet and the flip of the player
