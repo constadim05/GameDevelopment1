@@ -8,7 +8,6 @@ public class shootBullet : MonoBehaviour
     public float damage = 5f;
     public float fireRate = 0.5f; // Adjust this to control the rate of fire
 
-
     float nextFireTime;
     int shootableMask;
     LineRenderer gunLine;

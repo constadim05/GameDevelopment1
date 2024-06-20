@@ -3449,11 +3449,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1669764422}
   m_CullTransparentMesh: 1
---- !u!4 &1676732085 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 347510280811385439, guid: e36ed6da23d591c4daf70ee0c5853739, type: 3}
-  m_PrefabInstance: {fileID: 1360960365}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1723556579
 GameObject:
   m_ObjectHideFlags: 0
@@ -3794,10 +3789,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombiePrefab: {fileID: 465948105}
   spawnPoints:
-  - {fileID: 1676732085}
+  - {fileID: 2104548482}
+  - {fileID: 1409220979}
   spawnInterval: 5
   maxZombies: 10
-  detectionRadius: 30
+  detectionRadius: 100
   idleSounds:
   - {fileID: 8300000, guid: 4eefff9220a0cf5458d05a2ac06ab94d, type: 3}
   - {fileID: 8300000, guid: 55d541d3ffb701841923d98ca1eb4989, type: 3}
@@ -4397,14 +4393,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1755693668231641173, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.1334552
-      objectReference: {fileID: 0}
-    - target: {fileID: 1755693668231641173, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.10092345
-      objectReference: {fileID: 0}
-    - target: {fileID: 1755693668231641173, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.9036
       objectReference: {fileID: 0}
@@ -4444,77 +4432,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4445875052490506248, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
-      propertyPath: scalingMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4445875052490506248, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
-      propertyPath: ShapeModule.angle
-      value: 3.12
-      objectReference: {fileID: 0}
-    - target: {fileID: 4445875052490506248, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 0.21
-      objectReference: {fileID: 0}
-    - target: {fileID: 4445875052490506248, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5102058881933330744, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
-      propertyPath: m_Parameters.textureScale.x
-      value: 4.97
-      objectReference: {fileID: 0}
-    - target: {fileID: 5102058881933330744, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5102058881933330744, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 0
+    - target: {fileID: 4879130407438663591, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
+      propertyPath: sceneViewId
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7101120452318667105, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
       propertyPath: m_Name
       value: bullet
       objectReference: {fileID: 0}
-    - target: {fileID: 8950542331690180089, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
-      propertyPath: fireRate
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7101120452318667105, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6209692875034971467}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
---- !u!1 &6209692875034971466 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7101120452318667105, guid: 00f583ab985fdb4459100ce5d0fd65a7, type: 3}
-  m_PrefabInstance: {fileID: 6209692875034971465}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6209692875034971467
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6209692875034971466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 3
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1001 &7008659228359378111
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4666,11 +4596,11 @@ SceneRoots:
   - {fileID: 2353303209940133348}
   - {fileID: 5317351927422583470}
   - {fileID: 7008659228359378111}
+  - {fileID: 6209692875034971465}
   - {fileID: 1723556580}
   - {fileID: 1816319960}
   - {fileID: 2104548482}
   - {fileID: 1409220979}
-  - {fileID: 6209692875034971465}
   - {fileID: 833130483}
   - {fileID: 1827127410}
   - {fileID: 235943101}

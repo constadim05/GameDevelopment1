@@ -57,7 +57,11 @@ public class GameManager : MonoBehaviourPunCallbacks
             endGameAnim.SetTrigger("endGameText");
         }
         yield return new WaitForSeconds(3f);
+        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.Disconnect();
         LoadMainMenu();
+        
+        
     }
 
     public void LoadMainMenu()
