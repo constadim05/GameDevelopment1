@@ -41,6 +41,8 @@ MonoBehaviour:
   - RespawnSpaceship
   - EnemyKilled
   - PlayerDied
+  - RPC_Shoot
+  - SyncFlip
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

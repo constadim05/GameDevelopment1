@@ -180,7 +180,19 @@ public class playerController : MonoBehaviour, IPunObservable
         Vector3 theScale = transform.localScale;
         theScale.z *= -1;
         transform.localScale = theScale;
+
+        // Synchronize the scale change
+        view.RPC("SyncFlip", RpcTarget.All, theScale.z);
     }
+
+    [PunRPC]
+    void SyncFlip(float scaleZ)
+    {
+        Vector3 theScale = transform.localScale;
+        theScale.z = scaleZ;
+        transform.localScale = theScale;
+    }
+
 
     public float GetFacing()
     {
@@ -196,15 +208,17 @@ public class playerController : MonoBehaviour, IPunObservable
     {
         if (stream.IsWriting)
         {
-            // Send position and rotation data to other players
+            // Send position, rotation, and scale data to other players
             stream.SendNext(myRB.position);
             stream.SendNext(myRB.rotation);
+            stream.SendNext(transform.localScale);
         }
         else
         {
-            // Receive position and rotation data from other players
+            // Receive position, rotation, and scale data from other players
             networkPosition = (Vector3)stream.ReceiveNext();
             networkRotation = (Quaternion)stream.ReceiveNext();
+            transform.localScale = (Vector3)stream.ReceiveNext();
         }
     }
 }
