@@ -11,9 +11,14 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        UpdateCounts();
+        endgameText.SetActive(false);
+    }
+
+    void UpdateCounts()
+    {
         playersAlive = GameObject.FindGameObjectsWithTag("Player").Length;
         enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
-        endgameText.SetActive(false);
     }
 
     [PunRPC]
@@ -75,5 +80,30 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void OnEnemyKilled()
     {
         photonView.RPC("EnemyKilled", RpcTarget.All);
+    }
+
+    // New methods to handle player/enemy instantiation
+    public void OnPlayerSpawned()
+    {
+        photonView.RPC("PlayerSpawned", RpcTarget.All);
+    }
+
+    public void OnEnemySpawned()
+    {
+        photonView.RPC("EnemySpawned", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void PlayerSpawned()
+    {
+        playersAlive++;
+        CheckEndGame();
+    }
+
+    [PunRPC]
+    public void EnemySpawned()
+    {
+        enemyCount++;
+        CheckEndGame();
     }
 }

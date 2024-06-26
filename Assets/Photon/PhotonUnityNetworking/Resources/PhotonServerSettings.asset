@@ -43,6 +43,8 @@ MonoBehaviour:
   - PlayerDied
   - RPC_Shoot
   - SyncFlip
+  - EnemySpawned
+  - PlayerSpawned
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
